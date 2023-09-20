@@ -11,4 +11,14 @@ export const enum AuthStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const enum APIRoute {
+  Promo = '/promo',
+  Cameras = '/cameras'
+}
+
+export const enum NameSpace {
+  Cameras = 'CAMERAS',
+  Promo = 'PROMO',
+}
+
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy/';
