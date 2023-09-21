@@ -1,13 +1,15 @@
 import React from 'react';
 import { TCamera } from '../../types/camera';
+import { Link } from 'react-router-dom';
+import { AppRoute , STARS_RATING } from '../../utils/const';
 
 type TCardProps = {
   cameraInfo : TCamera;
 }
 
-const STARS_RATING = [1 , 2 , 3 , 4 , 5];
-
 function Card({cameraInfo} : TCardProps): JSX.Element {
+
+
   return (
 
     <div className="product-card">
@@ -53,9 +55,9 @@ function Card({cameraInfo} : TCardProps): JSX.Element {
         >
                       Купить
         </button>
-        <a className="btn btn--transparent" href="#">
+        <Link className="btn btn--transparent" to={`${AppRoute.Root}${cameraInfo.id}`}>
                       Подробнее
-        </a>
+        </Link>
       </div>
     </div>
   );

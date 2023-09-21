@@ -1,8 +1,7 @@
-import React , {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 import styles from './pagination.module.css';
@@ -11,7 +10,7 @@ function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
 
   // const [searchParams , setSearchParams] = useSearchParams();
-  const PRODUCTS_PER_PAGE = 6;
+  const PRODUCTS_PER_PAGE = 4;
   const camerasList = useAppSelector(getCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
 
@@ -20,76 +19,92 @@ function Pagination() : JSX.Element {
   // const start = (Number(page) - 1) * PRODUCTS_PER_PAGE;
   // const end = start + PRODUCTS_PER_PAGE;
 
+  const [currentPages , setCurrentPages] = useState({
+    paginationMin: 0,
+    paginationMax: 3,
+    currentSelected: 1,
+  });
+
 
   const { items } = usePagination({
     count: pageCount,
-    hideNextButton: false,
-    hidePrevButton: false,
-    boundaryCount: 0,
-    siblingCount: 0,
-    onChange(evt, page) {
-      evt.preventDefault();
-      const start = (Number(page) - 1) * PRODUCTS_PER_PAGE;
-      const end = start + PRODUCTS_PER_PAGE;
-      dispatch(sortShownItems([start, end]));
-    },
+    hideNextButton: currentPages.paginationMax >= pageCount,
+    hidePrevButton: currentPages.paginationMax <= 3,
+    page: currentPages.currentSelected,
+    siblingCount: 2,
   });
 
-  // const showNextNumbers = () => {
-  // };
+  useEffect(() => {
+    const start = (currentPages.currentSelected - 1) * PRODUCTS_PER_PAGE;
+    const end = start + PRODUCTS_PER_PAGE;
+    dispatch(sortShownItems([start, end]));
 
-  // const showLastNumbers = () => {
-
-  // };
+  }, [currentPages.currentSelected , dispatch]);
 
 
-  const modifiedItems = items.map((item) => {
-    if(item.type === 'next') {
-      return {
-        type: 'next-3',
-        page: item.page,
-        onClick: item.onClick,
-      };
-    } else if (item.type === 'previous') {
-      return {
-        type: 'last-3',
-        page: item.page,
-        onClick: item.onClick
-      };
+  const handleNextClick = (type: 'next' | 'previous') => {
+    setCurrentPages((prevPages) => {
+      if (type === 'next') {
+        return {
+          ...prevPages,
+          paginationMax: prevPages.paginationMax + 3,
+          paginationMin: prevPages.paginationMin + 3,
+          currentSelected: prevPages.paginationMax + 1,
+        };
+      } else {
+        return {
+          ...prevPages,
+          paginationMax: prevPages.paginationMax - 3,
+          paginationMin: prevPages.paginationMin - 3,
+          currentSelected: prevPages.paginationMin ,
+        };
+      }
+    });
+    console.log(currentPages.currentSelected);
 
-    } else {
-      return item;
-    }
+  };
 
-  });
+  const handlePageClick = (page : number) => {
+    setCurrentPages((prev) => ({
+      ...prev,
+      currentSelected: page
+    }));
+
+    console.log(currentPages.currentSelected);
+  };
 
 
   return (
     <div className="pagination">
       <ul className="pagination__list">
-        {items.map(({ page, type, selected, ...item }) => {
+        {items.map(({ page, type, selected }) => {
           let children = null;
 
           if (type === 'start-ellipsis' || type === 'end-ellipsis') {
             children = '';
-          } else if (type === 'page') {
+          }
+          if (type === 'page' && page as number <= currentPages.paginationMax && page as number > currentPages.paginationMin) {
             children = (
               <li key={`${page as number}${type}keyss`} className="pagination__item">
                 <button
                   className={`pagination__link ${styles['pagination__button']} ${selected ? 'pagination__link--active' : ''}`}
-                  {...item}
+                  onClick={() => {
+                    handlePageClick(page as number);
+                  }}
                 >
                   {page}
                 </button>
               </li>
 
             );
-          } else {
+          }
+          if (type === 'next' || type === 'previous'){
             children = (
-              <li className="pagination__item">
+
+              <li key={page} className="pagination__item">
                 <button
                   className = {`${styles['pagination__button']} pagination__link pagination__link--text`}
-                  {...item}
+                  onClick={() => handleNextClick(type)}
                 >
                   {type === 'next' ? 'Далее' : 'Назад'}
                 </button>

@@ -13,12 +13,17 @@ export const enum AuthStatus {
 
 export const enum APIRoute {
   Promo = '/promo',
-  Cameras = '/cameras'
+  Cameras = '/cameras',
+  Similar = '/similar',
+  Reviews = '/reviews'
 }
 
 export const enum NameSpace {
   Cameras = 'CAMERAS',
   Promo = 'PROMO',
+  Current = 'CURRENT',
 }
+
+export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy/';

@@ -1,6 +1,7 @@
 import { store } from '../store';
 import { TCamera } from './camera';
 import { TPromo } from './promo';
+import { TReview } from './review';
 
 export type TPromoData = {
   promos: TPromo[];
@@ -12,6 +13,14 @@ export type TCamerasData = {
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];
+}
+
+export type TCurrentData = {
+  currentInfo: TCamera | undefined;
+  hasError: boolean;
+  isDataLoading: boolean;
+  similarCameras: TCamera[];
+  reviews: TReview[];
 }
 
 export type State = ReturnType<typeof store.getState>;
