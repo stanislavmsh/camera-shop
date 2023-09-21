@@ -1,36 +1,69 @@
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { useAppSelector } from '../../hooks';
+import { getPromos } from '../../store/promo-data/promo-data.selectors';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import'./banner.css';
 
 export default function Banner() {
 
-  return(
+  const promoData = useAppSelector(getPromos);
 
-    <div className="banner">
-      <picture>
-        <source
-          type="image/webp"
-          srcSet="img/content/banner-bg.webp, img/content/banner-bg@2x.webp 2x"
-        />
-        <img
-          src="img/content/banner-bg.jpg"
-          srcSet="img/content/banner-bg@2x.jpg 2x"
-          width={1280}
-          height={280}
-          alt="баннер"
-        />
-      </picture>
-      <p className="banner__info">
-        <span className="banner__message">Новинка!</span>
-        <span className="title title--h1">
-          Cannonball&nbsp;Pro&nbsp;MX&nbsp;8i
-        </span>
-        <span className="banner__text">
+  const pagination = {
+    clickable: true,
+    renderBullet: function (_ : number, className : string) {
+      return `<span class="${ className }"></span>`;
+    },
+  };
+
+  return(
+    <Swiper
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      pagination = {pagination}
+      modules={[Autoplay, Pagination, Navigation]}
+      loop
+    >
+      {promoData.map((elem) => (
+        <SwiperSlide key={elem.id}>
+          <div
+
+            className="banner"
+          >
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`${elem.previewImgWebp} , ${elem.previewImgWebp2x} 2x`}
+              />
+              <img
+                src={elem.previewImg}
+                srcSet={`${elem.previewImg2x} 2x`}
+                width={1280}
+                height={280}
+                alt="баннер"
+              />
+            </picture>
+            <p className="banner__info">
+              <span className="banner__message"></span>
+              <span className="title title--h1">
+                {elem.name}
+              </span>
+              <span className="banner__text">
           Профессиональная камера от&nbsp;известного производителя
-        </span>
-        <a className="btn" href="#">
+              </span>
+              <a className="btn" href="#">
           Подробнее
-        </a>
-      </p>
-    </div>
+              </a>
+            </p>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
 
   );
 

@@ -1,6 +1,8 @@
 import Banner from '../../components/banner/banner';
+import MemoizedCards from '../../components/cards/cards';
 import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
+import MemoizedPagination from '../../components/pagination/pagination';
 
 export default function CatalogPage() : JSX.Element {
 
@@ -216,7 +218,7 @@ export default function CatalogPage() : JSX.Element {
                       </div>
                     </form>
                   </div>
-                  <div className="cards catalog__cards">
+                  {/* <div className="cards catalog__cards">
                     <div className="product-card">
                       <div className="product-card__img">
                         <picture>
@@ -724,37 +726,9 @@ export default function CatalogPage() : JSX.Element {
                         </a>
                       </div>
                     </div>
-                  </div>
-                  <div className="pagination">
-                    <ul className="pagination__list">
-                      <li className="pagination__item">
-                        <a
-                          className="pagination__link pagination__link--active"
-                          href={'1'}
-                        >
-                      1
-                        </a>
-                      </li>
-                      <li className="pagination__item">
-                        <a className="pagination__link" href={'2'}>
-                      2
-                        </a>
-                      </li>
-                      <li className="pagination__item">
-                        <a className="pagination__link" href={'3'}>
-                      3
-                        </a>
-                      </li>
-                      <li className="pagination__item">
-                        <a
-                          className="pagination__link pagination__link--text"
-                          href={'2'}
-                        >
-                      Далее
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                  </div> */}
+                  <MemoizedCards />
+                  <MemoizedPagination/>
                 </div>
               </div>
             </div>

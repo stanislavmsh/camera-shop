@@ -11,6 +11,7 @@ export type TCamerasData = {
   cameras: TCamera[];
   hasError: boolean;
   isDataLoading: boolean;
+  shownItems: TCamera[];
 }
 
 export type State = ReturnType<typeof store.getState>;

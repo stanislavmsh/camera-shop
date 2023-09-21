@@ -16,5 +16,4 @@ export const fetchPromoAction = createAsyncThunk<TPromo[], undefined, {
     const {data} = await api.get<TPromo[]>(APIRoute.Promo);
     return data;
   }
-
 );
