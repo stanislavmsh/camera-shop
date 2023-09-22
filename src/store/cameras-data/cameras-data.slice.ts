@@ -28,7 +28,6 @@ export const camerasData = createSlice({
       .addCase(fetchCamerasAction.fulfilled , (state, action) => {
         state.isDataLoading = false;
         state.cameras = action.payload;
-        state.shownItems = action.payload.slice(0 , 9);
       })
       .addCase(fetchCamerasAction.rejected, (state) => {
         state.isDataLoading = false;

@@ -18,9 +18,7 @@ function Pagination() : JSX.Element {
   const [currentPages , setCurrentPages] = useState({
     paginationMin: 0,
     paginationMax: 3,
-    currentSelected: pageFromUrl,
   });
-
 
   const { items } = usePagination({
     count: pageCount,
@@ -31,12 +29,10 @@ function Pagination() : JSX.Element {
   });
 
   useEffect(() => {
-    const start = (currentPages.currentSelected - 1) * PRODUCTS_PER_PAGE;
+    const start = (pageFromUrl - 1) * PRODUCTS_PER_PAGE;
     const end = start + PRODUCTS_PER_PAGE;
     dispatch(sortShownItems([start, end]));
-    setSearchParams({ page: currentPages.currentSelected.toString() });
-    console.log('useEffect 2');
-  }, [currentPages.currentSelected , dispatch, setSearchParams]);
+  }, [pageFromUrl , dispatch]);
 
 
   const handleNextClick = (type: 'next' | 'previous') => {
@@ -47,16 +43,16 @@ function Pagination() : JSX.Element {
         ...prevPages,
         paginationMax: prevPages.paginationMax + step,
         paginationMin: prevPages.paginationMin + step,
-        currentSelected: type === 'next' ? prevPages.paginationMax + 1 : prevPages.paginationMin,
       };
+    });
+
+    setSearchParams({
+      page: type === 'next' ? (currentPages.paginationMax + 1).toString() : currentPages.paginationMin.toString()
     });
   };
 
   const handlePageClick = (page : number) => {
-    setCurrentPages((prev) => ({
-      ...prev,
-      currentSelected: page
-    }));
+    setSearchParams({ page: page.toString() });
   };
 
 
