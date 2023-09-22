@@ -14,6 +14,8 @@ function Pagination() : JSX.Element {
   const camerasList = useAppSelector(getCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
   const pageFromUrl = Number(searchParams.get('page')) || 1;
+  const safePage = pageFromUrl > pageCount ? pageCount : pageFromUrl;
+
 
   const [currentPages , setCurrentPages] = useState({
     paginationMin: 0,
@@ -24,15 +26,19 @@ function Pagination() : JSX.Element {
     count: pageCount,
     hideNextButton: currentPages.paginationMax >= pageCount,
     hidePrevButton: currentPages.paginationMax <= 3,
-    page: pageFromUrl,
+    page: safePage,
     siblingCount: 2,
   });
 
   useEffect(() => {
-    const start = (pageFromUrl - 1) * PRODUCTS_PER_PAGE;
+
+    const start = (safePage - 1) * PRODUCTS_PER_PAGE;
     const end = start + PRODUCTS_PER_PAGE;
     dispatch(sortShownItems([start, end]));
-  }, [pageFromUrl , dispatch]);
+    if(pageFromUrl > pageCount) {
+      setSearchParams({page: safePage.toString()});
+    }
+  }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams]);
 
 
   const handleNextClick = (type: 'next' | 'previous') => {
@@ -56,7 +62,7 @@ function Pagination() : JSX.Element {
   };
 
 
-  const isLinkedPageInRange = pageFromUrl <= currentPages.paginationMax && pageFromUrl > currentPages.paginationMin;
+  const isLinkedPageInRange = safePage <= currentPages.paginationMax && safePage > currentPages.paginationMin;
 
   if(!isLinkedPageInRange) {
     setCurrentPages((prevPages) => {
