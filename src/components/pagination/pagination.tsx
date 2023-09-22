@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
-// import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 import styles from './pagination.module.css';
@@ -9,20 +9,16 @@ import styles from './pagination.module.css';
 function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
 
-  // const [searchParams , setSearchParams] = useSearchParams();
-  const PRODUCTS_PER_PAGE = 4;
+  const [searchParams , setSearchParams] = useSearchParams();
+  const PRODUCTS_PER_PAGE = 9;
   const camerasList = useAppSelector(getCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
-
-  // const page = searchParams.get('page') ?? '1';
-
-  // const start = (Number(page) - 1) * PRODUCTS_PER_PAGE;
-  // const end = start + PRODUCTS_PER_PAGE;
+  const pageFromUrl = Number(searchParams.get('page')) || 1;
 
   const [currentPages , setCurrentPages] = useState({
     paginationMin: 0,
     paginationMax: 3,
-    currentSelected: 1,
+    currentSelected: pageFromUrl,
   });
 
 
@@ -30,7 +26,7 @@ function Pagination() : JSX.Element {
     count: pageCount,
     hideNextButton: currentPages.paginationMax >= pageCount,
     hidePrevButton: currentPages.paginationMax <= 3,
-    page: currentPages.currentSelected,
+    page: pageFromUrl,
     siblingCount: 2,
   });
 
@@ -38,30 +34,22 @@ function Pagination() : JSX.Element {
     const start = (currentPages.currentSelected - 1) * PRODUCTS_PER_PAGE;
     const end = start + PRODUCTS_PER_PAGE;
     dispatch(sortShownItems([start, end]));
-
-  }, [currentPages.currentSelected , dispatch]);
+    setSearchParams({ page: currentPages.currentSelected.toString() });
+    console.log('useEffect 2');
+  }, [currentPages.currentSelected , dispatch, setSearchParams]);
 
 
   const handleNextClick = (type: 'next' | 'previous') => {
     setCurrentPages((prevPages) => {
-      if (type === 'next') {
-        return {
-          ...prevPages,
-          paginationMax: prevPages.paginationMax + 3,
-          paginationMin: prevPages.paginationMin + 3,
-          currentSelected: prevPages.paginationMax + 1,
-        };
-      } else {
-        return {
-          ...prevPages,
-          paginationMax: prevPages.paginationMax - 3,
-          paginationMin: prevPages.paginationMin - 3,
-          currentSelected: prevPages.paginationMin ,
-        };
-      }
-    });
-    console.log(currentPages.currentSelected);
+      const step = type === 'next' ? 3 : -3;
 
+      return {
+        ...prevPages,
+        paginationMax: prevPages.paginationMax + step,
+        paginationMin: prevPages.paginationMin + step,
+        currentSelected: type === 'next' ? prevPages.paginationMax + 1 : prevPages.paginationMin,
+      };
+    });
   };
 
   const handlePageClick = (page : number) => {
@@ -69,8 +57,6 @@ function Pagination() : JSX.Element {
       ...prev,
       currentSelected: page
     }));
-
-    console.log(currentPages.currentSelected);
   };
 
 
@@ -78,12 +64,13 @@ function Pagination() : JSX.Element {
     <div className="pagination">
       <ul className="pagination__list">
         {items.map(({ page, type, selected }) => {
-          let children = null;
+          let children;
+          const isPageInRange = page as number <= currentPages.paginationMax && page as number > currentPages.paginationMin;
 
           if (type === 'start-ellipsis' || type === 'end-ellipsis') {
-            children = '';
+            children = null;
           }
-          if (type === 'page' && page as number <= currentPages.paginationMax && page as number > currentPages.paginationMin) {
+          if (type === 'page' && isPageInRange) {
             children = (
               <li key={`${page as number}${type}keyss`} className="pagination__item">
                 <button
