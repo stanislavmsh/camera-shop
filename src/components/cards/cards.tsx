@@ -7,7 +7,6 @@ import { getShownItems } from '../../store/cameras-data/cameras-data.selectors';
 function Cards(): JSX.Element {
 
   const camerasList = useAppSelector(getShownItems);
-  console.log(camerasList);
 
   return(
     <div className="cards catalog__cards">

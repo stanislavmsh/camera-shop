@@ -56,6 +56,20 @@ function Pagination() : JSX.Element {
   };
 
 
+  const isLinkedPageInRange = pageFromUrl <= currentPages.paginationMax && pageFromUrl > currentPages.paginationMin;
+
+  if(!isLinkedPageInRange) {
+    setCurrentPages((prevPages) => {
+      const step = 3;
+
+      return {
+        ...prevPages,
+        paginationMax: prevPages.paginationMax + step,
+        paginationMin: prevPages.paginationMin + step,
+      };
+    });
+  }
+
   return (
     <div className="pagination">
       <ul className="pagination__list">
