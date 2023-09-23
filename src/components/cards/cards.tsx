@@ -10,7 +10,7 @@ function Cards(): JSX.Element {
 
   return(
     <div className="cards catalog__cards">
-      {camerasList.map((elem) => <MemoizedCard key={elem.id} cameraInfo={elem}/>) }
+      {camerasList.map((elem) => <MemoizedCard classCustom='' key={elem.id} cameraInfo={elem}/>) }
     </div>
   );
 }

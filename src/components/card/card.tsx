@@ -3,16 +3,19 @@ import { TCamera } from '../../types/camera';
 import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
 
+import './card.css';
+
 type TCardProps = {
   cameraInfo : TCamera;
+  classCustom: string;
 }
 
-function Card({cameraInfo} : TCardProps): JSX.Element {
+function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
 
 
   return (
 
-    <div className="product-card">
+    <div className={`product-card ${classCustom}`}>
       <div className="product-card__img">
         <picture>
           <source
