@@ -5,9 +5,9 @@ import ReviewBlock from '../../components/review-block/review-block';
 import SimilarOffers from '../../components/similar-offers/similar-offers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
-import { STARS_RATING } from '../../utils/const';
+import { AppRoute, STARS_RATING } from '../../utils/const';
 
 
 export default function ProductPage() : JSX.Element {
@@ -45,7 +45,7 @@ export default function ProductPage() : JSX.Element {
             <div className="container">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="index.html">
+                  <a className="breadcrumbs__link" href="/">
                 Главная
                     <svg width={5} height={8} aria-hidden="true">
                       <use xlinkHref="#icon-arrow-mini" />
@@ -53,12 +53,12 @@ export default function ProductPage() : JSX.Element {
                   </a>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="catalog.html">
+                  <Link className="breadcrumbs__link" to={AppRoute.Root}>
                 Каталог
                     <svg width={5} height={8} aria-hidden="true">
                       <use xlinkHref="#icon-arrow-mini" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <span className="breadcrumbs__link breadcrumbs__link--active">

@@ -7,6 +7,7 @@ import ProductPage from '../../pages/product-page/product-page';
 import BasketPage from '../../pages/basket-page/basket-page';
 import { useAppSelector } from '../../hooks';
 import { getLoadingStatus } from '../../store/cameras-data/cameras-data.selectors';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 export default function App() : JSX.Element {
 
@@ -34,6 +35,10 @@ export default function App() : JSX.Element {
         <Route
           path = {`${AppRoute.Root}/:id`}
           element = { <ProductPage /> }
+        />
+        <Route
+          path='*'
+          element = { <NotFoundPage />}
         />
       </Routes>
     </HistoryRouter>

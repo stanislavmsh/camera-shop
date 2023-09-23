@@ -79,7 +79,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                     {STARS_RATING.map((elem) => (
                       <>
                         <input
-                          key={elem}
+                          key={`star${elem}`}
                           className="visually-hidden"
                           id={`star-${elem}`}
                           type="radio"
