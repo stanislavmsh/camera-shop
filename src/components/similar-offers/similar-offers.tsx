@@ -1,16 +1,15 @@
-import { TCamera } from '../../types/camera';
 import MemoizedCard from '../card/card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import 'swiper/css';
 // import 'swiper/css/bundle';
 import { Pagination , Navigation , A11y } from 'swiper/modules';
+import { useAppSelector } from '../../hooks';
+import { getSimiralCameras } from '../../store/current-data/current-data.selectors';
 
 
-type TSimilarOffersProps = {
-  similars: TCamera[];
-}
+export default function SimilarOffers() : JSX.Element {
 
-export default function SimilarOffers({similars}: TSimilarOffersProps) : JSX.Element {
+  const similars = useAppSelector(getSimiralCameras);
 
   return (
 

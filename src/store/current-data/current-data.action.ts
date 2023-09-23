@@ -39,7 +39,8 @@ export const fetchReviewsAction = createAsyncThunk<TReview[], number, {
   'data/fetchReviews',
   async (id, { extra: api }): Promise<TReview[]> => {
     const {data} = await api.get<TReview[]>(`${APIRoute.Cameras}/${id}${APIRoute.Reviews}`);
-    return data;
+    const sortedByDate = data.sort((a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime());
+    return sortedByDate;
   }
 );
 

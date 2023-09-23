@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState , useCallback } from 'react';
 import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
 import ReviewBlock from '../../components/review-block/review-block';
 import SimilarOffers from '../../components/similar-offers/similar-offers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCurrentInfo, getCurrentReviews, getSimiralCameras } from '../../store/current-data/current-data.selectors';
+import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
 import { useParams } from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { STARS_RATING } from '../../utils/const';
@@ -14,6 +14,7 @@ export default function ProductPage() : JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentId = useParams().id;
+  const currentProduct = useAppSelector(getCurrentInfo);
 
   useEffect(() => {
     if(currentId) {
@@ -25,17 +26,14 @@ export default function ProductPage() : JSX.Element {
 
   const [isDescription, setIsDescription] = useState<boolean>(true);
 
-  const handleDescriptionClick = () => {
+  const handleDescriptionClick = useCallback(() => {
     setIsDescription(true);
-  };
+  },[]);
 
-  const handleStatsClick = () => {
+  const handleStatsClick = useCallback(() => {
     setIsDescription(false);
-  };
+  }, []);
 
-  const currentProduct = useAppSelector(getCurrentInfo);
-  // const currentReviews = useAppSelector(getCurrentReviews);
-  const currentSimilar = useAppSelector(getSimiralCameras);
 
   return(
 
@@ -155,7 +153,7 @@ export default function ProductPage() : JSX.Element {
             </section>
           </div>
           <div className="page-content__section">
-            <SimilarOffers similars={currentSimilar} />
+            <SimilarOffers />
           </div>
           <div className="page-content__section">
             <ReviewBlock />
