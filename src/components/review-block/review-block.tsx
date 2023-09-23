@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentReviews } from '../../store/current-data/current-data.selectors';
 import ReviewsList from '../reviews-list/reviews-list';
+// import ReviewForm from '../review-form/review-form';
+import ModalComment from '../modal-comment/modal-comment';
 
 export default function ReviewBlock() : JSX.Element {
   const currentReviews = useAppSelector(getCurrentReviews);
   const [currentMax , setCurrentMax] = useState(3);
+  const [isActive, setIsActive] = useState(false);
 
   const shownReviews = currentReviews.slice(0, currentMax);
 
@@ -15,6 +18,15 @@ export default function ReviewBlock() : JSX.Element {
 
   const isDisabled = currentMax >= currentReviews.length;
 
+  const handleOpenForm = () => {
+    setIsActive(true);
+  };
+
+  const handleCloseForm = () => {
+
+    setIsActive(false);
+  };
+
 
   return (
 
@@ -22,7 +34,7 @@ export default function ReviewBlock() : JSX.Element {
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button">
+          <button onClick={handleOpenForm} className="btn" type="button">
                 Оставить свой отзыв
           </button>
         </div>
@@ -33,6 +45,7 @@ export default function ReviewBlock() : JSX.Element {
           </button>
         </div>
       </div>
+      <ModalComment handleCloseForm={handleCloseForm} isActive={isActive}/>
     </section>
   );
 

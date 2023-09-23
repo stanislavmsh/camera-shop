@@ -3,7 +3,7 @@ import { TCamera } from '../../types/camera';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { APIRoute } from '../../utils/const';
-import { TReview } from '../../types/review';
+import { TReview, TUserReview } from '../../types/review';
 
 
 export const fetchCurrentAction = createAsyncThunk<TCamera, number, {
@@ -41,6 +41,17 @@ export const fetchReviewsAction = createAsyncThunk<TReview[], number, {
     const {data} = await api.get<TReview[]>(`${APIRoute.Cameras}/${id}${APIRoute.Reviews}`);
     const sortedByDate = data.sort((a, b) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime());
     return sortedByDate;
+  }
+);
+
+export const sendReviewAction = createAsyncThunk<void, TUserReview, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/sendReview',
+  async (userInfo, { extra: api }) => {
+    await api.post<TReview[]>(APIRoute.Reviews , userInfo);
   }
 );
 
