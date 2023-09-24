@@ -92,9 +92,9 @@ export default function ProductPage() : JSX.Element {
                     {currentProduct && STARS_RATING.map((elem) =>
                       (
                         <svg key={elem} width={17} height={16} aria-hidden="true">
-                          <use xlinkHref={elem >= currentProduct.rating ? '#icon-full-star' : '#icon-star'} />
+                          <use xlinkHref={elem <= currentProduct.rating ? '#icon-full-star' : '#icon-star'} />
                         </svg>
-                      )).reverse()}
+                      ))}
                     <p className="visually-hidden">Рейтинг:{currentProduct?.rating}</p>
                     <p className="rate__count">
                       <span className="visually-hidden">Всего оценок:</span>{currentProduct?.reviewCount}

@@ -30,9 +30,9 @@ export default function ReviewCard({reviewInfo} : TReviewCardProps) {
         {STARS_RATING.map((elem) =>
           (
             <svg key={elem} width={17} height={16} aria-hidden="true">
-              <use xlinkHref={elem >= reviewInfo.rating ? '#icon-full-star' : '#icon-star'} />
+              <use xlinkHref={elem <= reviewInfo.rating ? '#icon-full-star' : '#icon-star'} />
             </svg>
-          )).reverse()}
+          ))}
         <p className="visually-hidden">Оценка: {reviewInfo.rating}</p>
       </div>
       <ul className="review-card__list">
