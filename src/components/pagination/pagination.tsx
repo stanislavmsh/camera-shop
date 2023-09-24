@@ -10,7 +10,7 @@ function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
 
   const [searchParams , setSearchParams] = useSearchParams();
-  const PRODUCTS_PER_PAGE = 4;
+  const PRODUCTS_PER_PAGE = 9;
   const camerasList = useAppSelector(getCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
   const pageFromUrl = Number(searchParams.get('page')) || 1;
