@@ -10,7 +10,7 @@ function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
 
   const [searchParams , setSearchParams] = useSearchParams();
-  const PRODUCTS_PER_PAGE = 4;
+  const PRODUCTS_PER_PAGE = 9;
   const camerasList = useAppSelector(getCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
   const pageFromUrl = Number(searchParams.get('page')) || 1;
@@ -34,13 +34,8 @@ function Pagination() : JSX.Element {
 
     const start = (safePage - 1) * PRODUCTS_PER_PAGE;
     const end = start + PRODUCTS_PER_PAGE;
-    if (safePage === 1) {
-      setCurrentPages({
-        paginationMin: 0,
-        paginationMax: 3,
-      });
-    }
     dispatch(sortShownItems([start, end]));
+
     if(pageFromUrl > pageCount) {
       setSearchParams({page: safePage.toString()});
     }
@@ -68,7 +63,7 @@ function Pagination() : JSX.Element {
   };
 
 
-  const isLinkedPageInRange = safePage === 1 || safePage <= currentPages.paginationMax && safePage > currentPages.paginationMin;
+  const isLinkedPageInRange = safePage <= currentPages.paginationMax && safePage > currentPages.paginationMin;
 
   if(!isLinkedPageInRange) {
     setCurrentPages((prevPages) => {
