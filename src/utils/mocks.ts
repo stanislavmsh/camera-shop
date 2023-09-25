@@ -1,8 +1,12 @@
 import { Action } from 'redux';
 import { TCamera, TCategory, TLevel, TType } from '../types/camera';
 import { name, datatype, lorem , image, commerce} from 'faker';
+import { createAPI } from '../services/api';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { State } from '../types/state';
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>
 
 const TTypeValues: TType[] = ['Коллекционная', 'Моментальная', 'Цифровая', 'Плёночная'];
 const TLevelValues: TLevel[] = ['Нулевой', 'Любительский', 'Профессиональный'];
