@@ -31,6 +31,7 @@ export const currentData = createSlice({
         state.reviews = action.payload;
       })
       .addCase(fetchCurrentAction.rejected , (state) => {
+        state.isDataLoading = false;
         state.hasError = true;
       });
   }
