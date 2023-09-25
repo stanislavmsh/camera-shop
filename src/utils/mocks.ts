@@ -1,10 +1,11 @@
 import { Action } from 'redux';
 import { TCamera, TCategory, TLevel, TType } from '../types/camera';
-import { name, datatype, lorem , image, commerce , date} from 'faker';
+import { name, datatype, lorem , image, commerce } from 'faker';
 import { createAPI } from '../services/api';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { State } from '../types/state';
 import { TReview } from '../types/review';
+import { TPromo } from '../types/promo';
 
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>
@@ -59,4 +60,17 @@ export const makeFakeComments = () : TReview[] => (
   )
 
   )
+);
+
+export const makeFakePromos = () : TPromo[] => (
+  new Array(3).fill(null).map(() => (
+    {
+      id: datatype.number(),
+      name: name.firstName(),
+      previewImg: image.imageUrl(),
+      previewImg2x: image.imageUrl(),
+      previewImgWebp: image.imageUrl(),
+      previewImgWebp2x: image.imageUrl(),
+    }
+  ))
 );
