@@ -4,7 +4,7 @@ import { AppRoute } from '../../utils/const';
 
 function Header() : JSX.Element {
   return (
-    <header className="header" id="header">
+    <header data-testid='header-test' className="header" id="header">
       <div className="container">
         <Link
           className="header__logo"

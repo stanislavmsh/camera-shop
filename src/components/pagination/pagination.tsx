@@ -46,7 +46,6 @@ function Pagination() : JSX.Element {
     }
   }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams]);
 
-
   const handleNextClick = (type: 'next' | 'previous') => {
     setCurrentPages((prevPages) => {
       const step = type === 'next' ? 3 : -3;
@@ -67,7 +66,6 @@ function Pagination() : JSX.Element {
     setSearchParams({ page: page.toString() });
   };
 
-
   const isLinkedPageInRange = safePage === 1 || safePage <= currentPages.paginationMax && safePage > currentPages.paginationMin;
 
   if(!isLinkedPageInRange) {
@@ -83,7 +81,7 @@ function Pagination() : JSX.Element {
   }
 
   return (
-    <div className="pagination">
+    <div data-testid ='pagination-test' className="pagination">
       <ul className="pagination__list">
         {items.map(({ page, type, selected }) => {
           let children;
@@ -110,7 +108,7 @@ function Pagination() : JSX.Element {
           if (type === 'next' || type === 'previous'){
             children = (
 
-              <li key={page} className="pagination__item">
+              <li key={`${page as number}button`} className="pagination__item">
                 <button
                   className = {`${styles['pagination__button']} pagination__link pagination__link--text`}
                   onClick={() => handleNextClick(type)}

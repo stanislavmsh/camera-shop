@@ -19,7 +19,7 @@ export default function ReviewCard({reviewInfo} : TReviewCardProps) {
   });
 
   return(
-    <li className="review-card">
+    <li data-testid='review-card-test' className="review-card">
       <div className="review-card__head">
         <p className="title title--h4">{reviewInfo.userName}</p>
         <time className="review-card__data" dateTime={htmlDate}>
@@ -29,7 +29,7 @@ export default function ReviewCard({reviewInfo} : TReviewCardProps) {
       <div className="rate review-card__rate">
         {STARS_RATING.map((elem) =>
           (
-            <svg key={elem} width={17} height={16} aria-hidden="true">
+            <svg key={`${elem}review`} width={17} height={16} aria-hidden="true">
               <use xlinkHref={elem <= reviewInfo.rating ? '#icon-full-star' : '#icon-star'} />
             </svg>
           ))}

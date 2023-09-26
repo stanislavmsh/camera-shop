@@ -1,7 +1,5 @@
 import MemoizedCard from '../card/card';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/bundle';
 import { Pagination , Navigation , A11y } from 'swiper/modules';
 import { useAppSelector } from '../../hooks';
 import { getSimiralCameras } from '../../store/current-data/current-data.selectors';
@@ -15,7 +13,7 @@ export default function SimilarOffers() : JSX.Element {
 
   return (
 
-    <section className="product-similar">
+    <section data-testid="product-similar-test" className="product-similar">
       <div className="container">
         <h2 className="title title--h3">Похожие товары</h2>
         <div className="product-similar__slider">
@@ -31,7 +29,7 @@ export default function SimilarOffers() : JSX.Element {
               }}
             >
               {similars.map((elem) => (
-                <SwiperSlide key={elem.id}>
+                <SwiperSlide key={`${elem.id}similars`}>
                   <MemoizedCard
                     cameraInfo={elem}
                     classCustom={similars.includes(elem) ? 'is-active custom_swipe' : ''}

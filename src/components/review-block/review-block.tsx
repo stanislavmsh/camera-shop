@@ -23,14 +23,13 @@ export default function ReviewBlock() : JSX.Element {
   };
 
   const handleCloseForm = () => {
-
     setIsActive(false);
   };
 
 
   return (
 
-    <section className="review-block">
+    <section data-testid='review-block-test' className="review-block">
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>

@@ -5,7 +5,7 @@ function Footer() : JSX.Element {
 
   return(
 
-    <footer className="footer">
+    <footer data-testid="footer-test" className="footer">
       <div className="container">
         <div className="footer__info">
           <a

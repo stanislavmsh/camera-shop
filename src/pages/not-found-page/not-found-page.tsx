@@ -10,7 +10,7 @@ export default function NotFoundPage(): JSX.Element {
 
     <div className="wrapper">
       <MemoizedHeader />
-      <section className="not--found">
+      <section data-testid='not-found-test' className="not--found">
         <p className={`title title--h4 ${styles['not--found']}`}>404. Page not found</p>
         <div className={`title title--h4 ${styles['back']}`} >
           <Link to="/">Вернуться на главную</Link>

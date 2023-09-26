@@ -30,7 +30,7 @@ export default function Banner() {
       loop
     >
       {promoData.map((elem) => (
-        <SwiperSlide key={elem.id}>
+        <SwiperSlide key={`${elem.id}banner`}>
           <div
 
             className="banner"

@@ -10,8 +10,8 @@ export default function ReviewsList({reviews} : TReviewsListProps): JSX.Element 
 
 
   return (
-    <ul className="review-block__list">
-      {reviews.map((elem) => <ReviewCard key={elem.id} reviewInfo={elem}/>)}
+    <ul data-testid='reviews-block-test' className="review-block__list">
+      {reviews.map((elem) => <ReviewCard key={`${elem.id}${elem.cameraId}`} reviewInfo={elem}/>)}
     </ul>
   );
 }

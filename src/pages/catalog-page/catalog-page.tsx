@@ -31,7 +31,7 @@ export default function CatalogPage() : JSX.Element {
               </ul>
             </div>
           </div>
-          <section className="catalog">
+          <section data-testid='catalog-page-test' className="catalog">
             <div className="container">
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
               <div className="page-content__columns">

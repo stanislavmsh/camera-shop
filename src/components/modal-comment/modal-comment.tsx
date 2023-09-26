@@ -32,7 +32,7 @@ export default function ModalComment ({isActive, handleCloseForm} : ModalComment
   };
 
   return(
-    <div className={`modal ${isActive ? 'is-active' : ''} ${isThanksOpened ? 'modal--narrow' : ''}`}>
+    <div data-testid='modal-test' className={`modal ${isActive ? 'is-active' : ''} ${isThanksOpened ? 'modal--narrow' : ''}`}>
       {
         !isThanksOpened
           ?

@@ -35,7 +35,7 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
         <div className="rate product-card__rate">
           {STARS_RATING.map((elem) =>
             (
-              <svg key={elem} width={17} height={16} aria-hidden="true">
+              <svg key={`${elem}card`} width={17} height={16} aria-hidden="true">
                 <use xlinkHref={elem <= cameraInfo.rating ? '#icon-full-star' : '#icon-star'} />
               </svg>
             ))}
@@ -58,7 +58,7 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
         >
                       Купить
         </button>
-        <Link className="btn btn--transparent" to={`${AppRoute.Root}${cameraInfo.id}`}>
+        <Link data-testid="button-more-test" className="btn btn--transparent" to={`${AppRoute.Root}${cameraInfo.id}`}>
                       Подробнее
         </Link>
       </div>

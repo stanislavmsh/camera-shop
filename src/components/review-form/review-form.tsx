@@ -1,7 +1,7 @@
 import { useForm , SubmitHandler} from 'react-hook-form';
 import { TUserReview } from '../../types/review';
 import { STARS_RATING } from '../../utils/const';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/current-data/current-data.action';
 
@@ -77,9 +77,9 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                 <div className="rate__bar">
                   <div className="rate__group">
                     {STARS_RATING.map((elem) => (
-                      <>
+                      <React.Fragment key={`star${elem}`}>
                         <input
-                          key={`star${elem}`}
+                          data-testid='star-test'
                           className="visually-hidden"
                           id={`star-${elem}`}
                           type="radio"
@@ -98,7 +98,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                           htmlFor={`star-${elem}`}
                           title={setCurrentStarTitle(elem)}
                         />
-                      </>
+                      </React.Fragment>
                     )).reverse()}
 
                   </div>
@@ -119,6 +119,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                   </span>
                   <input
                     type="text"
+                    data-testid="test-name-input"
                     placeholder="Введите ваше имя"
                     {...register('userName', {required: true, validate: (value) => {
                       const isNameValid = nameRegExp.test(value);
@@ -139,6 +140,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                   </span>
                   <input
                     type="text"
+                    data-testid="test-adv-input"
                     placeholder="Основные преимущества товара"
                     {...register('advantage', {required: true})}
                     aria-invalid= {errors.advantage ? 'true' : 'false'}
@@ -156,6 +158,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                   </span>
                   <input
                     type="text"
+                    data-testid="test-dis-input"
                     placeholder="Главные недостатки товара"
                     {...register('disadvantage' , {required: true})}
                     aria-invalid = {errors.disadvantage ? 'true' : 'false'}
@@ -173,6 +176,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                   </span>
                   <textarea
                     minLength={5}
+                    data-testid="test-text-input"
                     placeholder="Поделитесь своим опытом покупки"
                     defaultValue={''}
                     {...register('review', {required: true})}
@@ -188,7 +192,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
             </button>
           </form>
         </div>
-        <button onClick={handleCloseForm} className="cross-btn" type="button" aria-label="Закрыть попап">
+        <button data-testid = 'submit-button-test' onClick={handleCloseForm} className="cross-btn" type="button" aria-label="Закрыть попап">
           <svg width={10} height={10} aria-hidden="true">
             <use xlinkHref="#icon-close" />
           </svg>

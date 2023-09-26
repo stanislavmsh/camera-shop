@@ -69,7 +69,7 @@ export default function ProductPage() : JSX.Element {
             </div>
           </div>
           <div className="page-content__section">
-            <section className="product">
+            <section data-testid='product-page-test' className="product">
               <div className="container">
                 <div className="product__img">
                   <picture>
@@ -91,7 +91,7 @@ export default function ProductPage() : JSX.Element {
                   <div className="rate product__rate">
                     {currentProduct && STARS_RATING.map((elem) =>
                       (
-                        <svg key={elem} width={17} height={16} aria-hidden="true">
+                        <svg key={`${elem}currentrating`} width={17} height={16} aria-hidden="true">
                           <use xlinkHref={elem <= currentProduct.rating ? '#icon-full-star' : '#icon-star'} />
                         </svg>
                       ))}

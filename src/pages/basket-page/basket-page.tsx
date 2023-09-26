@@ -36,7 +36,7 @@ export default function BasketPage() : JSX.Element {
               </ul>
             </div>
           </div>
-          <section className="basket">
+          <section data-testid='basket-page-test' className="basket">
             <div className="container">
               <h1 className="title title--h2">Корзина</h1>
               <ul className="basket__list">
