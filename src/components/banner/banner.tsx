@@ -7,6 +7,8 @@ import { useAppSelector } from '../../hooks';
 import { getPromos } from '../../store/promo-data/promo-data.selectors';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import'./banner.css';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../utils/const';
 
 export default function Banner() {
 
@@ -56,9 +58,9 @@ export default function Banner() {
               <span className="banner__text">
           Профессиональная камера от&nbsp;известного производителя
               </span>
-              <a className="btn" href="#">
+              <Link className="btn" to={`${AppRoute.Root}${elem.id}`}>
           Подробнее
-              </a>
+              </Link>
             </p>
           </div>
         </SwiperSlide>
