@@ -4,8 +4,6 @@ import { Pagination , Navigation , A11y } from 'swiper/modules';
 import { useAppSelector } from '../../hooks';
 import { getSimiralCameras } from '../../store/current-data/current-data.selectors';
 
-import './similar-offers.css';
-
 
 export default function SimilarOffers() : JSX.Element {
 
