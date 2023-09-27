@@ -3,8 +3,6 @@ import { TCamera } from '../../types/camera';
 import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
 
-import '/src/components/card/card.css';
-
 type TCardProps = {
   cameraInfo : TCamera;
   classCustom: string;
