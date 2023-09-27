@@ -28,4 +28,6 @@ export const enum RatingName {
 
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
+export const FOCUS_TIMEOUT = 500;
+
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy/';

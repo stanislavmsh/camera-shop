@@ -7,7 +7,7 @@ type CommentSuccessProps = {
 export default function CommentSuccess({handleCommentSuccess}: CommentSuccessProps): JSX.Element {
   return (
     <div className="modal__wrapper">
-      <div className="modal__overlay" />
+      <div onClick={handleCommentSuccess} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Спасибо за отзыв</p>
         <svg className="modal__icon" width={80} height={78} aria-hidden="true">
@@ -18,6 +18,7 @@ export default function CommentSuccess({handleCommentSuccess}: CommentSuccessPro
             onClick={handleCommentSuccess}
             className="btn btn--purple modal__btn modal__btn--fit-width"
             type="button"
+            id="thanks__button"
           >
           Вернуться к покупкам
           </button>

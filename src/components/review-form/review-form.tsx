@@ -57,7 +57,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
   return(
 
     <div className="modal__wrapper">
-      <div className="modal__overlay" />
+      <div onClick={handleCloseForm} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Оставить отзыв</p>
         <div className="form-review">
@@ -120,6 +120,7 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                   </span>
                   <input
                     type="text"
+                    id='name__input'
                     data-testid="test-name-input"
                     placeholder="Введите ваше имя"
                     {...register('userName', {required: true, validate: (value) => {
