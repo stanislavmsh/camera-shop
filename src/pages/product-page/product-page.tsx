@@ -8,6 +8,7 @@ import { getCurrentInfo } from '../../store/current-data/current-data.selectors'
 import { Link, useParams } from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { AppRoute, STARS_RATING } from '../../utils/const';
+import ModalBuy from '../../components/modal-buy/modal-buy';
 
 
 export default function ProductPage() : JSX.Element {
@@ -159,6 +160,7 @@ export default function ProductPage() : JSX.Element {
             <ReviewBlock />
           </div>
         </div>
+        <ModalBuy />
       </main>
       <a className="up-btn" href="#header">
         <svg width={12} height={18} aria-hidden="true">
