@@ -4,7 +4,7 @@ import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
 import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
-import styles from './pagination.module.css';
+import styles from './pagination.module.scss';
 
 function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
