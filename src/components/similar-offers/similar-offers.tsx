@@ -30,7 +30,7 @@ export default function SimilarOffers() : JSX.Element {
                 <SwiperSlide key={`${elem.id}similars`}>
                   <MemoizedCard
                     cameraInfo={elem}
-                    classCustom={similars.includes(elem) ? 'is-active custom_swipe' : ''}
+                    classCustom={similars.includes(elem) ? 'is-active' : ''}
                   />
                 </SwiperSlide>
               ))}
