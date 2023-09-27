@@ -3095,6 +3095,15 @@ button,
   margin: 0 16px;
 }
 
+.product-similar .product-card.custom_swipe {
+  /* display: none;
+  width: calc(33.3% - 16px);
+  margin: 0 16px; */
+  width: 100%;
+  margin: 0;
+}
+
+
 .product-similar .product-card.is-active {
   display: -webkit-box;
   display: -ms-flexbox;
