@@ -5,12 +5,6 @@ export const enum AppRoute {
   Item = '/item',
 }
 
-export const enum AuthStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
-
 export const enum APIRoute {
   Promo = '/promo',
   Cameras = '/cameras',
@@ -22,6 +16,14 @@ export const enum NameSpace {
   Cameras = 'CAMERAS',
   Promo = 'PROMO',
   Current = 'CURRENT',
+}
+
+export const enum RatingName {
+  Awful = 'Ужасно',
+  Bad = 'Плохо',
+  Average = 'Нормально',
+  Good = 'Хорошо',
+  Perfect = 'Отлично',
 }
 
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];

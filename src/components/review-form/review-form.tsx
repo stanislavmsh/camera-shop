@@ -1,6 +1,6 @@
 import { useForm , SubmitHandler} from 'react-hook-form';
 import { TUserReview } from '../../types/review';
-import { STARS_RATING } from '../../utils/const';
+import { STARS_RATING , RatingName } from '../../utils/const';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/current-data/current-data.action';
@@ -15,6 +15,7 @@ type ReviewFormProps = {
 
 export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateToSuccess} : ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const RESET_TIMEOUT = 300;
 
   const nameRegExp = new RegExp('[A-Za-zА-Яа-яЁё\\s\'\\-]+');
 
@@ -30,25 +31,25 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
       handleNavigateToSuccess();
     });
 
-    setTimeout(() => reset(), 300);
+    setTimeout(() => reset(), RESET_TIMEOUT);
 
   };
 
   const setCurrentStarTitle = (current: number) => {
-    if(current === 1) {
-      return 'Ужасно';
+    if(current === STARS_RATING[0]) {
+      return RatingName.Awful;
     }
-    if(current === 2) {
-      return 'Плохо';
+    if(current === STARS_RATING[1]) {
+      return RatingName.Bad;
     }
-    if(current === 3) {
-      return 'Нормально';
+    if(current === STARS_RATING[2]) {
+      return RatingName.Average;
     }
-    if(current === 4) {
-      return 'Хорошо';
+    if(current === STARS_RATING[3]) {
+      return RatingName.Good;
     }
-    if(current === 5) {
-      return 'Отлично';
+    if(current === STARS_RATING[4]) {
+      return RatingName.Perfect;
     }
   };
 
