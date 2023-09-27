@@ -176,7 +176,8 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
                     </svg>
                   </span>
                   <textarea
-                    minLength={5}
+                    minLength={10}
+                    maxLength={160}
                     data-testid="test-text-input"
                     placeholder="Поделитесь своим опытом покупки"
                     defaultValue={''}
