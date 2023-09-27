@@ -15,7 +15,9 @@ describe('Page: Catalog Page', () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,

@@ -2,6 +2,7 @@ import Banner from '../../components/banner/banner';
 import MemoizedCards from '../../components/cards/cards';
 import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
+import ModalBuy from '../../components/modal-buy/modal-buy';
 import MemoizedPagination from '../../components/pagination/pagination';
 
 export default function CatalogPage() : JSX.Element {
@@ -225,6 +226,7 @@ export default function CatalogPage() : JSX.Element {
             </div>
           </section>
         </div>
+        <ModalBuy />
       </main>
       <MemoizedFooter />
     </div>

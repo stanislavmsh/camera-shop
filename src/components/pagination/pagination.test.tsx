@@ -14,7 +14,9 @@ describe('Component: Pagination' , () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       }
     });
 

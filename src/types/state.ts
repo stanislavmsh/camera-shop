@@ -13,6 +13,8 @@ export type TCamerasData = {
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];
+  modalInfo: TCamera | undefined;
+  purchaseModalStatus: boolean;
 }
 
 export type TCurrentData = {

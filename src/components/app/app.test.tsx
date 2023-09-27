@@ -17,7 +17,9 @@ describe('Component: App', () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
@@ -44,7 +46,9 @@ describe('Component: App', () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
@@ -75,7 +79,9 @@ describe('Component: App', () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: true,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,

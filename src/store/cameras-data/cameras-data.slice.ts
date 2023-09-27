@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TCamerasData } from '../../types/state';
 import { NameSpace } from '../../utils/const';
 import { fetchCamerasAction } from './cameras-data.action';
+import { TCamera } from '../../types/camera';
 
 
 const initialState: TCamerasData = {
@@ -9,6 +10,8 @@ const initialState: TCamerasData = {
   hasError: false,
   isDataLoading: false,
   shownItems: [],
+  modalInfo: undefined,
+  purchaseModalStatus: false,
 };
 
 export const camerasData = createSlice({
@@ -17,6 +20,12 @@ export const camerasData = createSlice({
   reducers: {
     sortShownItems: (state , action: PayloadAction<number[]>) => {
       state.shownItems = [...state.cameras.slice(action.payload[0] , action.payload[1])];
+    },
+    setModalInfo: (state, action: PayloadAction<TCamera>) => {
+      state.modalInfo = action.payload;
+    },
+    setPurchaseModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.purchaseModalStatus = action.payload;
     }
 
   },
@@ -36,4 +45,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {sortShownItems} = camerasData.actions;
+export const {sortShownItems, setModalInfo, setPurchaseModalStatus} = camerasData.actions;

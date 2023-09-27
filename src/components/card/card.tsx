@@ -2,6 +2,9 @@ import React from 'react';
 import { TCamera } from '../../types/camera';
 import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
+import { useAppDispatch } from '../../hooks';
+import { setModalInfo, setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
+import { FOCUS_TIMEOUT } from '../../utils/const';
 
 type TCardProps = {
   cameraInfo : TCamera;
@@ -9,6 +12,17 @@ type TCardProps = {
 }
 
 function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
+  const handleBuyButton = () => {
+    dispatch(setModalInfo(cameraInfo));
+    dispatch(setPurchaseModalStatus(true));
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      document.getElementById('purchase__button')?.focus();
+    }, FOCUS_TIMEOUT);
+  };
 
 
   return (
@@ -53,6 +67,7 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
         <button
           className="btn btn--purple product-card__btn"
           type="button"
+          onClick={handleBuyButton}
         >
                       Купить
         </button>

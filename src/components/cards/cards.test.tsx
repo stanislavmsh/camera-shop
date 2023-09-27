@@ -16,7 +16,9 @@ describe('Component: Card', () => {
         cameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
-        shownItems: mockShownData
+        shownItems: mockShownData,
+        modalInfo: undefined,
+        purchaseModalStatus: false,
       }
     });
 
