@@ -141,7 +141,6 @@ describe('Current Data async actions', () => {
 
   describe('sendReviewAction', () => {
     it('should dispatch "sendReviewAction.pending", "sendReviewAction.fulfilled" when server response 200', async() => {
-      // const mockCurrent = makeFakeCurrentCameraData();
       const fakeComment: TUserReview = { cameraId: 1, userName: 'Ivan', advantage: 'abc', disadvantage: 'cba', review: 'text', rating: 4 };
       mockAxiosAdapter.onPost(APIRoute.Reviews).reply(200, []);
 

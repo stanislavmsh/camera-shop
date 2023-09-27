@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentReviews } from '../../store/current-data/current-data.selectors';
 import ReviewsList from '../reviews-list/reviews-list';
-// import ReviewForm from '../review-form/review-form';
 import ModalComment from '../modal-comment/modal-comment';
 
 export default function ReviewBlock() : JSX.Element {
