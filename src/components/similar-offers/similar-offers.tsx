@@ -17,6 +17,7 @@ export default function SimilarOffers() : JSX.Element {
         <div className="product-similar__slider">
           <div className="product-similar__slider-list">
             <Swiper
+              className='product-similar__slider-list'
               slidesPerView={3}
               slidesPerGroup={3}
               spaceBetween={32}
