@@ -12,6 +12,8 @@ const initialState: TCamerasData = {
   shownItems: [],
   modalInfo: undefined,
   purchaseModalStatus: false,
+  formModalStatus: false,
+  successModalStatus: false,
 };
 
 export const camerasData = createSlice({
@@ -25,7 +27,15 @@ export const camerasData = createSlice({
       state.modalInfo = action.payload;
     },
     setPurchaseModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.formModalStatus = false;
       state.purchaseModalStatus = action.payload;
+    },
+    setFormModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.purchaseModalStatus = false;
+      state.formModalStatus = action.payload;
+    },
+    setSuccessModalStatus: (state, action: PayloadAction<boolean>) => {
+      state.successModalStatus = action.payload;
     }
 
   },
@@ -45,4 +55,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {sortShownItems, setModalInfo, setPurchaseModalStatus} = camerasData.actions;
+export const {sortShownItems, setModalInfo, setPurchaseModalStatus, setFormModalStatus, setSuccessModalStatus} = camerasData.actions;

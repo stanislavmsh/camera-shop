@@ -17,6 +17,16 @@ describe('Component: Review Block', () => {
         isDataLoading: false,
         similarCameras: mockSimilarData,
         reviews: mockComments
+      },
+      CAMERAS: {
+        cameras: [],
+        hasError: false,
+        isDataLoading: false,
+        shownItems: [],
+        modalInfo: undefined,
+        purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 

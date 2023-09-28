@@ -17,6 +17,8 @@ describe('Component: Pagination' , () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 

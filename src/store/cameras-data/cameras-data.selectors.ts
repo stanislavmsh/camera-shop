@@ -8,3 +8,5 @@ export const getLoadingStatus = (state: State): boolean => state[NameSpace.Camer
 export const getShownItems = (state: State): TCamera[] => state[NameSpace.Cameras].shownItems;
 export const getModalInfo = (state: State): TCamera | undefined => state[NameSpace.Cameras].modalInfo;
 export const getPurchaseModalStatus = (state: State) : boolean => state[NameSpace.Cameras].purchaseModalStatus;
+export const getFormModalStatus = (state: State) : boolean => state[NameSpace.Cameras].formModalStatus;
+export const getSuccessModalStatus = (state: State) : boolean => state[NameSpace.Cameras].successModalStatus;

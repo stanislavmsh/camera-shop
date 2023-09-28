@@ -17,6 +17,7 @@ describe('ReviewForm Component', () => {
         handleCloseForm={mockHandleCloseForm}
         handleNavigateToSuccess={mockHandleNavigateToSuccess}
         cameraId={123}
+        isActive
       />, {
         CURRENT: {
           currentInfo: mockCurrentData,

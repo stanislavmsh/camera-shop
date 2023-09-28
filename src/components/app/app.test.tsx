@@ -20,6 +20,8 @@ describe('Component: App', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
@@ -49,6 +51,8 @@ describe('Component: App', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
@@ -82,6 +86,8 @@ describe('Component: App', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,

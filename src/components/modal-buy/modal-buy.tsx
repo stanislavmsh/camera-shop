@@ -1,31 +1,15 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getModalInfo, getPurchaseModalStatus } from '../../store/cameras-data/cameras-data.selectors';
+import { getModalInfo } from '../../store/cameras-data/cameras-data.selectors';
 import { setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
   const currentItem = useAppSelector(getModalInfo);
-  const isModalActive = useAppSelector(getPurchaseModalStatus);
-
-  const addButtonRef = useRef<HTMLButtonElement | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleModalClose = () => {
     dispatch(setPurchaseModalStatus(false));
     document.body.style.overflow = 'unset';
-  };
-
-  const handleFocusSwitch = (evt: KeyboardEvent) => {
-    if (evt.key === 'Tab' && isModalActive) {
-      evt.preventDefault();
-
-      if (document.activeElement === addButtonRef.current) {
-        closeButtonRef.current?.focus();
-      } else {
-        addButtonRef.current?.focus();
-      }
-    }
   };
 
   useEffect(() => {
@@ -35,78 +19,69 @@ export default function ModalBuy() : JSX.Element {
       }
     };
     document.addEventListener('keydown', onEscClick);
-    document.addEventListener('keydown', handleFocusSwitch);
-
-    if (isModalActive && addButtonRef.current) {
-      addButtonRef.current.focus();
-    }
 
     return () => {
       document.removeEventListener('keydown', onEscClick);
-      document.removeEventListener('keydown', handleFocusSwitch);
     };
   });
 
   return(
-    <div data-testid="modal-buy-test" className={`modal ${isModalActive ? 'is-active' : ''}`}>
-      <div onClick={handleModalClose} className="modal__wrapper">
-        <div className="modal__overlay" />
-        <div className="modal__content">
-          <p className="title title--h4">Добавить товар в корзину</p>
-          <div className="basket-item basket-item--short">
-            <div className="basket-item__img">
-              <picture>
-                <source
-                  type="image/webp"
-                  srcSet={`${currentItem?.previewImgWebp || ''}, ${currentItem?.previewImgWebp2x || ''} 2x`}
-                />
-                <img
-                  src={currentItem?.previewImg}
-                  srcSet={`${currentItem?.previewImg2x || ''} 2x`}
-                  width={140}
-                  height={120}
-                  alt={
-                    currentItem?.name
-                  }
-                />
-              </picture>
-            </div>
-            <div className="basket-item__description">
-              <p className="basket-item__title">{currentItem?.name}</p>
-              <ul className="basket-item__list">
-                <li className="basket-item__list-item">
-                  <span className="basket-item__article">Артикул:</span>{' '}
-                  <span className="basket-item__number">{currentItem?.vendorCode}</span>
-                </li>
-                <li className="basket-item__list-item">{currentItem?.type} фотокамера</li>
-                <li className="basket-item__list-item">{currentItem?.level} уровень</li>
-              </ul>
-              <p className="basket-item__price">
-                <span className="visually-hidden">Цена:</span>{currentItem?.price} ₽
-              </p>
-            </div>
+    <div onClick={handleModalClose} className="modal__wrapper">
+      <div className="modal__overlay" />
+      <div className="modal__content">
+        <p className="title title--h4">Добавить товар в корзину</p>
+        <div className="basket-item basket-item--short">
+          <div className="basket-item__img">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={`${currentItem?.previewImgWebp || ''}, ${currentItem?.previewImgWebp2x || ''} 2x`}
+              />
+              <img
+                src={currentItem?.previewImg}
+                srcSet={`${currentItem?.previewImg2x || ''} 2x`}
+                width={140}
+                height={120}
+                alt={
+                  currentItem?.name
+                }
+              />
+            </picture>
           </div>
-          <div className="modal__buttons">
-            <button
-              id='purchase__button'
-              className="btn btn--purple modal__btn modal__btn--fit-width"
-              type="button"
-              ref={addButtonRef}
-            >
-              <svg width={24} height={16} aria-hidden="true">
-                <use xlinkHref="#icon-add-basket" />
-              </svg>
-          Добавить в корзину
-            </button>
+          <div className="basket-item__description">
+            <p className="basket-item__title">{currentItem?.name}</p>
+            <ul className="basket-item__list">
+              <li className="basket-item__list-item">
+                <span className="basket-item__article">Артикул:</span>{' '}
+                <span className="basket-item__number">{currentItem?.vendorCode}</span>
+              </li>
+              <li className="basket-item__list-item">{currentItem?.type} фотокамера</li>
+              <li className="basket-item__list-item">{currentItem?.level} уровень</li>
+            </ul>
+            <p className="basket-item__price">
+              <span className="visually-hidden">Цена:</span>{currentItem?.price} ₽
+            </p>
           </div>
-          <button ref={closeButtonRef} onClick={handleModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
-            <svg width={10} height={10} aria-hidden="true">
-              <use xlinkHref="#icon-close" />
+        </div>
+        <div className="modal__buttons">
+          <button
+            data-testid='modal-buy-test'
+            id='purchase__button'
+            className="btn btn--purple modal__btn modal__btn--fit-width"
+            type="button"
+          >
+            <svg width={24} height={16} aria-hidden="true">
+              <use xlinkHref="#icon-add-basket" />
             </svg>
+          Добавить в корзину
           </button>
         </div>
+        <button onClick={handleModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
+          <svg width={10} height={10} aria-hidden="true">
+            <use xlinkHref="#icon-close" />
+          </svg>
+        </button>
       </div>
     </div>
-
   );
 }

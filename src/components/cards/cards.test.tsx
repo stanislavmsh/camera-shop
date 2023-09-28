@@ -19,6 +19,8 @@ describe('Component: Card', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 

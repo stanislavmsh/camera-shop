@@ -8,7 +8,8 @@ import { getCurrentInfo } from '../../store/current-data/current-data.selectors'
 import { Link, useParams , useSearchParams} from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { AppRoute, STARS_RATING } from '../../utils/const';
-import ModalBuy from '../../components/modal-buy/modal-buy';
+// import { getPurchaseModalStatus } from '../../store/cameras-data/cameras-data.selectors';
+// import ModalBuy from '../../components/modal-buy/modal-buy';
 
 
 export default function ProductPage() : JSX.Element {
@@ -20,6 +21,7 @@ export default function ProductPage() : JSX.Element {
   const [isDescription, setIsDescription] = useState<boolean>(true);
   const parsedParam = searchParams.get('type');
   const wrapperRef = useRef<HTMLDivElement>(null);
+  // const isBuyOpened = useAppSelector(getPurchaseModalStatus);
 
   const handleScrollToTop = () => {
     if(wrapperRef.current) {
@@ -176,7 +178,6 @@ export default function ProductPage() : JSX.Element {
             <ReviewBlock />
           </div>
         </div>
-        <ModalBuy />
       </main>
       <Link onClick={handleScrollToTop} className="up-btn" to={`${parsedParam !== null ? `?type=${parsedParam}` : ''}#header`}>
         <svg width={12} height={18} aria-hidden="true">

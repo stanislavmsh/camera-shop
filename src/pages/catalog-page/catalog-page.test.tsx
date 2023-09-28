@@ -1,11 +1,12 @@
 import { render , screen} from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import CatalogPage from './catalog-page';
-import { makeFakeCamerasData, makeFakePromos } from '../../utils/mocks';
+import { makeFakeCamerasData, makeFakeComments, makeFakePromos } from '../../utils/mocks';
 
 const mockCameraData = makeFakeCamerasData();
 const mockShownData = mockCameraData.slice(0, 3);
 const mockPromoData = makeFakePromos();
+const mockComments = makeFakeComments();
 
 
 describe('Page: Catalog Page', () => {
@@ -18,11 +19,20 @@ describe('Page: Catalog Page', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
         hasError: false,
       },
+      CURRENT: {
+        currentInfo: mockCameraData[0],
+        hasError: false,
+        isDataLoading: false,
+        similarCameras: mockCameraData,
+        reviews: mockComments
+      }
     }
     );
 

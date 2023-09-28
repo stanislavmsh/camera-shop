@@ -20,6 +20,8 @@ describe('Page: Catalog Page', () => {
         shownItems: mockShownData,
         modalInfo: undefined,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,

@@ -15,6 +15,8 @@ export type TCamerasData = {
   shownItems: TCamera[];
   modalInfo: TCamera | undefined;
   purchaseModalStatus: boolean;
+  formModalStatus: boolean;
+  successModalStatus: boolean;
 }
 
 export type TCurrentData = {

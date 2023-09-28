@@ -18,6 +18,8 @@ describe('Component: Modal Buy' , () => {
         shownItems: mockShownData,
         modalInfo: mockModal,
         purchaseModalStatus: true,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 
@@ -25,27 +27,8 @@ describe('Component: Modal Buy' , () => {
 
     const element = screen.getByTestId('modal-buy-test');
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('is-active');
+    expect(element).toHaveTextContent('Добавить в корзину');
 
   });
 
-  it('should not render ModalBuy when isActive is false', () => {
-    const { withStoreComponent } = withStore(<ModalBuy />, {
-      CAMERAS: {
-        cameras: mockCamerasData,
-        hasError: false,
-        isDataLoading: false,
-        shownItems: mockShownData,
-        modalInfo: mockModal,
-        purchaseModalStatus: false,
-      }
-    });
-
-    render(withStoreComponent);
-
-    const element = screen.getByTestId('modal-buy-test');
-    expect(element).toBeInTheDocument();
-    expect(element).not.toHaveClass('is-active');
-
-  });
 });

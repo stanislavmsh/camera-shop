@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
 import { useAppDispatch } from '../../hooks';
 import { setModalInfo, setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
-import { FOCUS_TIMEOUT } from '../../utils/const';
+// import { FOCUS_TIMEOUT } from '../../utils/const';
 import { formatNumberWithSpace } from '../../utils/utils';
 
 type TCardProps = {
@@ -20,9 +20,6 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
     dispatch(setModalInfo(cameraInfo));
     dispatch(setPurchaseModalStatus(true));
     document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      document.getElementById('purchase__button')?.focus();
-    }, FOCUS_TIMEOUT);
   };
 
 

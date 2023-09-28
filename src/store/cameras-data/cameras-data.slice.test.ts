@@ -12,6 +12,8 @@ describe('Cameras Data Slice' , () => {
     shownItems: [],
     modalInfo: undefined,
     purchaseModalStatus: false,
+    formModalStatus: false,
+    successModalStatus: false,
   };
 
   it('should return initial state with empty action' , () => {

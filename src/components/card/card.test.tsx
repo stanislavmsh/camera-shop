@@ -21,6 +21,8 @@ describe('Component: Card', () => {
         shownItems: mockShownData,
         modalInfo: singleCameraData,
         purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 

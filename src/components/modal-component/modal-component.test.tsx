@@ -1,23 +1,32 @@
 import { makeFakeCamerasData, makeFakeComments, makeFakeCurrentCameraData } from '../../utils/mocks';
-import ModalComment from './modal-comment';
+import ModalComponent from './modal-component';
 import { withStore } from '../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
 
 
-const mockFunction = () => [];
 const mockCurrentData = makeFakeCurrentCameraData();
 const mockSimilarData = makeFakeCamerasData();
 const mockComments = makeFakeComments();
 
 describe('Component: Modal Comment' , () => {
-  it('should render ReviewForm when isActive is true', () => {
-    const { withStoreComponent } = withStore(<ModalComment isActive handleCloseForm={mockFunction}/>, {
+  it('should render ReviewForm when any modal status is true', () => {
+    const { withStoreComponent } = withStore(<ModalComponent />, {
       CURRENT: {
         currentInfo: mockCurrentData,
         hasError: false,
         isDataLoading: false,
         similarCameras: mockSimilarData,
-        reviews: mockComments
+        reviews: mockComments,
+      },
+      CAMERAS: {
+        cameras: [],
+        hasError: false,
+        isDataLoading: false,
+        shownItems: [],
+        modalInfo: undefined,
+        purchaseModalStatus: true,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 
@@ -29,14 +38,24 @@ describe('Component: Modal Comment' , () => {
 
   });
 
-  it('should not render ReviewForm when isActive is false', () => {
-    const { withStoreComponent } = withStore(<ModalComment isActive={false} handleCloseForm={mockFunction}/>, {
+  it('should not render ReviewForm when modal status is false', () => {
+    const { withStoreComponent } = withStore(<ModalComponent />, {
       CURRENT: {
         currentInfo: mockCurrentData,
         hasError: false,
         isDataLoading: false,
         similarCameras: mockSimilarData,
         reviews: mockComments
+      },
+      CAMERAS: {
+        cameras: [],
+        hasError: false,
+        isDataLoading: false,
+        shownItems: [],
+        modalInfo: undefined,
+        purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     });
 

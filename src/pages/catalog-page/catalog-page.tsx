@@ -2,7 +2,7 @@ import Banner from '../../components/banner/banner';
 import MemoizedCards from '../../components/cards/cards';
 import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
-import ModalBuy from '../../components/modal-buy/modal-buy';
+import ModalComponent from '../../components/modal-component/modal-component';
 import MemoizedPagination from '../../components/pagination/pagination';
 import { AppRoute } from '../../utils/const';
 import { Link } from 'react-router-dom';
@@ -225,7 +225,7 @@ export default function CatalogPage() : JSX.Element {
             </div>
           </section>
         </div>
-        <ModalBuy />
+        <ModalComponent />
       </main>
       <MemoizedFooter />
     </div>
