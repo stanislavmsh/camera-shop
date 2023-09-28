@@ -3,7 +3,7 @@ import ReviewForm from '../review-form/review-form';
 import CommentSuccess from '../comment-success/comment-success';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
-import { fetchReviewsAction } from '../../store/current-data/current-data.action';
+import { fetchCurrentAction, fetchReviewsAction } from '../../store/current-data/current-data.action';
 import { FOCUS_TIMEOUT } from '../../utils/const';
 
 type ModalCommentProps = {
@@ -21,6 +21,7 @@ export default function ModalComment ({isActive, handleCloseForm} : ModalComment
 
   const handleSuccessClick = () => {
     if(currentitem) {
+      dispatch(fetchCurrentAction(currentitem.id));
       dispatch(fetchReviewsAction(currentitem.id)).then(() => {
         handleCloseForm();
         setIsThanksOpened(false);
