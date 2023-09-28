@@ -1,3 +1,4 @@
 .pagination__button {
   border: none !important;
+  cursor: pointer;
 }

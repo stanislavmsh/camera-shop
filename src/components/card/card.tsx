@@ -5,6 +5,7 @@ import { AppRoute , STARS_RATING } from '../../utils/const';
 import { useAppDispatch } from '../../hooks';
 import { setModalInfo, setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
 import { FOCUS_TIMEOUT } from '../../utils/const';
+import { formatNumberWithSpace } from '../../utils/utils';
 
 type TCardProps = {
   cameraInfo : TCamera;
@@ -60,7 +61,7 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
           {cameraInfo.name}
         </p>
         <p className="product-card__price">
-          <span className="visually-hidden">Цена:</span>{cameraInfo.price} ₽
+          <span className="visually-hidden">Цена:</span>{formatNumberWithSpace(cameraInfo.price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">

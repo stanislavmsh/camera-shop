@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination , Navigation , A11y } from 'swiper/modules';
 import { useAppSelector } from '../../hooks';
 import { getSimiralCameras } from '../../store/current-data/current-data.selectors';
+import styles from './smilar-offers.module.css';
 
 
 export default function SimilarOffers() : JSX.Element {
@@ -37,8 +38,7 @@ export default function SimilarOffers() : JSX.Element {
               ))}
             </Swiper >
             <button
-              className="slider-controls slider-controls--prev"
-              style={{pointerEvents: 'auto'}}
+              className={`${styles['button-prev']} slider-controls--prev`}
               type="button"
               aria-label="Предыдущий слайд"
             >
@@ -47,8 +47,7 @@ export default function SimilarOffers() : JSX.Element {
               </svg>
             </button>
             <button
-              className="slider-controls slider-controls--next"
-              style={{pointerEvents: 'auto'}}
+              className={`${styles['button-next']} slider-controls--next`}
               type="button"
               aria-label="Следующий слайд"
             >

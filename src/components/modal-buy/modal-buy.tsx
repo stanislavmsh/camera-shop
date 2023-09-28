@@ -1,16 +1,31 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getModalInfo, getPurchaseModalStatus } from '../../store/cameras-data/cameras-data.selectors';
 import { setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
   const currentItem = useAppSelector(getModalInfo);
   const isModalActive = useAppSelector(getPurchaseModalStatus);
 
+  const addButtonRef = useRef<HTMLButtonElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const handleModalClose = () => {
     dispatch(setPurchaseModalStatus(false));
     document.body.style.overflow = 'unset';
+  };
+
+  const handleFocusSwitch = (evt: KeyboardEvent) => {
+    if (evt.key === 'Tab' && isModalActive) {
+      evt.preventDefault();
+
+      if (document.activeElement === addButtonRef.current) {
+        closeButtonRef.current?.focus();
+      } else {
+        addButtonRef.current?.focus();
+      }
+    }
   };
 
   useEffect(() => {
@@ -20,9 +35,15 @@ export default function ModalBuy() : JSX.Element {
       }
     };
     document.addEventListener('keydown', onEscClick);
+    document.addEventListener('keydown', handleFocusSwitch);
+
+    if (isModalActive && addButtonRef.current) {
+      addButtonRef.current.focus();
+    }
 
     return () => {
       document.removeEventListener('keydown', onEscClick);
+      document.removeEventListener('keydown', handleFocusSwitch);
     };
   });
 
@@ -70,6 +91,7 @@ export default function ModalBuy() : JSX.Element {
               id='purchase__button'
               className="btn btn--purple modal__btn modal__btn--fit-width"
               type="button"
+              ref={addButtonRef}
             >
               <svg width={24} height={16} aria-hidden="true">
                 <use xlinkHref="#icon-add-basket" />
@@ -77,7 +99,7 @@ export default function ModalBuy() : JSX.Element {
           Добавить в корзину
             </button>
           </div>
-          <button onClick={handleModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
+          <button ref={closeButtonRef} onClick={handleModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
             <svg width={10} height={10} aria-hidden="true">
               <use xlinkHref="#icon-close" />
             </svg>

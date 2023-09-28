@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 import styles from './pagination.module.css';
+import { AppRoute } from '../../utils/const';
 
 function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ function Pagination() : JSX.Element {
 
 
   const [currentPages , setCurrentPages] = useState({
+    current : safePage,
     paginationMin: 0,
     paginationMax: 3,
   });
@@ -26,7 +28,7 @@ function Pagination() : JSX.Element {
     count: pageCount,
     hideNextButton: currentPages.paginationMax >= pageCount,
     hidePrevButton: currentPages.paginationMax <= 3,
-    page: safePage,
+    page: currentPages.current,
     siblingCount: 2,
   });
 
@@ -36,6 +38,7 @@ function Pagination() : JSX.Element {
     const end = start + PRODUCTS_PER_PAGE;
     if (safePage === 1) {
       setCurrentPages({
+        current: safePage,
         paginationMin: 0,
         paginationMax: 3,
       });
@@ -48,27 +51,26 @@ function Pagination() : JSX.Element {
 
   const handleNextClick = (type: 'next' | 'previous') => {
     setCurrentPages((prevPages) => {
-      const step = type === 'next' ? 3 : -3;
+      const step = type === 'next' ? 1 : -1;
 
       return {
         ...prevPages,
-        paginationMax: prevPages.paginationMax + step,
-        paginationMin: prevPages.paginationMin + step,
+        current: prevPages.current + step
       };
     });
 
     setSearchParams({
-      page: type === 'next' ? (currentPages.paginationMax + 1).toString() : currentPages.paginationMin.toString()
+      page: type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString()
     });
   };
 
   const handlePageClick = (page : number) => {
     setSearchParams({ page: page.toString() });
+    setCurrentPages((prevPages) => ({...prevPages, current: page}));
   };
 
-  const isLinkedPageInRange = safePage === 1 || safePage <= currentPages.paginationMax && safePage > currentPages.paginationMin;
 
-  if(!isLinkedPageInRange) {
+  if(currentPages.current > currentPages.paginationMax) {
     setCurrentPages((prevPages) => {
       const step = 3;
 
@@ -76,6 +78,16 @@ function Pagination() : JSX.Element {
         ...prevPages,
         paginationMax: prevPages.paginationMax + step,
         paginationMin: prevPages.paginationMin + step,
+      };
+    });
+  } else if (currentPages.current < currentPages.paginationMin + 1){
+    setCurrentPages((prevPages) => {
+      const step = 3;
+
+      return {
+        ...prevPages,
+        paginationMax: prevPages.paginationMax - step,
+        paginationMin: prevPages.paginationMin - step,
       };
     });
   }
@@ -93,14 +105,15 @@ function Pagination() : JSX.Element {
           if (type === 'page' && isPageInRange) {
             children = (
               <li key={`${page as number}${type}keyss`} className="pagination__item">
-                <button
+                <Link
+                  to={`${AppRoute.Root}?page=${page as number}`}
                   className={`pagination__link ${styles['pagination__button']} ${selected ? 'pagination__link--active' : ''}`}
                   onClick={() => {
                     handlePageClick(page as number);
                   }}
                 >
                   {page}
-                </button>
+                </Link>
               </li>
 
             );

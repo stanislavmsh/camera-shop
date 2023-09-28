@@ -1,11 +1,11 @@
-import { useEffect, useState , useCallback } from 'react';
+import { useEffect, useState , useCallback, useRef } from 'react';
 import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
 import ReviewBlock from '../../components/review-block/review-block';
 import SimilarOffers from '../../components/similar-offers/similar-offers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams , useSearchParams} from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { AppRoute, STARS_RATING } from '../../utils/const';
 import ModalBuy from '../../components/modal-buy/modal-buy';
@@ -16,29 +16,45 @@ export default function ProductPage() : JSX.Element {
   const dispatch = useAppDispatch();
   const currentId = useParams().id;
   const currentProduct = useAppSelector(getCurrentInfo);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isDescription, setIsDescription] = useState<boolean>(true);
+  const parsedParam = searchParams.get('type');
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToTop = () => {
+    if(wrapperRef.current) {
+      wrapperRef.current.scrollIntoView({behavior: 'smooth'});
+    }
+  };
 
   useEffect(() => {
+    if(parsedParam === 'stats') {
+      setIsDescription(false);
+    } else {
+      setIsDescription(true);
+    }
     if(currentId) {
       dispatch(fetchCurrentAction(Number(currentId)));
       dispatch(fetchReviewsAction(Number(currentId)));
       dispatch(fetchSimilarAction(Number(currentId)));
     }
-  }, [dispatch, currentId]);
+  }, [dispatch, currentId , setIsDescription , parsedParam]);
 
-  const [isDescription, setIsDescription] = useState<boolean>(true);
 
   const handleDescriptionClick = useCallback(() => {
     setIsDescription(true);
-  },[]);
+    setSearchParams({type: 'description'});
+  },[setSearchParams]);
 
   const handleStatsClick = useCallback(() => {
     setIsDescription(false);
-  }, []);
+    setSearchParams({type: 'stats'});
+  }, [setSearchParams]);
 
 
   return(
 
-    <div className="wrapper">
+    <div ref={wrapperRef} id='page__top' className="wrapper">
       <MemoizedHeader />
       <main>
         <div className="page-content">
@@ -162,11 +178,11 @@ export default function ProductPage() : JSX.Element {
         </div>
         <ModalBuy />
       </main>
-      <a className="up-btn" href="#header">
+      <Link onClick={handleScrollToTop} className="up-btn" to={`${parsedParam !== null ? `?type=${parsedParam}` : ''}#header`}>
         <svg width={12} height={18} aria-hidden="true">
           <use xlinkHref="#icon-arrow2" />
         </svg>
-      </a>
+      </Link>
       <MemoizedFooter />
     </div>
 

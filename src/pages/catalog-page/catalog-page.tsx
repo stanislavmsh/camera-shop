@@ -4,6 +4,8 @@ import MemoizedFooter from '../../components/footer/footer';
 import MemoizedHeader from '../../components/header/header';
 import ModalBuy from '../../components/modal-buy/modal-buy';
 import MemoizedPagination from '../../components/pagination/pagination';
+import { AppRoute } from '../../utils/const';
+import { Link } from 'react-router-dom';
 
 export default function CatalogPage() : JSX.Element {
 
@@ -17,12 +19,12 @@ export default function CatalogPage() : JSX.Element {
             <div className="container">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="index.html">
+                  <Link className="breadcrumbs__link" to={AppRoute.Root}>
                 Главная
                     <svg width={5} height={8} aria-hidden="true">
                       <use xlinkHref="#icon-arrow-mini" />
                     </svg>
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <span className="breadcrumbs__link breadcrumbs__link--active">
@@ -66,7 +68,6 @@ export default function CatalogPage() : JSX.Element {
                             <input
                               type="checkbox"
                               name="photocamera"
-                              defaultChecked
                             />
                             <span className="custom-checkbox__icon" />
                             <span className="custom-checkbox__label">
@@ -91,7 +92,6 @@ export default function CatalogPage() : JSX.Element {
                             <input
                               type="checkbox"
                               name="digital"
-                              defaultChecked
                             />
                             <span className="custom-checkbox__icon" />
                             <span className="custom-checkbox__label">Цифровая</span>
@@ -120,7 +120,6 @@ export default function CatalogPage() : JSX.Element {
                             <input
                               type="checkbox"
                               name="collection"
-                              defaultChecked
                               disabled
                             />
                             <span className="custom-checkbox__icon" />
@@ -134,7 +133,7 @@ export default function CatalogPage() : JSX.Element {
                         <legend className="title title--h5">Уровень</legend>
                         <div className="custom-checkbox catalog-filter__item">
                           <label>
-                            <input type="checkbox" name="zero" defaultChecked />
+                            <input type="checkbox" name="zero"/>
                             <span className="custom-checkbox__icon" />
                             <span className="custom-checkbox__label">Нулевой</span>
                           </label>
@@ -178,7 +177,7 @@ export default function CatalogPage() : JSX.Element {
                               type="radio"
                               id="sortPrice"
                               name="sort"
-                              defaultChecked
+
                             />
                             <label htmlFor="sortPrice">по цене</label>
                           </div>
@@ -193,7 +192,7 @@ export default function CatalogPage() : JSX.Element {
                               type="radio"
                               id="up"
                               name="sort-icon"
-                              defaultChecked
+
                               aria-label="По возрастанию"
                             />
                             <label htmlFor="up">

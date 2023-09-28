@@ -18,7 +18,6 @@ export default function ReviewForm({ handleCloseForm , cameraId, handleNavigateT
   const RESET_TIMEOUT = 300;
 
   const nameRegExp = new RegExp('[A-Za-zА-Яа-яЁё\\s\'\\-]+');
-
   const [currentRating, setCurrentRating] = useState(0);
 
   const {register , handleSubmit, formState: { errors } , reset} = useForm<TUserReview>({mode: 'onSubmit', criteriaMode: 'all'});
