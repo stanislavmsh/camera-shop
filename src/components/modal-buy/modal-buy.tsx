@@ -1,6 +1,4 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-// import { getModalInfo } from '../../store/cameras-data/cameras-data.selectors';
-// import { setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
 import { useEffect } from 'react';
 import { formatNumberWithSpace } from '../../utils/utils';
 import { getModalInfo } from '../../store/modal-process/modal-process.selectors';

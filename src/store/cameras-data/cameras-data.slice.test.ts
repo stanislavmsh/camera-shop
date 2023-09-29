@@ -1,7 +1,7 @@
 
 import { makeFakeCamerasData } from '../../utils/mocks';
 import { fetchCamerasAction } from './cameras-data.action';
-import { camerasData, setModalInfo, setPurchaseModalStatus, sortShownItems } from './cameras-data.slice';
+import { camerasData, sortShownItems } from './cameras-data.slice';
 
 describe('Cameras Data Slice' , () => {
 

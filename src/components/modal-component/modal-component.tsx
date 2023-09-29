@@ -5,8 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
 import { fetchCurrentAction, fetchReviewsAction } from '../../store/current-data/current-data.action';
 import ModalBuy from '../modal-buy/modal-buy';
-// import { getFormModalStatus, getPurchaseModalStatus, getSuccessModalStatus } from '../../store/cameras-data/cameras-data.selectors';
-// import { setFormModalStatus, setPurchaseModalStatus , setSuccessModalStatus} from '../../store/cameras-data/cameras-data.slice';
 import FocusLock from 'react-focus-lock';
 import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus } from '../../store/modal-process/modal-process.selectors';
 import { setFormModalStatus, setPurchaseModalStatus, setSuccessModalStatus } from '../../store/modal-process/modal-process.slice';
@@ -60,7 +58,7 @@ export default function ModalComponent (): JSX.Element {
     };
   });
 
-  let currentElement: JSX.Element = <div className="modal__wrapper">123</div>;
+  let currentElement: JSX.Element = <div></div>;
 
   switch (true) {
     case isPurchaseOpened:
