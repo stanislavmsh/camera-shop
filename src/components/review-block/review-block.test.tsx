@@ -23,6 +23,8 @@ describe('Component: Review Block', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+      },
+      MODAL: {
         modalInfo: undefined,
         purchaseModalStatus: false,
         formModalStatus: false,

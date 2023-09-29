@@ -17,10 +17,6 @@ describe('Page: Catalog Page', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
-        modalInfo: undefined,
-        purchaseModalStatus: false,
-        formModalStatus: false,
-        successModalStatus: false,
       },
       PROMO: {
         promos: mockPromoData,
@@ -32,6 +28,12 @@ describe('Page: Catalog Page', () => {
         isDataLoading: false,
         similarCameras: mockCameraData,
         reviews: mockComments
+      },
+      MODAL: {
+        modalInfo: undefined,
+        purchaseModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
       }
     }
     );

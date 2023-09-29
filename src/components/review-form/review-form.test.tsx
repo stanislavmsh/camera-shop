@@ -10,12 +10,10 @@ const mockComments = makeFakeComments();
 describe('ReviewForm Component', () => {
   it('should render form', () => {
     const mockHandleCloseForm = vitest.fn();
-    const mockHandleNavigateToSuccess = vitest.fn();
 
     const { withStoreComponent } = withStore(
       <ReviewForm
         handleCloseForm={mockHandleCloseForm}
-        handleNavigateToSuccess={mockHandleNavigateToSuccess}
         cameraId={123}
         isActive
       />, {

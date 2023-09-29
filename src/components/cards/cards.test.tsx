@@ -17,10 +17,6 @@ describe('Component: Card', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
-        modalInfo: undefined,
-        purchaseModalStatus: false,
-        formModalStatus: false,
-        successModalStatus: false,
       }
     });
 

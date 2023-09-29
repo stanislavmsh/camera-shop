@@ -19,10 +19,6 @@ describe('Component: Card', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
-        modalInfo: singleCameraData,
-        purchaseModalStatus: false,
-        formModalStatus: false,
-        successModalStatus: false,
       }
     });
 

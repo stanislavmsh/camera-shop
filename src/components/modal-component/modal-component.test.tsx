@@ -28,7 +28,7 @@ describe('Component: Modal Comment' , () => {
         modalInfo: undefined,
         purchaseModalStatus: false,
         formModalStatus: false,
-        successModalStatus: false,
+        successModalStatus: true,
       }
     });
 

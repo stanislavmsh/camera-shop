@@ -16,8 +16,10 @@ describe('Component: Modal Buy' , () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
+      },
+      MODAL: {
         modalInfo: mockModal,
-        purchaseModalStatus: true,
+        purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
       }
