@@ -5,6 +5,7 @@ type CommentSuccessProps = {
 
 
 export default function CommentSuccess({handleCommentSuccess}: CommentSuccessProps): JSX.Element {
+
   return (
     <div className="modal__wrapper">
       <div onClick={handleCommentSuccess} className="modal__overlay" />

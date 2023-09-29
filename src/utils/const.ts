@@ -16,6 +16,7 @@ export const enum NameSpace {
   Cameras = 'CAMERAS',
   Promo = 'PROMO',
   Current = 'CURRENT',
+  Modal = 'MODAL',
 }
 
 export const enum RatingName {

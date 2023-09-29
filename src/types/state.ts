@@ -13,10 +13,7 @@ export type TCamerasData = {
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];
-  modalInfo: TCamera | undefined;
-  purchaseModalStatus: boolean;
-  formModalStatus: boolean;
-  successModalStatus: boolean;
+
 }
 
 export type TCurrentData = {
@@ -25,6 +22,13 @@ export type TCurrentData = {
   isDataLoading: boolean;
   similarCameras: TCamera[];
   reviews: TReview[];
+}
+
+export type TModalProcess = {
+  modalInfo: TCamera | undefined;
+  purchaseModalStatus: boolean;
+  formModalStatus: boolean;
+  successModalStatus: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

@@ -23,8 +23,10 @@ describe('Component: Modal Comment' , () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+      },
+      MODAL: {
         modalInfo: undefined,
-        purchaseModalStatus: true,
+        purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
       }
@@ -52,6 +54,8 @@ describe('Component: Modal Comment' , () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+      },
+      MODAL: {
         modalInfo: undefined,
         purchaseModalStatus: false,
         formModalStatus: false,

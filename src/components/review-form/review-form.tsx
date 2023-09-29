@@ -5,7 +5,8 @@ import React, { useState , useRef , useEffect} from 'react';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/current-data/current-data.action';
 import FocusLock from 'react-focus-lock';
-import { setFormModalStatus, setSuccessModalStatus } from '../../store/cameras-data/cameras-data.slice';
+import { setFormModalStatus, setSuccessModalStatus } from '../../store/modal-process/modal-process.slice';
+// import { setFormModalStatus, setSuccessModalStatus } from '../../store/cameras-data/cameras-data.slice';
 
 
 type ReviewFormProps = {

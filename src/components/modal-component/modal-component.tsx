@@ -5,9 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
 import { fetchCurrentAction, fetchReviewsAction } from '../../store/current-data/current-data.action';
 import ModalBuy from '../modal-buy/modal-buy';
-import { getFormModalStatus, getPurchaseModalStatus, getSuccessModalStatus } from '../../store/cameras-data/cameras-data.selectors';
-import { setFormModalStatus, setPurchaseModalStatus , setSuccessModalStatus} from '../../store/cameras-data/cameras-data.slice';
+// import { getFormModalStatus, getPurchaseModalStatus, getSuccessModalStatus } from '../../store/cameras-data/cameras-data.selectors';
+// import { setFormModalStatus, setPurchaseModalStatus , setSuccessModalStatus} from '../../store/cameras-data/cameras-data.slice';
 import FocusLock from 'react-focus-lock';
+import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus } from '../../store/modal-process/modal-process.selectors';
+import { setFormModalStatus, setPurchaseModalStatus, setSuccessModalStatus } from '../../store/modal-process/modal-process.slice';
 
 
 export default function ModalComponent (): JSX.Element {
@@ -16,8 +18,8 @@ export default function ModalComponent (): JSX.Element {
 
 
   const handleCloseForm = () => {
-    dispatch(setPurchaseModalStatus(false));
     dispatch(setFormModalStatus(false));
+    dispatch(setPurchaseModalStatus(false));
     document.body.style.overflow = 'unset';
   };
 
@@ -58,16 +60,20 @@ export default function ModalComponent (): JSX.Element {
     };
   });
 
-  let currentElement: JSX.Element = <div></div>;
+  let currentElement: JSX.Element = <div className="modal__wrapper">123</div>;
 
-  if(isPurchaseOpened) {
-    currentElement = <ModalBuy />;
-  }
-  if(isFormModalOpened) {
-    currentElement = <ReviewForm isActive={isFormModalOpened} cameraId={currentitem?.id || 0} handleCloseForm={handleCloseForm}/>;
-  }
-  if(isSuccessModalOpened) {
-    currentElement = <CommentSuccess handleCommentSuccess={handleSuccessClick}/>;
+  switch (true) {
+    case isPurchaseOpened:
+      currentElement = <ModalBuy />;
+      break;
+    case isFormModalOpened:
+      currentElement = (
+        <ReviewForm isActive={isFormModalOpened} cameraId={currentitem?.id || 0} handleCloseForm={handleCloseForm} />
+      );
+      break;
+    case isSuccessModalOpened:
+      currentElement = <CommentSuccess handleCommentSuccess={handleSuccessClick} />;
+      break;
   }
 
 

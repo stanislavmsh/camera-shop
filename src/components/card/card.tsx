@@ -3,9 +3,10 @@ import { TCamera } from '../../types/camera';
 import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
 import { useAppDispatch } from '../../hooks';
-import { setModalInfo, setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
+// import { setModalInfo, setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
 // import { FOCUS_TIMEOUT } from '../../utils/const';
 import { formatNumberWithSpace } from '../../utils/utils';
+import { setModalInfo, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
 
 type TCardProps = {
   cameraInfo : TCamera;

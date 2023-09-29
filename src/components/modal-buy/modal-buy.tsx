@@ -1,7 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getModalInfo } from '../../store/cameras-data/cameras-data.selectors';
-import { setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
+// import { getModalInfo } from '../../store/cameras-data/cameras-data.selectors';
+// import { setPurchaseModalStatus } from '../../store/cameras-data/cameras-data.slice';
 import { useEffect } from 'react';
+import { formatNumberWithSpace } from '../../utils/utils';
+import { getModalInfo } from '../../store/modal-process/modal-process.selectors';
+import { setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -59,7 +62,7 @@ export default function ModalBuy() : JSX.Element {
               <li className="basket-item__list-item">{currentItem?.level} уровень</li>
             </ul>
             <p className="basket-item__price">
-              <span className="visually-hidden">Цена:</span>{currentItem?.price} ₽
+              <span className="visually-hidden">Цена:</span>{formatNumberWithSpace(currentItem?.price || 1)} ₽
             </p>
           </div>
         </div>
