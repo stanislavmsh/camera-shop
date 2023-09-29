@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewForm from '../review-form/review-form';
 import CommentSuccess from '../comment-success/comment-success';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -14,12 +14,7 @@ export default function ModalComponent (): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-
-  const handleCloseForm = () => {
-    dispatch(setFormModalStatus(false));
-    dispatch(setPurchaseModalStatus(false));
-    document.body.style.overflow = 'unset';
-  };
+  const [currentElement , setCurrentElement] = useState<JSX.Element>(<div></div>);
 
   const isPurchaseOpened = useAppSelector(getPurchaseModalStatus);
   const isFormModalOpened = useAppSelector(getFormModalStatus);
@@ -27,20 +22,40 @@ export default function ModalComponent (): JSX.Element {
 
   const currentitem = useAppSelector(getCurrentInfo);
 
-  const handleSuccessClick = () => {
-    if(currentitem) {
-      dispatch(fetchCurrentAction(currentitem.id));
-      dispatch(fetchReviewsAction(currentitem.id)).then(() => {
-        handleCloseForm();
-        dispatch(setSuccessModalStatus(false));
-      });
-    }
-  };
-
   const isActive = isPurchaseOpened || isFormModalOpened || isSuccessModalOpened;
 
 
   useEffect(() => {
+    const handleCloseForm = () => {
+      dispatch(setFormModalStatus(false));
+      dispatch(setPurchaseModalStatus(false));
+      document.body.style.overflow = 'unset';
+    };
+    const handleSuccessClick = () => {
+      if(currentitem) {
+        dispatch(fetchCurrentAction(currentitem.id));
+        dispatch(fetchReviewsAction(currentitem.id)).then(() => {
+          handleCloseForm();
+          dispatch(setSuccessModalStatus(false));
+        });
+      }
+    };
+
+    switch (true) {
+      case isPurchaseOpened:
+        setCurrentElement(<ModalBuy />);
+        break;
+      case isFormModalOpened:
+        setCurrentElement (
+          <ReviewForm isActive={isFormModalOpened} cameraId={currentitem?.id || 0} handleCloseForm={handleCloseForm} />
+        );
+        break;
+      case isSuccessModalOpened:
+        setCurrentElement (<CommentSuccess handleCommentSuccess={handleSuccessClick} />);
+        break;
+    }
+
+
     const onEscClick = (evt: KeyboardEvent) => {
       if(evt.code === 'Escape') {
         if(isSuccessModalOpened) {
@@ -56,23 +71,7 @@ export default function ModalComponent (): JSX.Element {
     return () => {
       document.removeEventListener('keydown', onEscClick);
     };
-  });
-
-  let currentElement: JSX.Element = <div></div>;
-
-  switch (true) {
-    case isPurchaseOpened:
-      currentElement = <ModalBuy />;
-      break;
-    case isFormModalOpened:
-      currentElement = (
-        <ReviewForm isActive={isFormModalOpened} cameraId={currentitem?.id || 0} handleCloseForm={handleCloseForm} />
-      );
-      break;
-    case isSuccessModalOpened:
-      currentElement = <CommentSuccess handleCommentSuccess={handleSuccessClick} />;
-      break;
-  }
+  }, [isPurchaseOpened, isFormModalOpened, currentitem?.id, isSuccessModalOpened, dispatch, currentitem]);
 
 
   return(
