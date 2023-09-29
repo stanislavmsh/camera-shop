@@ -6,6 +6,7 @@ const initialState = {
   purchaseModalStatus: false,
   formModalStatus: false,
   successModalStatus: false,
+  isActive: true,
 };
 
 
