@@ -10,7 +10,7 @@ const mockCurrentData = makeFakeCurrentCameraData();
 const mockComments = makeFakeComments();
 
 
-describe('Page: Catalog Page', () => {
+describe('Page: Catalog Page ', () => {
   it('should render page', () => {
     const { withStoreComponent } = withStore(<ProductPage />, {
       CAMERAS: {
