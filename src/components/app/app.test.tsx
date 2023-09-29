@@ -35,6 +35,7 @@ describe('Component: App', () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
     });
 
@@ -69,6 +70,7 @@ describe('Component: App', () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
 
     });
@@ -109,6 +111,7 @@ describe('Component: App', () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
 
     });

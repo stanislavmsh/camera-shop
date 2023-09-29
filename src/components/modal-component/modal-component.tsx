@@ -6,15 +6,15 @@ import { getCurrentInfo } from '../../store/current-data/current-data.selectors'
 import { fetchCurrentAction, fetchReviewsAction } from '../../store/current-data/current-data.action';
 import ModalBuy from '../modal-buy/modal-buy';
 import FocusLock from 'react-focus-lock';
-import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus } from '../../store/modal-process/modal-process.selectors';
-import { setFormModalStatus, setPurchaseModalStatus, setSuccessModalStatus } from '../../store/modal-process/modal-process.slice';
+import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus, getActiveStatus } from '../../store/modal-process/modal-process.selectors';
+import { setActiveStatus } from '../../store/modal-process/modal-process.slice';
 
 
 export default function ModalComponent (): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const [currentElement , setCurrentElement] = useState<JSX.Element>(<div></div>);
+  const [currentElement , setCurrentElement] = useState<JSX.Element | null>(null);
 
   const isPurchaseOpened = useAppSelector(getPurchaseModalStatus);
   const isFormModalOpened = useAppSelector(getFormModalStatus);
@@ -22,13 +22,12 @@ export default function ModalComponent (): JSX.Element {
 
   const currentitem = useAppSelector(getCurrentInfo);
 
-  const isActive = isPurchaseOpened || isFormModalOpened || isSuccessModalOpened;
+  const isActive = useAppSelector(getActiveStatus);
 
 
   useEffect(() => {
     const handleCloseForm = () => {
-      dispatch(setFormModalStatus(false));
-      dispatch(setPurchaseModalStatus(false));
+      dispatch(setActiveStatus(false));
       document.body.style.overflow = 'unset';
     };
     const handleSuccessClick = () => {
@@ -36,7 +35,6 @@ export default function ModalComponent (): JSX.Element {
         dispatch(fetchCurrentAction(currentitem.id));
         dispatch(fetchReviewsAction(currentitem.id)).then(() => {
           handleCloseForm();
-          dispatch(setSuccessModalStatus(false));
         });
       }
     };

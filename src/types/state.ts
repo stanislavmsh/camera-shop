@@ -29,6 +29,7 @@ export type TModalProcess = {
   purchaseModalStatus: boolean;
   formModalStatus: boolean;
   successModalStatus: boolean;
+  isActive: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

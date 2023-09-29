@@ -2,13 +2,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { formatNumberWithSpace } from '../../utils/utils';
 import { getModalInfo } from '../../store/modal-process/modal-process.selectors';
-import { setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
+import { setActiveStatus, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
   const currentItem = useAppSelector(getModalInfo);
 
   const handleModalClose = () => {
+    dispatch(setActiveStatus(false));
     dispatch(setPurchaseModalStatus(false));
     document.body.style.overflow = 'unset';
   };

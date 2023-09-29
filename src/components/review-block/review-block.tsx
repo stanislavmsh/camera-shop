@@ -4,8 +4,7 @@ import { getCurrentReviews } from '../../store/current-data/current-data.selecto
 import ReviewsList from '../reviews-list/reviews-list';
 import { FOCUS_TIMEOUT } from '../../utils/const';
 import ModalComponent from '../modal-component/modal-component';
-import { setFormModalStatus } from '../../store/modal-process/modal-process.slice';
-// import { setFormModalStatus } from '../../store/cameras-data/cameras-data.slice';
+import { setActiveStatus, setFormModalStatus } from '../../store/modal-process/modal-process.slice';
 
 export default function ReviewBlock() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,6 +19,7 @@ export default function ReviewBlock() : JSX.Element {
   const isDisabled = currentMax >= currentReviews.length;
 
   const handleOpenForm = () => {
+    dispatch(setActiveStatus(true));
     dispatch(setFormModalStatus(true));
 
     setTimeout(() => {

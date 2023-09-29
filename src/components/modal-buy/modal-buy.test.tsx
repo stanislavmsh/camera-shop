@@ -22,6 +22,7 @@ describe('Component: Modal Buy' , () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
     });
 

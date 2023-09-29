@@ -6,3 +6,4 @@ export const getModalInfo = (state: State): TCamera | undefined => state[NameSpa
 export const getPurchaseModalStatus = (state: State) : boolean => state[NameSpace.Modal].purchaseModalStatus;
 export const getFormModalStatus = (state: State) : boolean => state[NameSpace.Modal].formModalStatus;
 export const getSuccessModalStatus = (state: State) : boolean => state[NameSpace.Modal].successModalStatus;
+export const getActiveStatus = (state: State) : boolean => state[NameSpace.Modal].isActive;

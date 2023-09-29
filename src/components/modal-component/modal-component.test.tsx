@@ -8,7 +8,7 @@ const mockCurrentData = makeFakeCurrentCameraData();
 const mockSimilarData = makeFakeCamerasData();
 const mockComments = makeFakeComments();
 
-describe('Component: Modal Comment' , () => {
+describe('Component: Modal Component' , () => {
   it('should render ReviewForm when any modal status is true', () => {
     const { withStoreComponent } = withStore(<ModalComponent />, {
       CURRENT: {
@@ -29,6 +29,7 @@ describe('Component: Modal Comment' , () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: true,
+        isActive: true,
       }
     });
 
@@ -60,6 +61,7 @@ describe('Component: Modal Comment' , () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
     });
 

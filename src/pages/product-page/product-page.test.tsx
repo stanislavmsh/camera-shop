@@ -35,6 +35,7 @@ describe('Page: Catalog Page', () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
     }
     );

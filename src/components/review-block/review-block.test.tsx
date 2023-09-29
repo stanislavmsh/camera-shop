@@ -29,6 +29,7 @@ describe('Component: Review Block', () => {
         purchaseModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        isActive: false,
       }
     });
 
