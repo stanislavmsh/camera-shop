@@ -132,6 +132,8 @@ export default function ReviewForm({ handleCloseForm , cameraId , isActive} : Re
                     <input
                       type="text"
                       id='name__input'
+                      minLength={2}
+                      maxLength={160}
                       data-testid="test-name-input"
                       placeholder="Введите ваше имя"
                       {...register('userName', {required: true, validate: (value) => {
@@ -154,6 +156,8 @@ export default function ReviewForm({ handleCloseForm , cameraId , isActive} : Re
                     <input
                       type="text"
                       data-testid="test-adv-input"
+                      minLength={2}
+                      maxLength={160}
                       placeholder="Основные преимущества товара"
                       {...register('advantage', {required: true})}
                       aria-invalid= {errors.advantage ? 'true' : 'false'}
@@ -172,6 +176,8 @@ export default function ReviewForm({ handleCloseForm , cameraId , isActive} : Re
                     <input
                       type="text"
                       data-testid="test-dis-input"
+                      minLength={2}
+                      maxLength={160}
                       placeholder="Главные недостатки товара"
                       {...register('disadvantage' , {required: true})}
                       aria-invalid = {errors.disadvantage ? 'true' : 'false'}
@@ -188,7 +194,7 @@ export default function ReviewForm({ handleCloseForm , cameraId , isActive} : Re
                       </svg>
                     </span>
                     <textarea
-                      minLength={10}
+                      minLength={2}
                       maxLength={160}
                       data-testid="test-text-input"
                       placeholder="Поделитесь своим опытом покупки"
