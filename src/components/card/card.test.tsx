@@ -19,6 +19,8 @@ describe('Component: Card', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
+        firstItem: 1,
+        lastItem: 9,
       }
     });
 

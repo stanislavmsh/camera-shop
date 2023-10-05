@@ -18,6 +18,8 @@ describe('Component: App', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
+        firstItem: 1,
+        lastItem: 9,
       },
       PROMO: {
         promos: mockPromoData,
@@ -53,6 +55,8 @@ describe('Component: App', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
+        firstItem: 1,
+        lastItem: 9,
       },
       PROMO: {
         promos: mockPromoData,
@@ -93,6 +97,8 @@ describe('Component: App', () => {
         hasError: false,
         isDataLoading: true,
         shownItems: mockShownData,
+        firstItem: 1,
+        lastItem: 9,
 
       },
       PROMO: {

@@ -23,6 +23,8 @@ describe('Component: Review Block', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+        firstItem: 1,
+        lastItem: 9,
       },
       MODAL: {
         modalInfo: undefined,

@@ -10,6 +10,8 @@ describe('Cameras Data Slice' , () => {
     hasError: false,
     isDataLoading: false,
     shownItems: [],
+    firstItem: 1,
+    lastItem: 9,
   };
 
   it('should return initial state with empty action' , () => {
@@ -38,12 +40,15 @@ describe('Cameras Data Slice' , () => {
     const state = {
       ...initialState,
       cameras: mockCameraData,
+
     };
 
     const expectedState = {
       ...initialState,
       cameras: mockCameraData,
       shownItems: expectedShowIntems,
+      firstItem: 0,
+      lastItem: 4,
     };
 
     const result = camerasData.reducer(state, sortShownItems(actionPayload));

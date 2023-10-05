@@ -18,6 +18,8 @@ describe('Page: Catalog Page ', () => {
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
+        firstItem: 1,
+        lastItem: 9,
       },
       PROMO: {
         promos: mockPromoData,

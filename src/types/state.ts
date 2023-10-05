@@ -1,4 +1,5 @@
 import { store } from '../store';
+// import { SortingOption } from '../utils/const';
 import { TCamera } from './camera';
 import { TPromo } from './promo';
 import { TReview } from './review';
@@ -13,6 +14,9 @@ export type TCamerasData = {
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];
+  // sortingOrder: SortingOption;
+  firstItem: number;
+  lastItem: number;
 
 }
 

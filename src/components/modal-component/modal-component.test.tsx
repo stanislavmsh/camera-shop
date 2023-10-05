@@ -23,6 +23,8 @@ describe('Component: Modal Component' , () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+        firstItem: 1,
+        lastItem: 9,
       },
       MODAL: {
         modalInfo: undefined,
@@ -55,6 +57,8 @@ describe('Component: Modal Component' , () => {
         hasError: false,
         isDataLoading: false,
         shownItems: [],
+        firstItem: 1,
+        lastItem: 9,
       },
       MODAL: {
         modalInfo: undefined,

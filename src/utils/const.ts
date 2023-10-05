@@ -27,6 +27,16 @@ export const enum RatingName {
   Perfect = 'Отлично',
 }
 
+export const enum SortingOption {
+  HighToLow = 'HighToLow',
+  LowToHigh = 'LowToHigh'
+}
+
+export const enum SortingValues {
+  Price = 'price',
+  Rating = 'rating',
+}
+
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
 export const FOCUS_TIMEOUT = 500;
