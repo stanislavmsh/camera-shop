@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TCamerasData } from '../../types/state';
 import { NameSpace, SortingOption, SortingValues } from '../../utils/const';
-import { fetchCamerasAction } from './cameras-data.action';
+import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.action';
+import { TCamera } from '../../types/camera';
 
 
 const initialState: TCamerasData = {
@@ -52,6 +53,9 @@ export const camerasData = createSlice({
     },
     resetFilters: (state) => {
       state.sortedCameras = [...state.cameras];
+    },
+    setNewSortedCameras: (state, action: PayloadAction<TCamera[]>) => {
+      state.sortedCameras = action.payload;
     }
 
   },
@@ -68,8 +72,11 @@ export const camerasData = createSlice({
       .addCase(fetchCamerasAction.rejected, (state) => {
         state.isDataLoading = false;
         state.hasError = true;
+      })
+      .addCase(fetchCamerasByPriceAction.fulfilled, (state, action) => {
+        state.sortedCameras = action.payload;
       });
   }
 });
 
-export const {sortShownItems, sortCatalog, resetFilters} = camerasData.actions;
+export const {sortShownItems, sortCatalog, resetFilters, setNewSortedCameras} = camerasData.actions;

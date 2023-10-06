@@ -37,6 +37,24 @@ export const enum SortingValues {
   Rating = 'rating',
 }
 
+export const enum FilterCategory {
+  Photo = 'Фотокамера',
+  Video = 'Видеокамера',
+}
+
+export const enum FilterType {
+  Digital = 'Цифровая',
+  Collection = 'Коллекционная',
+  Momental = 'Моментальная',
+  Film = 'Плёночная',
+}
+
+export const enum FilterLevel {
+  Zero = 'Нулевой',
+  Newbie = 'Любительский',
+  Pro = 'Профессиональный'
+}
+
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
 export const FOCUS_TIMEOUT = 500;

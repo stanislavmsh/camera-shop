@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
+import { getSortedCameras } from '../../store/cameras-data/cameras-data.selectors';
 import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
@@ -11,7 +11,7 @@ function Pagination() : JSX.Element {
 
   const [searchParams , setSearchParams] = useSearchParams();
   const PRODUCTS_PER_PAGE = 9;
-  const camerasList = useAppSelector(getCameras);
+  const camerasList = useAppSelector(getSortedCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
   const pageFromUrl = Number(searchParams.get('page')) || 1;
   const safePage = pageFromUrl > pageCount ? pageCount : pageFromUrl;
