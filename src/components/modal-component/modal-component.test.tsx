@@ -20,6 +20,7 @@ describe('Component: Modal Component' , () => {
       },
       CAMERAS: {
         cameras: [],
+        sortedCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],
@@ -54,6 +55,7 @@ describe('Component: Modal Component' , () => {
       },
       CAMERAS: {
         cameras: [],
+        sortedCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],

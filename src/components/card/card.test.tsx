@@ -16,6 +16,7 @@ describe('Component: Card', () => {
     const {withStoreComponent} = withStore(<MemoizedCard cameraInfo={singleCameraData} classCustom="test-class" />, {
       CAMERAS: {
         cameras: mockCamerasData,
+        sortedCameras: mockCamerasData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,

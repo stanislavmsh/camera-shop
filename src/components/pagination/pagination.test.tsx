@@ -12,6 +12,7 @@ describe('Component: Pagination' , () => {
     const { withStoreComponent } = withStore(<MemoizedPagination />, {
       CAMERAS: {
         cameras: mockCameraData,
+        sortedCameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,

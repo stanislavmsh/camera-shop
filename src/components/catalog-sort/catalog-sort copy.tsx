@@ -13,26 +13,36 @@ export default function CatalogSort() {
   const orderParams = searchParams.get('order');
 
   const handleValueSwitch = (value: SortingValues) => {
+    dispatch(sortCatalog([sortParams as SortingOption || SortingOption.HighToLow, value]));
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('sort', value);
-    newSearchParams.set('order', orderParams || SortingOption.HighToLow);
 
     setSearchParams(newSearchParams);
   };
 
   const handleOptionClick = (option: SortingOption) => {
+    dispatch(sortCatalog([option, orderParams as SortingValues || SortingValues.Price]));
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('sort', sortParams || SortingValues.Price);
     newSearchParams.set('order', option);
 
     setSearchParams(newSearchParams);
   };
 
   useEffect(() => {
-    if(searchParams.has('sort') || searchParams.has('order')) {
-      dispatch(sortCatalog([orderParams as SortingOption || SortingOption.HighToLow, sortParams as SortingValues || SortingValues.Price]));
+    const updateSearchParams = (key: string, value: string) => {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set(key, value);
+      setSearchParams(newSearchParams);
+    };
+
+    if (searchParams.has('sort')) {
+      updateSearchParams('sort', searchParams.get('sort') as SortingValues);
     }
-  });
+
+    if (searchParams.has('order')) {
+      updateSearchParams('order', searchParams.get('order') as SortingOption);
+    }
+  }, [searchParams, setSearchParams]);
 
 
   return (
@@ -46,18 +56,18 @@ export default function CatalogSort() {
                 type="radio"
                 id="sortPrice"
                 name="sort"
-                onChange={() => handleValueSwitch(SortingValues.Price)}
-                checked={sortParams === SortingValues.Price}
+                onClick={() => handleValueSwitch(SortingValues.Price)}
+                defaultChecked={sortParams === SortingValues.Price}
               />
               <label htmlFor="sortPrice">по цене</label>
             </div>
             <div className="catalog-sort__btn-text">
               <input
-                onChange={() => handleValueSwitch(SortingValues.Rating)}
+                onClick={() => handleValueSwitch(SortingValues.Rating)}
                 type="radio"
                 id="sortPopular"
                 name="sort"
-                checked={sortParams === SortingValues.Rating}
+                defaultChecked={sortParams === SortingValues.Rating}
               />
               <label htmlFor="sortPopular">по популярности</label>
             </div>
@@ -69,8 +79,8 @@ export default function CatalogSort() {
                 id="up"
                 name="sort-icon"
                 aria-label="По возрастанию"
-                onChange={() => handleOptionClick(SortingOption.LowToHigh)}
-                checked={orderParams === SortingOption.LowToHigh}
+                onClick={() => handleOptionClick(SortingOption.LowToHigh)}
+                defaultChecked={orderParams === SortingOption.LowToHigh}
               />
               <label htmlFor="up">
                 <svg width={16} height={14} aria-hidden="true">
@@ -84,8 +94,8 @@ export default function CatalogSort() {
                 id="down"
                 name="sort-icon"
                 aria-label="По убыванию"
-                onChange={() => handleOptionClick(SortingOption.HighToLow)}
-                checked={orderParams === SortingOption.HighToLow}
+                onClick={() => handleOptionClick(SortingOption.HighToLow)}
+                defaultChecked={orderParams === SortingOption.HighToLow}
               />
               <label htmlFor="down">
                 <svg width={16} height={14} aria-hidden="true">

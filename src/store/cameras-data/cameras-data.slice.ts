@@ -6,6 +6,7 @@ import { fetchCamerasAction } from './cameras-data.action';
 
 const initialState: TCamerasData = {
   cameras: [],
+  sortedCameras: [],
   hasError: false,
   isDataLoading: false,
   shownItems: [],
@@ -18,7 +19,7 @@ export const camerasData = createSlice({
   initialState,
   reducers: {
     sortShownItems: (state , action: PayloadAction<number[]>) => {
-      state.shownItems = [...state.cameras.slice(action.payload[0] , action.payload[1])];
+      state.shownItems = [...state.sortedCameras.slice(action.payload[0] , action.payload[1])];
       state.firstItem = action.payload[0];
       state.lastItem = action.payload[1];
     },
@@ -28,27 +29,30 @@ export const camerasData = createSlice({
       switch (sortingOption) {
         case SortingOption.HighToLow:
           if (sortingValue === SortingValues.Price) {
-            state.cameras.sort((a, b) => b.price - a.price);
-            state.shownItems = [...state.cameras.slice(state.firstItem , state.lastItem)];
+            state.sortedCameras.sort((a, b) => b.price - a.price);
+            state.shownItems = [...state.sortedCameras.slice(state.firstItem , state.lastItem)];
           }
           if (sortingValue === SortingValues.Rating) {
-            state.cameras.sort((a, b) => b.rating - a.rating);
-            state.shownItems = [...state.cameras.slice(state.firstItem , state.lastItem)];
+            state.sortedCameras.sort((a, b) => b.rating - a.rating);
+            state.shownItems = [...state.sortedCameras.slice(state.firstItem , state.lastItem)];
           }
           break;
 
         case SortingOption.LowToHigh:
           if (sortingValue === SortingValues.Price) {
-            state.cameras.sort((a, b) => a.price - b.price);
-            state.shownItems = [...state.cameras.slice(state.firstItem , state.lastItem)];
+            state.sortedCameras.sort((a, b) => a.price - b.price);
+            state.shownItems = [...state.sortedCameras.slice(state.firstItem , state.lastItem)];
           }
           if (sortingValue === SortingValues.Rating) {
-            state.cameras.sort((a, b) => a.rating - b.rating);
-            state.shownItems = [...state.cameras.slice(state.firstItem , state.lastItem)];
+            state.sortedCameras.sort((a, b) => a.rating - b.rating);
+            state.shownItems = [...state.sortedCameras.slice(state.firstItem , state.lastItem)];
           }
           break;
       }
     },
+    resetFilters: (state) => {
+      state.sortedCameras = [...state.cameras];
+    }
 
   },
   extraReducers(builder) {
@@ -59,6 +63,7 @@ export const camerasData = createSlice({
       .addCase(fetchCamerasAction.fulfilled , (state, action) => {
         state.isDataLoading = false;
         state.cameras = action.payload;
+        state.sortedCameras = action.payload;
       })
       .addCase(fetchCamerasAction.rejected, (state) => {
         state.isDataLoading = false;
@@ -67,4 +72,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {sortShownItems, sortCatalog} = camerasData.actions;
+export const {sortShownItems, sortCatalog, resetFilters} = camerasData.actions;

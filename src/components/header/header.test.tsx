@@ -15,6 +15,7 @@ describe('Component: Card', () => {
     const { withStoreComponent } = withStore(<MemoizedHeader />, {
       CAMERAS: {
         cameras: mockCamerasData,
+        sortedCameras: mockCamerasData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,

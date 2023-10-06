@@ -1,4 +1,12 @@
 .pagination__button {
   border: none !important;
   cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+.pagination__next-prev {
+  border: none !important;
+  cursor: pointer;
+  height: 36px;
 }

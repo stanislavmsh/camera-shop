@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCameras } from '../../store/cameras-data/cameras-data.selectors';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 import styles from './pagination.module.css';
-import { AppRoute } from '../../utils/const';
 
 function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,6 +15,8 @@ function Pagination() : JSX.Element {
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
   const pageFromUrl = Number(searchParams.get('page')) || 1;
   const safePage = pageFromUrl > pageCount ? pageCount : pageFromUrl;
+  const orderParams = searchParams.get('order');
+  const sortParams = searchParams.get('sort');
 
 
   const [currentPages , setCurrentPages] = useState({
@@ -33,7 +34,6 @@ function Pagination() : JSX.Element {
   });
 
   useEffect(() => {
-
     const start = (safePage - 1) * PRODUCTS_PER_PAGE;
     const end = start + PRODUCTS_PER_PAGE;
     if (safePage === 1) {
@@ -45,9 +45,16 @@ function Pagination() : JSX.Element {
     }
     dispatch(sortShownItems([start, end]));
     if(pageFromUrl > pageCount) {
-      setSearchParams({page: safePage.toString()});
+      searchParams.set('page', safePage.toString());
+      if(orderParams) {
+        searchParams.set('order', orderParams);
+      }
+      if(sortParams) {
+        searchParams.set('sort', sortParams);
+      }
+      setSearchParams(searchParams);
     }
-  }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams]);
+  }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams, searchParams, orderParams, sortParams]);
 
   const handleNextClick = (type: 'next' | 'previous') => {
     setCurrentPages((prevPages) => {
@@ -58,14 +65,25 @@ function Pagination() : JSX.Element {
         current: prevPages.current + step
       };
     });
-
-    setSearchParams({
-      page: type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString()
-    });
+    searchParams.set('page', type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString());
+    if(orderParams) {
+      searchParams.set('order', orderParams);
+    }
+    if(sortParams) {
+      searchParams.set('sort', sortParams);
+    }
+    setSearchParams(searchParams);
   };
 
   const handlePageClick = (page : number) => {
-    setSearchParams({ page: page.toString() });
+    searchParams.set('page', page.toString());
+    if(orderParams) {
+      searchParams.set('order', orderParams);
+    }
+    if(sortParams) {
+      searchParams.set('sort', sortParams);
+    }
+    setSearchParams(searchParams);
     setCurrentPages((prevPages) => ({...prevPages, current: page}));
   };
 
@@ -105,15 +123,15 @@ function Pagination() : JSX.Element {
           if (type === 'page' && isPageInRange) {
             children = (
               <li key={`${page as number}${type}keyss`} className="pagination__item">
-                <Link
-                  to={`${AppRoute.Root}?page=${page as number}`}
+                <button
+                  // to={`${AppRoute.Root}?page=${page as number}`}
                   className={`pagination__link ${styles['pagination__button']} ${selected ? 'pagination__link--active' : ''}`}
                   onClick={() => {
                     handlePageClick(page as number);
                   }}
                 >
                   {page}
-                </Link>
+                </button>
               </li>
 
             );
@@ -123,7 +141,7 @@ function Pagination() : JSX.Element {
 
               <li key={`${page as number}button`} className="pagination__item">
                 <button
-                  className = {`${styles['pagination__button']} pagination__link pagination__link--text`}
+                  className = {`${styles['pagination__next-prev']} pagination__link pagination__link--text`}
                   onClick={() => handleNextClick(type)}
                 >
                   {type === 'next' ? 'Далее' : 'Назад'}

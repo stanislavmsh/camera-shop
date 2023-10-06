@@ -15,6 +15,7 @@ describe('Component: App', () => {
     const { withStoreComponent } = withStore(<App />, {
       CAMERAS: {
         cameras: mockCameraData,
+        sortedCameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
@@ -52,6 +53,7 @@ describe('Component: App', () => {
     const { withStoreComponent } = withStore(<App />, {
       CAMERAS: {
         cameras: mockCameraData,
+        sortedCameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
@@ -94,6 +96,7 @@ describe('Component: App', () => {
     const { withStoreComponent } = withStore(<App />, {
       CAMERAS: {
         cameras: mockCameraData,
+        sortedCameras: mockCameraData,
         hasError: false,
         isDataLoading: true,
         shownItems: mockShownData,

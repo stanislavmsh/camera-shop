@@ -11,6 +11,7 @@ export type TPromoData = {
 
 export type TCamerasData = {
   cameras: TCamera[];
+  sortedCameras: TCamera[];
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];

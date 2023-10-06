@@ -2,8 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/const';
 import SearchForm from '../search-form/search-form';
+import { useAppDispatch } from '../../hooks';
+import { resetFilters, sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 
 function Header() : JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleCatalogClick = () => {
+    dispatch(resetFilters());
+    dispatch(sortShownItems([0, 9]));
+  };
+
   return (
     <header data-testid='header-test' className="header" id="header">
       <div className="container">
@@ -11,6 +20,7 @@ function Header() : JSX.Element {
           className="header__logo"
           to={AppRoute.Root}
           aria-label="Переход на главную"
+          onClick={handleCatalogClick}
         >
           <svg width={100} height={36} aria-hidden="true">
             <use xlinkHref="#icon-logo" />
@@ -19,7 +29,7 @@ function Header() : JSX.Element {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <Link className="main-nav__link" to="/">
+              <Link onClick={handleCatalogClick} className="main-nav__link" to="/">
               Каталог
               </Link>
             </li>

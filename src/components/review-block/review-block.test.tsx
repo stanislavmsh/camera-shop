@@ -20,6 +20,7 @@ describe('Component: Review Block', () => {
       },
       CAMERAS: {
         cameras: [],
+        sortedCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],

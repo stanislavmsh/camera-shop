@@ -7,6 +7,7 @@ describe('Cameras Data Slice' , () => {
 
   const initialState = {
     cameras: [],
+    sortedCameras: [],
     hasError: false,
     isDataLoading: false,
     shownItems: [],
@@ -40,12 +41,14 @@ describe('Cameras Data Slice' , () => {
     const state = {
       ...initialState,
       cameras: mockCameraData,
+      sortedCameras: mockCameraData,
 
     };
 
     const expectedState = {
       ...initialState,
       cameras: mockCameraData,
+      sortedCameras: mockCameraData,
       shownItems: expectedShowIntems,
       firstItem: 0,
       lastItem: 4,
@@ -66,12 +69,13 @@ describe('Cameras Data Slice' , () => {
 
   });
 
-  it('should set "cameras" to array with cameras data , isDataLoading to false with "fetchCamerasAction.fullfilled"', () => {
+  it('should set "cameras" and sortedCameras to arrays with cameras data , isDataLoading to false with "fetchCamerasAction.fullfilled"', () => {
 
     const mockCameraData = makeFakeCamerasData();
     const expectedState = {
       ...initialState,
       cameras: mockCameraData,
+      sortedCameras: mockCameraData,
       isDataLoading: false,
     };
 
