@@ -1,31 +1,11 @@
-// import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-// import { useAppDispatch, useAppSelector } from '../../hooks';
 import { FilterCategory , FilterType} from '../../utils/const';
-// import { getCameras, getSortedCameras } from '../../store/cameras-data/cameras-data.selectors';
-// import { setNewSortedCameras } from '../../store/cameras-data/cameras-data.slice';
 
 
 export default function CatalogFilterCategory () : JSX.Element {
-  // const dispatch = useAppDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get('category');
-  // const cameras = useAppSelector(getSortedCameras);
-  // const array = [...cameras.filter((elem) => {
-  //   if(categoryParam === FilterCategory.Photo) {
-  //     return elem.category === 'Фотоаппарат';
-  //   }
-  //   return elem.category === categoryParam;
-  // }
-  // )];
-
-  // console.log(array);
-
-  // useEffect(() => {
-  //   dispatch(setNewSortedCameras(array));
-
-  // }, [dispatch, cameras , categoryParam]);
 
   const handlePhotoClick = () => {
     if(categoryParam === FilterCategory.Video || categoryParam === null) {
@@ -38,7 +18,6 @@ export default function CatalogFilterCategory () : JSX.Element {
     }
   };
 
-  // console.log(categoryParam);
 
   const handleVideoClick = () => {
     if(categoryParam === FilterCategory.Photo || categoryParam === null) {

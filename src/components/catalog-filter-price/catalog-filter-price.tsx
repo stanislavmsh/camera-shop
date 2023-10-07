@@ -25,7 +25,10 @@ export default function CatalogFilterPrice () {
       <div className="catalog-filter__price-range">
         <div className="custom-input">
           <label>
-            <input type="number" name="price" placeholder={lowestPrice.toString()} />
+            <input type="number"
+              name="price"
+              placeholder={lowestPrice.toString()}
+            />
           </label>
         </div>
         <div className="custom-input">

@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { FilterCategory , FilterType} from '../../utils/const';
 
 export default function CatalogFilterType() : JSX.Element {
 
@@ -31,7 +32,7 @@ export default function CatalogFilterType() : JSX.Element {
             type="checkbox"
             name="Цифровая"
             onChange={handleTypeClick}
-            checked={typeParams.includes('Цифровая')}
+            checked={typeParams.includes(FilterType.Digital)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">Цифровая</span>
@@ -42,9 +43,9 @@ export default function CatalogFilterType() : JSX.Element {
           <input
             type="checkbox"
             name="Плёночная"
-            disabled={categoryParam === 'video'}
+            disabled={categoryParam === FilterCategory.Video}
             onChange={handleTypeClick}
-            checked={typeParams.includes('Плёночная')}
+            checked={typeParams.includes(FilterType.Film)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">
@@ -57,9 +58,9 @@ export default function CatalogFilterType() : JSX.Element {
           <input
             type="checkbox"
             name="Моментальная"
-            disabled={categoryParam === 'video'}
+            disabled={categoryParam === FilterCategory.Video}
             onChange={handleTypeClick}
-            checked={typeParams.includes('Моментальная')}
+            checked={typeParams.includes(FilterType.Momental)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">
@@ -73,7 +74,7 @@ export default function CatalogFilterType() : JSX.Element {
             type="checkbox"
             name="Коллекционная"
             onChange={handleTypeClick}
-            checked={typeParams.includes('Коллекционная')}
+            checked={typeParams.includes(FilterType.Collection)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">

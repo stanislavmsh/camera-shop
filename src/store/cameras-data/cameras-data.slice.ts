@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TCamerasData } from '../../types/state';
-import { NameSpace, SortingOption, SortingValues } from '../../utils/const';
+import { FilterCategory, FilterLevel, FilterType, NameSpace, SortingOption, SortingValues } from '../../utils/const';
 import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.action';
 import { TCamera } from '../../types/camera';
 
@@ -14,6 +14,8 @@ const initialState: TCamerasData = {
   firstItem: 1,
   lastItem: 9,
 };
+
+type FilterPayloadAction = [FilterCategory | null, FilterType[], FilterLevel[]]
 
 export const camerasData = createSlice({
   name: NameSpace.Cameras,
@@ -54,8 +56,26 @@ export const camerasData = createSlice({
     resetFilters: (state) => {
       state.sortedCameras = [...state.cameras];
     },
+    // убрать
     setNewSortedCameras: (state, action: PayloadAction<TCamera[]>) => {
       state.sortedCameras = action.payload;
+    },
+    //
+    filterCameras: (state , action: PayloadAction<FilterPayloadAction>) => {
+      const [category, types , levels] = action.payload;
+      const filteredCameras = [...state.sortedCameras.filter((elem) => {
+        if(category) {
+          if(category === FilterCategory.Photo) {
+            return elem.category === 'Фотоаппарат';
+          }
+          return elem.category === FilterCategory.Video;
+        }
+        return elem;
+      })];
+
+      console.log(filteredCameras.length);
+
+      // state.sortedCameras = filteredCameras;
     }
 
   },
@@ -79,4 +99,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {sortShownItems, sortCatalog, resetFilters, setNewSortedCameras} = camerasData.actions;
+export const {sortShownItems, sortCatalog, resetFilters, setNewSortedCameras, filterCameras} = camerasData.actions;
