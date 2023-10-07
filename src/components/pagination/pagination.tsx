@@ -12,9 +12,9 @@ function Pagination() : JSX.Element {
   const [searchParams , setSearchParams] = useSearchParams();
   const PRODUCTS_PER_PAGE = 9;
   const camerasList = useAppSelector(getFilteredCameras);
-  const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE);
+  const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE) ;
   const pageFromUrl = Number(searchParams.get('page')) || 1;
-  const safePage = pageFromUrl > pageCount ? pageCount : pageFromUrl;
+  const safePage = pageFromUrl > pageCount ? pageCount || 1 : pageFromUrl;
   const orderParams = searchParams.get('order');
   const sortParams = searchParams.get('sort');
 
