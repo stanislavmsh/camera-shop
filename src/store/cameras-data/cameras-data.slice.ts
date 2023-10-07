@@ -52,9 +52,6 @@ export const camerasData = createSlice({
           break;
       }
     },
-    resetFilters: (state) => {
-      state.filteredCameras = [...state.cameras];
-    },
     filterCameras: (state , action: PayloadAction<FilterPayloadAction>) => {
       const [category, types , levels] = action.payload;
       state.filteredCameras = [...state.cameras.filter((elem) => (
@@ -85,4 +82,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {sortShownItems, sortCatalog, resetFilters, filterCameras} = camerasData.actions;
+export const {sortShownItems, sortCatalog, filterCameras} = camerasData.actions;
