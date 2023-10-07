@@ -1,9 +1,9 @@
 import { useAppSelector } from '../../hooks';
-import { getSortedCameras } from '../../store/cameras-data/cameras-data.selectors';
+import { getFilteredCameras } from '../../store/cameras-data/cameras-data.selectors';
 
 export default function CatalogFilterPrice () {
 
-  const cameras = useAppSelector(getSortedCameras);
+  const cameras = useAppSelector(getFilteredCameras);
 
   const lowestPrice = cameras.reduce((min, object) => {
     if (object.price < min) {
