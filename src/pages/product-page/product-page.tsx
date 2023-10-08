@@ -8,6 +8,7 @@ import { getCurrentInfo } from '../../store/current-data/current-data.selectors'
 import { Link, useParams , useSearchParams} from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { AppRoute, STARS_RATING } from '../../utils/const';
+import { setPriceMinMax, resetCameras } from '../../store/cameras-data/cameras-data.slice';
 
 
 export default function ProductPage() : JSX.Element {
@@ -50,6 +51,11 @@ export default function ProductPage() : JSX.Element {
     setSearchParams({type: 'stats'});
   }, [setSearchParams]);
 
+  const handleCatalogClick = () => {
+    dispatch(setPriceMinMax(['', '']));
+    dispatch(resetCameras());
+  };
+
 
   return(
 
@@ -69,7 +75,10 @@ export default function ProductPage() : JSX.Element {
                   </a>
                 </li>
                 <li className="breadcrumbs__item">
-                  <Link className="breadcrumbs__link" to={AppRoute.Root}>
+                  <Link
+                    onClick={handleCatalogClick}
+                    className="breadcrumbs__link" to={AppRoute.Root}
+                  >
                 Каталог
                     <svg width={5} height={8} aria-hidden="true">
                       <use xlinkHref="#icon-arrow-mini" />

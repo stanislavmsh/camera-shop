@@ -24,7 +24,7 @@ export const fetchCamerasByPriceAction = createAsyncThunk<TCamera[], [number, nu
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchCameras2',
+  'data/fetchCamerasByPrice',
   async (_args, { extra: api }) : Promise<TCamera[]> => {
     const {data} = await api.get<TCamera[]>(`${APIRoute.Cameras}?price_gte=${_args[0]}&price_lte=${_args[1]}`);
     return data;

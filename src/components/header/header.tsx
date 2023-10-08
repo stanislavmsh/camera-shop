@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/const';
 import SearchForm from '../search-form/search-form';
+import { useAppDispatch } from '../../hooks';
+import { resetCameras, setPriceMinMax } from '../../store/cameras-data/cameras-data.slice';
 
 function Header() : JSX.Element {
+  const dispatch = useAppDispatch();
+  const handleLogoClick = () => {
+    dispatch(setPriceMinMax(['', '']));
+    dispatch(resetCameras());
+  };
 
 
   return (
@@ -13,6 +20,7 @@ function Header() : JSX.Element {
           className="header__logo"
           to={AppRoute.Root}
           aria-label="Переход на главную"
+          onClick={handleLogoClick}
         >
           <svg width={100} height={36} aria-hidden="true">
             <use xlinkHref="#icon-logo" />
@@ -23,6 +31,7 @@ function Header() : JSX.Element {
             <li className="main-nav__item">
               <Link
                 className="main-nav__link" to="/"
+                onClick={handleLogoClick}
               >
               Каталог
               </Link>

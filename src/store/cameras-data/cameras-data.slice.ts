@@ -7,11 +7,15 @@ import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.ac
 const initialState: TCamerasData = {
   cameras: [],
   filteredCameras: [],
+  storedItems: [],
+  backupCameras: [],
   hasError: false,
   isDataLoading: false,
   shownItems: [],
   firstItem: 1,
   lastItem: 9,
+  isDataByPriceLoading: false,
+  priceMinMax: ['', '']
 };
 
 type FilterPayloadAction = [FilterCategory | null, FilterType[], FilterLevel[]]
@@ -43,10 +47,12 @@ export const camerasData = createSlice({
         case SortingOption.LowToHigh:
           if (sortingValue === SortingValues.Price) {
             state.filteredCameras.sort((a, b) => a.price - b.price);
+            state.storedItems.sort((a, b) => a.price - b.price);
             state.shownItems = [...state.filteredCameras.slice(state.firstItem , state.lastItem)];
           }
           if (sortingValue === SortingValues.Rating) {
             state.filteredCameras.sort((a, b) => a.rating - b.rating);
+            state.storedItems.sort((a, b) => a.rating - b.rating);
             state.shownItems = [...state.filteredCameras.slice(state.firstItem , state.lastItem)];
           }
           break;
@@ -59,6 +65,17 @@ export const camerasData = createSlice({
           (!types.length || types.includes(elem.type as FilterType)) &&
           (!levels.length || levels.includes(elem.level as FilterLevel))
       ))];
+      state.storedItems = [...state.backupCameras.filter((elem) => (
+        (!category || (category === FilterCategory.Photo && elem.category === 'Фотоаппарат') || (category === FilterCategory.Video && elem.category === FilterCategory.Video)) &&
+          (!types.length || types.includes(elem.type as FilterType)) &&
+          (!levels.length || levels.includes(elem.level as FilterLevel))
+      ))];
+    },
+    setPriceMinMax: (state, action: PayloadAction<[string, string]>) => {
+      state.priceMinMax = action.payload;
+    },
+    resetCameras: (state) => {
+      state.cameras = [...state.backupCameras];
     }
 
   },
@@ -71,15 +88,22 @@ export const camerasData = createSlice({
         state.isDataLoading = false;
         state.cameras = action.payload;
         state.filteredCameras = action.payload;
+        state.storedItems = action.payload;
+        state.backupCameras = action.payload;
       })
       .addCase(fetchCamerasAction.rejected, (state) => {
         state.isDataLoading = false;
         state.hasError = true;
       })
+      .addCase(fetchCamerasByPriceAction.pending, (state) => {
+        state.isDataByPriceLoading = true;
+      })
       .addCase(fetchCamerasByPriceAction.fulfilled, (state, action) => {
+        state.cameras = action.payload;
         state.filteredCameras = action.payload;
+        state.isDataByPriceLoading = false;
       });
   }
 });
 
-export const {sortShownItems, sortCatalog, filterCameras} = camerasData.actions;
+export const {sortShownItems, sortCatalog, filterCameras, setPriceMinMax, resetCameras} = camerasData.actions;

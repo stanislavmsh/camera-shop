@@ -11,11 +11,15 @@ export type TPromoData = {
 export type TCamerasData = {
   cameras: TCamera[];
   filteredCameras: TCamera[];
+  storedItems: TCamera[];
+  backupCameras: TCamera[];
   hasError: boolean;
   isDataLoading: boolean;
   shownItems: TCamera[];
   firstItem: number;
   lastItem: number;
+  isDataByPriceLoading: boolean;
+  priceMinMax: [string, string];
 }
 
 export type TCurrentData = {

@@ -87,22 +87,24 @@ function Pagination() : JSX.Element {
   };
 
 
-  if(currentPages.current > currentPages.paginationMax) {
+  if(safePage > currentPages.paginationMax) {
     setCurrentPages((prevPages) => {
       const step = 3;
 
       return {
         ...prevPages,
+        current: safePage,
         paginationMax: prevPages.paginationMax + step,
         paginationMin: prevPages.paginationMin + step,
       };
     });
-  } else if (currentPages.current < currentPages.paginationMin + 1){
+  } else if (safePage < currentPages.paginationMin + 1){
     setCurrentPages((prevPages) => {
       const step = 3;
 
       return {
         ...prevPages,
+        current: safePage,
         paginationMax: prevPages.paginationMax - step,
         paginationMin: prevPages.paginationMin - step,
       };
@@ -119,11 +121,10 @@ function Pagination() : JSX.Element {
           if (type === 'start-ellipsis' || type === 'end-ellipsis') {
             children = null;
           }
-          if (type === 'page' && isPageInRange) {
+          if (type === 'page' && isPageInRange && pageCount !== 1) {
             children = (
               <li key={`${page as number}${type}keyss`} className="pagination__item">
                 <button
-                  // to={`${AppRoute.Root}?page=${page as number}`}
                   className={`pagination__link ${styles['pagination__button']} ${selected ? 'pagination__link--active' : ''}`}
                   onClick={() => {
                     handlePageClick(page as number);

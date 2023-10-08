@@ -8,8 +8,20 @@ import CatalogSort from '../../components/catalog-sort/catalog-sort';
 import { AppRoute } from '../../utils/const';
 import { Link } from 'react-router-dom';
 import CatalogFilter from '../../components/catalog-filter/catalog-filter';
+import LoadingPlaceholder from '../../components/loading-placeholder/loading-placeholder';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getDataByPriceStatus } from '../../store/cameras-data/cameras-data.selectors';
+import { setPriceMinMax, resetCameras } from '../../store/cameras-data/cameras-data.slice';
 
 export default function CatalogPage() : JSX.Element {
+  const dispatch = useAppDispatch();
+  const isDataByPriceLoading = useAppSelector(getDataByPriceStatus);
+
+
+  const handleCatalogClick = () => {
+    dispatch(setPriceMinMax(['', '']));
+    dispatch(resetCameras());
+  };
 
   return (
     <div className="wrapper">
@@ -22,6 +34,7 @@ export default function CatalogPage() : JSX.Element {
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
                   <Link
+                    onClick={handleCatalogClick}
                     className="breadcrumbs__link" to={AppRoute.Root}
                   >
                 Главная
@@ -47,8 +60,15 @@ export default function CatalogPage() : JSX.Element {
                 </div>
                 <div className="catalog__content">
                   <CatalogSort />
-                  <MemoizedCards />
-                  <MemoizedPagination/>
+                  {isDataByPriceLoading
+                    ?
+                    <LoadingPlaceholder/>
+                    :
+                    <>
+                      <MemoizedCards />
+                      <MemoizedPagination/>
+                    </>}
+
                 </div>
               </div>
             </div>

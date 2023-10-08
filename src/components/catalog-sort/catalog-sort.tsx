@@ -28,6 +28,7 @@ export default function CatalogSort() {
     setSearchParams(newSearchParams);
   };
 
+
   useEffect(() => {
     if(searchParams.has('sort') || searchParams.has('order')) {
       dispatch(sortCatalog([orderParams as SortingOption || SortingOption.HighToLow, sortParams as SortingValues || SortingValues.Price]));
