@@ -4,11 +4,9 @@ import CatalogFilterPrice from '../catalog-filter-price/catalog-filter-price';
 import CatalogFilterCategory from '../catalog-filter-category/catalog-filter-category';
 import CatalogFilterType from '../catalog-filter-type/catalog-filter-type';
 import CatalogFilterLevel from '../catalog-filter-level/catalog-filter-level';
-import { filterCameras } from '../../store/cameras-data/cameras-data.slice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { filterCameras, resetCameras } from '../../store/cameras-data/cameras-data.slice';
+import { useAppDispatch } from '../../hooks';
 import { FilterCategory, FilterLevel, FilterType } from '../../utils/const';
-import { fetchCamerasByPriceAction } from '../../store/cameras-data/cameras-data.action';
-import { getBackupCameras } from '../../store/cameras-data/cameras-data.selectors';
 
 
 export default function CatalogFilter() {
@@ -17,10 +15,6 @@ export default function CatalogFilter() {
 
   const minRef = useRef<HTMLInputElement | null>(null);
   const maxRef = useRef<HTMLInputElement | null>(null);
-
-  const backupCams = useAppSelector(getBackupCameras);
-  const lowestPrice = backupCams.length > 0 ? Math.min(...backupCams.map((camera) => camera.price)) : 0;
-  const highestPrice = backupCams.length > 0 ? Math.max(...backupCams.map((camera) => camera.price)) : 0;
 
   const orderParams = searchParams.get('order');
   const sortParams = searchParams.get('sort');
@@ -35,7 +29,7 @@ export default function CatalogFilter() {
       searchParams.delete('level');
       searchParams.delete('sort');
       searchParams.delete('order');
-      dispatch(fetchCamerasByPriceAction([lowestPrice, highestPrice]));
+      dispatch(resetCameras());
       if(maxRef.current) {
         maxRef.current.value = '';
       }

@@ -25,3 +25,4 @@ export function debounce<F extends (evt: ChangeEvent<HTMLInputElement>) => void>
     timeoutId = setTimeout(() => func.apply(this, args), delay);
   };
 }
+

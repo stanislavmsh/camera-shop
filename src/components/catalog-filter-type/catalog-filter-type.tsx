@@ -6,8 +6,8 @@ export default function CatalogFilterType() : JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const categoryParam = searchParams.get('category');
-  const typeParams = searchParams.getAll('type');
+  const categoryParam = searchParams.get('category') as FilterCategory;
+  const typeParams = searchParams.getAll('type') as FilterType[];
 
   const handleTypeClick = (evt : ChangeEvent<HTMLInputElement>) => {
     const currentName = evt.target.name;
@@ -19,9 +19,10 @@ export default function CatalogFilterType() : JSX.Element {
     if(!isChecked) {
       searchParams.delete('type', currentName);
     }
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
-
   };
+
 
   return (
     <fieldset className="catalog-filter__block">

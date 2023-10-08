@@ -18,6 +18,7 @@ export default function CatalogFilterLevel(): JSX.Element {
     if(!isChecked) {
       searchParams.delete('level', currentName);
     }
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
 
   };

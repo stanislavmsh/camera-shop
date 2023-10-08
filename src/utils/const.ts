@@ -37,19 +37,19 @@ export const enum SortingValues {
   Rating = 'rating',
 }
 
-export const enum FilterCategory {
+export enum FilterCategory {
   Photo = 'Фотокамера',
   Video = 'Видеокамера',
 }
 
-export const enum FilterType {
+export enum FilterType {
   Digital = 'Цифровая',
   Collection = 'Коллекционная',
   Momental = 'Моментальная',
   Film = 'Плёночная',
 }
 
-export const enum FilterLevel {
+export enum FilterLevel {
   Zero = 'Нулевой',
   Newbie = 'Любительский',
   Pro = 'Профессиональный'
