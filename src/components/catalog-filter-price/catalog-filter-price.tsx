@@ -4,7 +4,7 @@ import { getBackupCameras, getPriceMinMax, getStoredItems } from '../../store/ca
 import { fetchCamerasByPriceAction } from '../../store/cameras-data/cameras-data.action';
 import { useSearchParams } from 'react-router-dom';
 import { filterCameras, setPriceMinMax, sortCatalog } from '../../store/cameras-data/cameras-data.slice';
-import { FilterCategory, FilterType, FilterLevel, SortingOption, SortingValues } from '../../utils/const';
+import { FilterCategory, FilterType, FilterLevel, SortingOption, SortingValues, SearchParam } from '../../utils/const';
 import { debounce } from '../../utils/utils';
 
 type CatalogFilterPriceProps = {
@@ -20,11 +20,11 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const sortParams = searchParams.get('sort');
-  const orderParams = searchParams.get('order');
-  const categoryParam = searchParams.get('category') as FilterCategory;
-  const typeParams = searchParams.getAll('type') as FilterType[];
-  const levelParams = searchParams.getAll('level') as FilterLevel[];
+  const sortParams = searchParams.get(SearchParam.Sorting);
+  const orderParams = searchParams.get(SearchParam.Order);
+  const categoryParam = searchParams.get(SearchParam.Category) as FilterCategory;
+  const typeParams = searchParams.getAll(SearchParam.Type) as FilterType[];
+  const levelParams = searchParams.getAll(SearchParam.Level) as FilterLevel[];
 
 
   const cameras = useAppSelector(getStoredItems);
@@ -39,7 +39,7 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
   const updateCards = ([min, max] : [number, number]) => {
     dispatch(fetchCamerasByPriceAction([min , max])).then(() => {
       dispatch(filterCameras([categoryParam, typeParams, levelParams]));
-      if(searchParams.has('sort') || searchParams.has('order')) {
+      if(searchParams.has(SearchParam.Sorting) || searchParams.has(SearchParam.Order)) {
         dispatch(sortCatalog([orderParams as SortingOption || SortingOption.HighToLow, sortParams as SortingValues || SortingValues.Price]));
       }
     });

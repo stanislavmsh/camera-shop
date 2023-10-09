@@ -18,7 +18,7 @@ export default function ProductPage() : JSX.Element {
   const currentProduct = useAppSelector(getCurrentInfo);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isDescription, setIsDescription] = useState<boolean>(true);
-  const parsedParam = searchParams.get('type');
+  const parsedParam = searchParams.get(SearchParam.Type);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleScrollToTop = () => {

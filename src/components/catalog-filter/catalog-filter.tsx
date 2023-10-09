@@ -6,7 +6,7 @@ import CatalogFilterType from '../catalog-filter-type/catalog-filter-type';
 import CatalogFilterLevel from '../catalog-filter-level/catalog-filter-level';
 import { filterCameras, resetCameras } from '../../store/cameras-data/cameras-data.slice';
 import { useAppDispatch } from '../../hooks';
-import { FilterCategory, FilterLevel, FilterType } from '../../utils/const';
+import { FilterCategory, FilterLevel, FilterType, SearchParam } from '../../utils/const';
 
 
 export default function CatalogFilter() {
@@ -16,19 +16,19 @@ export default function CatalogFilter() {
   const minRef = useRef<HTMLInputElement | null>(null);
   const maxRef = useRef<HTMLInputElement | null>(null);
 
-  const orderParams = searchParams.get('order');
-  const sortParams = searchParams.get('sort');
-  const categoryParam = searchParams.get('category') as FilterCategory;
-  const typeParams = searchParams.getAll('type') as FilterType[];
-  const levelParams = searchParams.getAll('level') as FilterLevel[];
+  const orderParams = searchParams.get(SearchParam.Order);
+  const sortParams = searchParams.get(SearchParam.Sorting);
+  const categoryParam = searchParams.get(SearchParam.Category) as FilterCategory;
+  const typeParams = searchParams.getAll(SearchParam.Type) as FilterType[];
+  const levelParams = searchParams.getAll(SearchParam.Level) as FilterLevel[];
 
   const handleResetClick = () => {
     if(orderParams || sortParams || categoryParam || typeParams || levelParams) {
-      searchParams.delete('type');
-      searchParams.delete('category');
-      searchParams.delete('level');
-      searchParams.delete('sort');
-      searchParams.delete('order');
+      searchParams.delete(SearchParam.Type);
+      searchParams.delete(SearchParam.Category);
+      searchParams.delete(SearchParam.Level);
+      searchParams.delete(SearchParam.Sorting);
+      searchParams.delete(SearchParam.Order);
       dispatch(resetCameras());
       if(maxRef.current) {
         maxRef.current.value = '';
@@ -49,13 +49,13 @@ export default function CatalogFilter() {
 
     if (invalidLevels.length > 0) {
       invalidLevels.forEach((invalidLevel) => {
-        searchParams.delete('level', invalidLevel);
+        searchParams.delete(SearchParam.Level, invalidLevel);
       });
       setSearchParams(searchParams);
     }
     if (invalidTypes.length > 0) {
       invalidTypes.forEach((type) => {
-        searchParams.delete('type', type);
+        searchParams.delete(SearchParam.Type, type);
       });
       setSearchParams(searchParams);
     }

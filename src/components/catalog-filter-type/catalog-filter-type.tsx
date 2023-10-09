@@ -1,23 +1,23 @@
 import { ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FilterCategory , FilterType} from '../../utils/const';
+import { FilterCategory , FilterType, SearchParam} from '../../utils/const';
 
 export default function CatalogFilterType() : JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const categoryParam = searchParams.get('category') as FilterCategory;
-  const typeParams = searchParams.getAll('type') as FilterType[];
+  const categoryParam = searchParams.get(SearchParam.Category) as FilterCategory;
+  const typeParams = searchParams.getAll(SearchParam.Type) as FilterType[];
 
   const handleTypeClick = (evt : ChangeEvent<HTMLInputElement>) => {
     const currentName = evt.target.name;
     const isChecked = evt.target.checked;
 
     if(isChecked) {
-      searchParams.append('type', currentName);
+      searchParams.append(SearchParam.Type, currentName);
     }
     if(!isChecked) {
-      searchParams.delete('type', currentName);
+      searchParams.delete(SearchParam.Type, currentName);
     }
     searchParams.set('page', '1');
     setSearchParams(searchParams);

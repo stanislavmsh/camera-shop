@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SortingOption, SortingValues } from '../../utils/const';
+import { SearchParam, SortingOption, SortingValues } from '../../utils/const';
 import { useAppDispatch } from '../../hooks';
 import { sortCatalog } from '../../store/cameras-data/cameras-data.slice';
 import { useSearchParams } from 'react-router-dom';
@@ -9,28 +9,28 @@ export default function CatalogSort() {
 
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const sortParams = searchParams.get('sort');
-  const orderParams = searchParams.get('order');
+  const sortParams = searchParams.get(SearchParam.Sorting);
+  const orderParams = searchParams.get(SearchParam.Order);
 
   const handleValueSwitch = (value: SortingValues) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('sort', value);
-    newSearchParams.set('order', orderParams || SortingOption.HighToLow);
+    newSearchParams.set(SearchParam.Sorting, value);
+    newSearchParams.set(SearchParam.Order, orderParams || SortingOption.HighToLow);
 
     setSearchParams(newSearchParams);
   };
 
   const handleOptionClick = (option: SortingOption) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('sort', sortParams || SortingValues.Price);
-    newSearchParams.set('order', option);
+    newSearchParams.set(SearchParam.Sorting, sortParams || SortingValues.Price);
+    newSearchParams.set(SearchParam.Order, option);
 
     setSearchParams(newSearchParams);
   };
 
 
   useEffect(() => {
-    if(searchParams.has('sort') || searchParams.has('order')) {
+    if(searchParams.has(SearchParam.Sorting) || searchParams.has(SearchParam.Order)) {
       dispatch(sortCatalog([orderParams as SortingOption || SortingOption.HighToLow, sortParams as SortingValues || SortingValues.Price]));
     }
   });

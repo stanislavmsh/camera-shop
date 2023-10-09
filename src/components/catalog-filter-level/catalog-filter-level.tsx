@@ -1,22 +1,23 @@
 import { useSearchParams } from 'react-router-dom';
 import { ChangeEvent } from 'react';
+import { SearchParam } from '../../utils/const';
 
 
 export default function CatalogFilterLevel(): JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const levelParams = searchParams.getAll('level');
+  const levelParams = searchParams.getAll(SearchParam.Level);
 
   const handleLevelClick = (evt : ChangeEvent<HTMLInputElement>) => {
     const currentName = evt.target.name;
     const isChecked = evt.target.checked;
 
     if(isChecked) {
-      searchParams.append('level', currentName);
+      searchParams.append(SearchParam.Level, currentName);
     }
     if(!isChecked) {
-      searchParams.delete('level', currentName);
+      searchParams.delete(SearchParam.Level, currentName);
     }
     searchParams.set('page', '1');
     setSearchParams(searchParams);
