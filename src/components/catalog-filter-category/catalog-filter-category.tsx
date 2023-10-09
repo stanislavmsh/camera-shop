@@ -48,7 +48,7 @@ export default function CatalogFilterCategory () : JSX.Element {
   }, [categoryParam, searchParams, setSearchParams]);
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='filter-category-test' className="catalog-filter__block">
       <legend className="title title--h5">Категория</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>

@@ -55,6 +55,15 @@ export enum FilterLevel {
   Pro = 'Профессиональный'
 }
 
+export const enum SearchParam {
+  Page = 'page',
+  Type = 'type',
+  Category = 'category',
+  Level = 'level',
+  Sorting = 'sort',
+  Order = 'order',
+}
+
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
 export const FOCUS_TIMEOUT = 500;

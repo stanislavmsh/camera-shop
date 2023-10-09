@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import usePagination from '@mui/material/usePagination';
 import { sortShownItems } from '../../store/cameras-data/cameras-data.slice';
 import styles from './pagination.module.css';
+import { SearchParam } from '../../utils/const';
 
 function Pagination() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ function Pagination() : JSX.Element {
   const PRODUCTS_PER_PAGE = 9;
   const camerasList = useAppSelector(getFilteredCameras);
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE) ;
-  const pageFromUrl = Number(searchParams.get('page')) || 1;
+  const pageFromUrl = Number(searchParams.get(SearchParam.Page)) || 1;
   const safePage = pageFromUrl > pageCount ? pageCount || 1 : pageFromUrl;
 
   const [currentPages , setCurrentPages] = useState({
@@ -42,7 +43,7 @@ function Pagination() : JSX.Element {
     }
     dispatch(sortShownItems([start, end]));
     if(pageFromUrl > pageCount) {
-      searchParams.set('page', safePage.toString());
+      searchParams.set(SearchParam.Page, safePage.toString());
       setSearchParams(searchParams);
     }
   }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams, searchParams]);
@@ -56,12 +57,12 @@ function Pagination() : JSX.Element {
         current: prevPages.current + step
       };
     });
-    searchParams.set('page', type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString());
+    searchParams.set(SearchParam.Page, type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString());
     setSearchParams(searchParams);
   };
 
   const handlePageClick = (page : number) => {
-    searchParams.set('page', page.toString());
+    searchParams.set(SearchParam.Page, page.toString());
     setSearchParams(searchParams);
     setCurrentPages((prevPages) => ({...prevPages, current: page}));
   };

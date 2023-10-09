@@ -24,7 +24,7 @@ export default function CatalogFilterLevel(): JSX.Element {
   };
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid="catalog-filter-level-test" className="catalog-filter__block">
       <legend className="title title--h5">Уровень</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>

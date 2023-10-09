@@ -66,7 +66,7 @@ export default function CatalogFilter() {
   },[categoryParam, dispatch, levelParams, typeParams, searchParams, setSearchParams]);
 
   return (
-    <div className="catalog-filter">
+    <div data-testid="catalog-filter-test" className="catalog-filter">
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
         <CatalogFilterPrice maxRef={maxRef} minRef={minRef}/>
