@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { ChangeEvent } from 'react';
-import { SearchParam } from '../../utils/const';
+import { FilterLevel, SearchParam } from '../../utils/const';
 
 
 export default function CatalogFilterLevel(): JSX.Element {
@@ -19,7 +19,7 @@ export default function CatalogFilterLevel(): JSX.Element {
     if(!isChecked) {
       searchParams.delete(SearchParam.Level, currentName);
     }
-    searchParams.set('page', '1');
+    searchParams.set(SearchParam.Page, '1');
     setSearchParams(searchParams);
 
   };
@@ -30,9 +30,9 @@ export default function CatalogFilterLevel(): JSX.Element {
       <div className="custom-checkbox catalog-filter__item">
         <label>
           <input type="checkbox"
-            name="Нулевой"
+            name={FilterLevel.Zero}
             onChange={handleLevelClick}
-            checked={levelParams.includes('Нулевой')}
+            checked={levelParams.includes(FilterLevel.Zero)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">Нулевой</span>
@@ -42,9 +42,9 @@ export default function CatalogFilterLevel(): JSX.Element {
         <label>
           <input
             type="checkbox"
-            name="Любительский"
+            name={FilterLevel.Newbie}
             onChange={handleLevelClick}
-            checked={levelParams.includes('Любительский')}
+            checked={levelParams.includes(FilterLevel.Newbie)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">
@@ -56,9 +56,9 @@ export default function CatalogFilterLevel(): JSX.Element {
         <label>
           <input
             type="checkbox"
-            name="Профессиональный"
+            name={FilterLevel.Pro}
             onChange={handleLevelClick}
-            checked={levelParams.includes('Профессиональный')}
+            checked={levelParams.includes(FilterLevel.Pro)}
           />
           <span className="custom-checkbox__icon" />
           <span className="custom-checkbox__label">

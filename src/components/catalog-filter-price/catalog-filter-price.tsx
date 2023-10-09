@@ -87,7 +87,7 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
     const priceServerMin = Number(minRef.current?.value) || defaultMin;
     dispatch(setPriceMinMax([minRef.current?.value || '', maxRef.current?.value || '']));
     updateCards([priceServerMin, priceServerMax]);
-    searchParams.set('page', '1');
+    searchParams.set(SearchParam.Page, '1');
     setSearchParams(searchParams);
 
   };

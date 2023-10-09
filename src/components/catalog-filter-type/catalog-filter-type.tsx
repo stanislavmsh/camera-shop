@@ -19,7 +19,7 @@ export default function CatalogFilterType() : JSX.Element {
     if(!isChecked) {
       searchParams.delete(SearchParam.Type, currentName);
     }
-    searchParams.set('page', '1');
+    searchParams.set(SearchParam.Page, '1');
     setSearchParams(searchParams);
   };
 

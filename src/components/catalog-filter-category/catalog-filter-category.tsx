@@ -11,11 +11,11 @@ export default function CatalogFilterCategory () : JSX.Element {
   const handlePhotoClick = () => {
     if(categoryParam === FilterCategory.Video || categoryParam === null) {
       searchParams.set(SearchParam.Category, FilterCategory.Photo);
-      searchParams.set('page', '1');
+      searchParams.set(SearchParam.Page, '1');
       setSearchParams(searchParams);
     }
     if(categoryParam === FilterCategory.Photo) {
-      searchParams.set('page', '1');
+      searchParams.set(SearchParam.Page, '1');
       searchParams.delete(SearchParam.Category);
       setSearchParams(searchParams);
     }
@@ -25,13 +25,13 @@ export default function CatalogFilterCategory () : JSX.Element {
   const handleVideoClick = () => {
     if(categoryParam === FilterCategory.Photo || categoryParam === null) {
       searchParams.set(SearchParam.Category, FilterCategory.Video);
-      searchParams.set('page', '1');
+      searchParams.set(SearchParam.Page, '1');
       searchParams.delete(SearchParam.Type, FilterType.Momental);
       searchParams.delete(SearchParam.Type, FilterType.Film);
       setSearchParams(searchParams);
     }
     if(categoryParam === FilterCategory.Video) {
-      searchParams.set('page', '1');
+      searchParams.set(SearchParam.Page, '1');
       searchParams.delete(SearchParam.Category);
       setSearchParams(searchParams);
     }
