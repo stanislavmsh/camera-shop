@@ -138,7 +138,7 @@ describe('Component: App', () => {
 
     render(withStoreComponent);
 
-    const loadingMessage = screen.getByText('Loading...');
+    const loadingMessage = screen.getByText('ГРУЖУСЬ...');
 
     expect(loadingMessage).toBeInTheDocument();
   });

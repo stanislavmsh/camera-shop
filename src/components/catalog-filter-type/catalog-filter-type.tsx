@@ -25,7 +25,7 @@ export default function CatalogFilterType() : JSX.Element {
 
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalog-filter-type-test' className="catalog-filter__block">
       <legend className="title title--h5">Тип камеры</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>

@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import CatalogFilterCategory from './catalog-filter-category';
 import { withStore, withHistory } from '../../utils/mock-component';
 import { makeFakeCamerasData } from '../../utils/mocks';
+import CatalogSort from './catalog-sort';
 
 const mockCameraData = makeFakeCamerasData();
 const mockShownData = mockCameraData.slice(0, 3);
 
-describe('Component: Catalog filter category', () => {
+describe('Component: Catalog Sort', () => {
 
-  it('renders CatalogFilter component with data' , () => {
+  it('renders CatalogSort component with data' , () => {
 
-    const { withStoreComponent } = withStore(<CatalogFilterCategory />, {
+    const { withStoreComponent } = withStore(<CatalogSort />, {
       CAMERAS: {
         cameras: mockCameraData,
         filteredCameras: mockCameraData,
@@ -30,8 +30,7 @@ describe('Component: Catalog filter category', () => {
 
     render(prepComponent);
 
-    expect(screen.getByTestId('filter-category-test')).toBeInTheDocument();
+    expect(screen.getByTestId('catalog-sort-test')).toBeInTheDocument();
   });
-
 });
 

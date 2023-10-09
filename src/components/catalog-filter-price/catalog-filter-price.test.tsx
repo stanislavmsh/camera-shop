@@ -1,16 +1,18 @@
 import { render, screen } from '@testing-library/react';
-import CatalogFilterCategory from './catalog-filter-category';
+import CatalogFilterPrice from './catalog-filter-price';
 import { withStore, withHistory } from '../../utils/mock-component';
 import { makeFakeCamerasData } from '../../utils/mocks';
 
 const mockCameraData = makeFakeCamerasData();
 const mockShownData = mockCameraData.slice(0, 3);
 
-describe('Component: Catalog filter category', () => {
+describe('Component: Catalog filter price', () => {
 
   it('renders CatalogFilter component with data' , () => {
+    const minRef = { current: null };
+    const maxRef = { current: null };
 
-    const { withStoreComponent } = withStore(<CatalogFilterCategory />, {
+    const { withStoreComponent } = withStore(<CatalogFilterPrice maxRef={maxRef} minRef={minRef} />, {
       CAMERAS: {
         cameras: mockCameraData,
         filteredCameras: mockCameraData,
@@ -30,7 +32,7 @@ describe('Component: Catalog filter category', () => {
 
     render(prepComponent);
 
-    expect(screen.getByTestId('filter-category-test')).toBeInTheDocument();
+    expect(screen.getByTestId('catalog-filter-price-test')).toBeInTheDocument();
   });
 
 });

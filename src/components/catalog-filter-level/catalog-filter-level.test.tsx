@@ -6,7 +6,7 @@ import { makeFakeCamerasData } from '../../utils/mocks';
 const mockCameraData = makeFakeCamerasData();
 const mockShownData = mockCameraData.slice(0, 3);
 
-describe('Component: Catalog filter category', () => {
+describe('Component: Catalog filter level', () => {
 
   it('renders CatalogFilter component with data' , () => {
 

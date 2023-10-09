@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentInfo } from '../../store/current-data/current-data.selectors';
 import { Link, useParams , useSearchParams} from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
-import { AppRoute, STARS_RATING } from '../../utils/const';
+import { AppRoute, STARS_RATING, SearchParam } from '../../utils/const';
 import { setPriceMinMax, resetCameras } from '../../store/cameras-data/cameras-data.slice';
 
 

@@ -46,12 +46,10 @@ export const camerasData = createSlice({
         case SortingOption.LowToHigh:
           if (sortingValue === SortingValues.Price) {
             state.filteredCameras.sort((a, b) => a.price - b.price);
-            state.storedItems.sort((a, b) => a.price - b.price);
             state.shownItems = [...state.filteredCameras.slice(state.firstItem , state.lastItem)];
           }
           if (sortingValue === SortingValues.Rating) {
             state.filteredCameras.sort((a, b) => a.rating - b.rating);
-            state.storedItems.sort((a, b) => a.rating - b.rating);
             state.shownItems = [...state.filteredCameras.slice(state.firstItem , state.lastItem)];
           }
           break;

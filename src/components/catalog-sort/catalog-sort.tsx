@@ -37,7 +37,7 @@ export default function CatalogSort() {
 
 
   return (
-    <div className="catalog-sort">
+    <div data-testid='catalog-sort-test' className="catalog-sort">
       <form action="#">
         <div className="catalog-sort__inner">
           <p className="title title--h5">Сортировать:</p>

@@ -96,7 +96,7 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
 
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalog-filter-price-test' className="catalog-filter__block">
       <legend className="title title--h5">Цена, ₽</legend>
       <div className="catalog-filter__price-range">
         <div className="custom-input">

@@ -40,7 +40,7 @@ export default function SearchForm () : JSX.Element {
   });
 
   return (
-    <div {...getRootProps()} className={`form-search ${popupOpen && inputValue.length > 2 ? 'list-opened' : ''}`} >
+    <div data-testid='search-form-test' {...getRootProps()} className={`form-search ${popupOpen && inputValue.length > 2 ? 'list-opened' : ''}`} >
       <form >
         <label {...getInputLabelProps()}>
           <svg
