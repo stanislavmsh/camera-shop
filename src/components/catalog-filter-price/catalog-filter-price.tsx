@@ -107,7 +107,6 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
               placeholder={lowestPrice.toString()}
               onChange={debouncedHandleInputChange}
               ref={minRef}
-              // defaultValue={currentMinMax[0]}
             />
           </label>
         </div>
@@ -119,7 +118,6 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
               placeholder={highestPrice.toString()}
               onChange={debouncedHandleInputChange}
               ref={maxRef}
-              // defaultValue={currentMinMax[1]}
             />
           </label>
         </div>

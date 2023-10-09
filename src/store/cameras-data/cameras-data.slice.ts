@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TCamerasData } from '../../types/state';
+import { FilterPayloadAction, TCamerasData } from '../../types/state';
 import { FilterCategory, FilterLevel, FilterType, NameSpace, SortingOption, SortingValues } from '../../utils/const';
 import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.action';
 
@@ -18,7 +18,6 @@ const initialState: TCamerasData = {
   priceMinMax: ['', '']
 };
 
-type FilterPayloadAction = [FilterCategory | null, FilterType[], FilterLevel[]]
 
 export const camerasData = createSlice({
   name: NameSpace.Cameras,

@@ -1,4 +1,5 @@
 import { store } from '../store';
+import { FilterCategory, FilterType, FilterLevel } from '../utils/const';
 import { TCamera } from './camera';
 import { TPromo } from './promo';
 import { TReview } from './review';
@@ -7,6 +8,8 @@ export type TPromoData = {
   promos: TPromo[];
   hasError: boolean;
 }
+
+export type FilterPayloadAction = [FilterCategory | null, FilterType[], FilterLevel[]]
 
 export type TCamerasData = {
   cameras: TCamera[];

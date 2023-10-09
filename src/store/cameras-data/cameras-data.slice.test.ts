@@ -1,8 +1,9 @@
 
-import { TCamerasData } from '../../types/state';
+import { FilterPayloadAction, TCamerasData } from '../../types/state';
+import { FilterCategory, SortingOption, SortingValues } from '../../utils/const';
 import { makeFakeCamerasData } from '../../utils/mocks';
 import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.action';
-import { camerasData, sortShownItems } from './cameras-data.slice';
+import { camerasData, filterCameras, resetCameras, setPriceMinMax, sortCatalog, sortShownItems } from './cameras-data.slice';
 
 describe('Cameras Data Slice' , () => {
 
@@ -63,6 +64,82 @@ describe('Cameras Data Slice' , () => {
 
     expect(result).toEqual(expectedState);
 
+  });
+
+  it('should sort catalog and set new shown items based on new filteredCameras' , () => {
+    const actionPayload : [SortingOption, SortingValues] = [SortingOption.LowToHigh , SortingValues.Price];
+    const mockCameraData = makeFakeCamerasData();
+    const expectedFilteredCameras = mockCameraData.sort((a, b) => a.price - b.price);
+    const expectedShownItems = [...expectedFilteredCameras.slice(initialState.firstItem, initialState.lastItem)];
+    const state = {
+      ...initialState,
+      filteredCameras: mockCameraData
+    };
+    const expectedState = {
+      ...initialState,
+      filteredCameras: expectedFilteredCameras,
+      shownItems: expectedShownItems,
+    };
+
+    const result = camerasData.reducer(state, sortCatalog(actionPayload));
+
+    expect(result).toEqual(expectedState);
+
+  });
+
+  it('should filter cameras and backup cameras and put result into filteredCameras and storedItems', () => {
+    const actionPayload: FilterPayloadAction = [FilterCategory.Photo, [] , []];
+    const mockCameraData = makeFakeCamerasData();
+    const expectedFilteredData = [...mockCameraData.filter((elem) => elem.category === actionPayload[0] || elem.category === 'Фотоаппарат')];
+    const state = {
+      ...initialState,
+      cameras: mockCameraData,
+      backupCameras: mockCameraData,
+    };
+    const expectedState = {
+      ...initialState,
+      cameras: mockCameraData,
+      backupCameras: mockCameraData,
+      filteredCameras: expectedFilteredData,
+      storedItems: expectedFilteredData,
+    };
+
+    const result = camerasData.reducer(state, filterCameras(actionPayload));
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should store max and min price in priceMinMax', () => {
+    const actionPayload: [string, string] = ['1990', '50000'];
+    const state = {
+      ...initialState
+    };
+    const expectedState = {
+      ...initialState,
+      priceMinMax: actionPayload
+    };
+
+    const result = camerasData.reducer(state, setPriceMinMax(actionPayload));
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should reset cameras from backupCameras', () => {
+    const mockCameraData = makeFakeCamerasData();
+    const state = {
+      ...initialState,
+      cameras: mockCameraData.slice(0, 2),
+      backupCameras: mockCameraData,
+    };
+    const expectedState = {
+      ...initialState,
+      cameras: mockCameraData,
+      backupCameras: mockCameraData
+    };
+
+    const result = camerasData.reducer(state, resetCameras());
+
+    expect(result).toEqual(expectedState);
   });
 
   it('should set "isDataLoading" to true with fetchCamerasAction.pending', () => {
