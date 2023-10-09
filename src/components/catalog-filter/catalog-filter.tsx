@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef} from 'react';
 import CatalogFilterPrice from '../catalog-filter-price/catalog-filter-price';
 import CatalogFilterCategory from '../catalog-filter-category/catalog-filter-category';
 import CatalogFilterType from '../catalog-filter-type/catalog-filter-type';
@@ -42,9 +42,28 @@ export default function CatalogFilter() {
 
 
   useEffect(() => {
-    dispatch(filterCameras([categoryParam, typeParams, levelParams]));
-  },[categoryParam, dispatch, levelParams, typeParams]);
+    const validLevels = Object.values(FilterLevel);
+    const validTypes = Object.values(FilterType);
+    const invalidLevels = levelParams.filter((level) => !validLevels.includes(level));
+    const invalidTypes = typeParams.filter((type) => !validTypes.includes(type));
 
+    if (invalidLevels.length > 0) {
+      invalidLevels.forEach((invalidLevel) => {
+        searchParams.delete('level', invalidLevel);
+      });
+      setSearchParams(searchParams);
+    }
+    if (invalidTypes.length > 0) {
+      invalidTypes.forEach((type) => {
+        searchParams.delete('type', type);
+      });
+      setSearchParams(searchParams);
+    }
+
+    if(invalidLevels.length === 0 && invalidTypes.length === 0) {
+      dispatch(filterCameras([categoryParam, typeParams, levelParams]));
+    }
+  },[categoryParam, dispatch, levelParams, typeParams, searchParams, setSearchParams]);
 
   return (
     <div className="catalog-filter">

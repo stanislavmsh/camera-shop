@@ -20,12 +20,16 @@ describe('Component: Review Block', () => {
       },
       CAMERAS: {
         cameras: [],
-        sortedCameras: [],
+        filteredCameras: [],
+        storedItems: [],
+        backupCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],
         firstItem: 1,
         lastItem: 9,
+        isDataByPriceLoading: false,
+        priceMinMax: ['', '']
       },
       MODAL: {
         modalInfo: undefined,

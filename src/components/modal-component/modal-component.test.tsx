@@ -3,7 +3,6 @@ import ModalComponent from './modal-component';
 import { withStore } from '../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
 
-
 const mockCurrentData = makeFakeCurrentCameraData();
 const mockSimilarData = makeFakeCamerasData();
 const mockComments = makeFakeComments();
@@ -19,13 +18,17 @@ describe('Component: Modal Component' , () => {
         reviews: mockComments,
       },
       CAMERAS: {
-        cameras: [],
-        sortedCameras: [],
+        cameras:[],
+        filteredCameras: [],
+        storedItems: [],
+        backupCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],
         firstItem: 1,
         lastItem: 9,
+        isDataByPriceLoading: false,
+        priceMinMax: ['', '']
       },
       MODAL: {
         modalInfo: undefined,
@@ -54,13 +57,17 @@ describe('Component: Modal Component' , () => {
         reviews: mockComments
       },
       CAMERAS: {
-        cameras: [],
-        sortedCameras: [],
+        cameras:[],
+        filteredCameras: [],
+        storedItems: [],
+        backupCameras: [],
         hasError: false,
         isDataLoading: false,
         shownItems: [],
         firstItem: 1,
         lastItem: 9,
+        isDataByPriceLoading: false,
+        priceMinMax: ['', '']
       },
       MODAL: {
         modalInfo: undefined,

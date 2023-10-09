@@ -6,7 +6,7 @@ import { AppThunkDispatch , extractActionsTypes, makeFakeCamerasData} from '../.
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { APIRoute } from '../../utils/const';
-import { fetchCamerasAction } from './cameras-data.action';
+import { fetchCamerasAction, fetchCamerasByPriceAction } from './cameras-data.action';
 
 
 describe('Cameras Data async actions', () => {
@@ -56,6 +56,42 @@ describe('Cameras Data async actions', () => {
     });
 
 
+  });
+  describe('fetchCamerasByPriceAction', () => {
+    it('should dispatch "fetchCamerasByPriceAction.pending", "fetchCamerasByPriceAction.fullfilled" when server response 200', async () => {
+      const mockCameraData = makeFakeCamerasData();
+      const actionPayload: [number, number] = [1990, 5000];
+      mockAxiosAdapter.onGet(`${APIRoute.Cameras}?price_gte=${actionPayload[0]}&price_lte=${actionPayload[1]}`).reply(200, mockCameraData);
+
+      await store.dispatch(fetchCamerasByPriceAction(actionPayload));
+
+      const emmitedAction = store.getActions();
+      const extractedActionsTypes = extractActionsTypes(store.getActions());
+      const fetchCamerasByPriceActionFullfilled = emmitedAction.at(1) as ReturnType<typeof fetchCamerasByPriceAction.fulfilled>;
+
+      expect(extractedActionsTypes).toEqual([
+        fetchCamerasByPriceAction.pending.type,
+        fetchCamerasByPriceAction.fulfilled.type
+      ]);
+
+      expect(fetchCamerasByPriceActionFullfilled.payload).toEqual(mockCameraData);
+
+    });
+
+    it('should dispatch "fetchCamerasByPriceAction.pending", "fetchCamerasByPriceAction.rejected" when server response 400', async () => {
+      const actionPayload: [number, number] = [-1990, -5000];
+      mockAxiosAdapter.onGet(`${APIRoute.Cameras}?price_gte=${actionPayload[0]}&price_lte=${actionPayload[1]}`).reply(400, []);
+
+      await store.dispatch(fetchCamerasByPriceAction(actionPayload));
+      const actions = extractActionsTypes(store.getActions());
+
+
+      expect(actions).toEqual([
+        fetchCamerasByPriceAction.pending.type,
+        fetchCamerasByPriceAction.rejected.type
+
+      ]);
+    });
   });
 
 });

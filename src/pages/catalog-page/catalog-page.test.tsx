@@ -14,11 +14,16 @@ describe('Page: Catalog Page', () => {
     const { withStoreComponent } = withStore(<CatalogPage />, {
       CAMERAS: {
         cameras: mockCameraData,
+        filteredCameras: mockCameraData,
+        storedItems: mockCameraData,
+        backupCameras: mockCameraData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
         firstItem: 1,
         lastItem: 9,
+        isDataByPriceLoading: false,
+        priceMinMax: ['', '']
       },
       PROMO: {
         promos: mockPromoData,

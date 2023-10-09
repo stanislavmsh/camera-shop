@@ -13,12 +13,16 @@ describe('Component: Modal Buy' , () => {
     const { withStoreComponent } = withStore(<ModalBuy />, {
       CAMERAS: {
         cameras: mockCamerasData,
-        sortedCameras: mockCamerasData,
+        filteredCameras: mockCamerasData,
+        storedItems: mockCamerasData,
+        backupCameras: mockCamerasData,
         hasError: false,
         isDataLoading: false,
         shownItems: mockShownData,
         firstItem: 1,
         lastItem: 9,
+        isDataByPriceLoading: false,
+        priceMinMax: ['', '']
       },
       MODAL: {
         modalInfo: mockModal,

@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { FilterCategory , FilterType} from '../../utils/const';
+import { useEffect } from 'react';
 
 
 export default function CatalogFilterCategory () : JSX.Element {
@@ -35,6 +36,16 @@ export default function CatalogFilterCategory () : JSX.Element {
       setSearchParams(searchParams);
     }
   };
+
+  useEffect(() => {
+    if (
+      categoryParam !== FilterCategory.Photo &&
+      categoryParam !== FilterCategory.Video
+    ) {
+      searchParams.delete('category');
+      setSearchParams(searchParams);
+    }
+  }, [categoryParam, searchParams, setSearchParams]);
 
   return (
     <fieldset className="catalog-filter__block">

@@ -15,8 +15,6 @@ function Pagination() : JSX.Element {
   const pageCount = Math.ceil(camerasList.length / PRODUCTS_PER_PAGE) ;
   const pageFromUrl = Number(searchParams.get('page')) || 1;
   const safePage = pageFromUrl > pageCount ? pageCount || 1 : pageFromUrl;
-  const orderParams = searchParams.get('order');
-  const sortParams = searchParams.get('sort');
 
   const [currentPages , setCurrentPages] = useState({
     current : safePage,
@@ -45,15 +43,9 @@ function Pagination() : JSX.Element {
     dispatch(sortShownItems([start, end]));
     if(pageFromUrl > pageCount) {
       searchParams.set('page', safePage.toString());
-      if(orderParams) {
-        searchParams.set('order', orderParams);
-      }
-      if(sortParams) {
-        searchParams.set('sort', sortParams);
-      }
       setSearchParams(searchParams);
     }
-  }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams, searchParams, orderParams, sortParams]);
+  }, [safePage , dispatch , pageCount, pageFromUrl, setSearchParams, searchParams]);
 
   const handleNextClick = (type: 'next' | 'previous') => {
     setCurrentPages((prevPages) => {
@@ -65,23 +57,11 @@ function Pagination() : JSX.Element {
       };
     });
     searchParams.set('page', type === 'next' ? (currentPages.current + 1).toString() : (currentPages.current - 1).toString());
-    if(orderParams) {
-      searchParams.set('order', orderParams);
-    }
-    if(sortParams) {
-      searchParams.set('sort', sortParams);
-    }
     setSearchParams(searchParams);
   };
 
   const handlePageClick = (page : number) => {
     searchParams.set('page', page.toString());
-    if(orderParams) {
-      searchParams.set('order', orderParams);
-    }
-    if(sortParams) {
-      searchParams.set('sort', sortParams);
-    }
     setSearchParams(searchParams);
     setCurrentPages((prevPages) => ({...prevPages, current: page}));
   };
