@@ -61,11 +61,11 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
       evt.target.value = '0';
     }
     if(maxRef.current && minRef.current) {
-      if(maxRef.current.value !== '' && maxRef.current?.value < minRef.current?.value) {
+      if(maxRef.current.value !== '' && Number(maxRef.current.value) < Number(minRef.current.value)) {
         maxRef.current.value = minRef.current.value;
       }
     }
-    if (minRef) {
+    if (minRef.current) {
       if(value < lowestPrice && evt.target.value !== '') {
         evt.target.value = lowestPrice.toString();
       }
@@ -73,8 +73,8 @@ export default function CatalogFilterPrice ({minRef, maxRef} : CatalogFilterPric
         evt.target.value = highestPrice.toString();
       }
     }
-    if(maxRef) {
-      if(value > highestPrice) {
+    if(maxRef.current) {
+      if(Number(maxRef.current?.value) > highestPrice) {
         evt.target.value = highestPrice.toString();
       }
       if(maxRef.current?.value !== '' && value < Number(minRef.current?.value)) {
