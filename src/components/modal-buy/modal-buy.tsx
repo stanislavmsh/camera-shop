@@ -4,6 +4,7 @@ import { formatNumberWithSpace } from '../../utils/utils';
 import { getModalInfo } from '../../store/modal-process/modal-process.selectors';
 import { setActiveStatus, setBasketModalStatus, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
 import { addItemToBasket } from '../../store/basket-data/basket-data.slice';
+import { FilterCategory } from '../../utils/const';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -64,7 +65,7 @@ export default function ModalBuy() : JSX.Element {
                 <span className="basket-item__article">Артикул:</span>{' '}
                 <span className="basket-item__number">{currentItem?.vendorCode}</span>
               </li>
-              <li className="basket-item__list-item">{currentItem?.type} фотокамера</li>
+              <li className="basket-item__list-item">{currentItem?.type} {currentItem?.category === 'Фотоаппарат' ? FilterCategory.Photo.toLowerCase() : FilterCategory.Video.toLowerCase()}</li>
               <li className="basket-item__list-item">{currentItem?.level} уровень</li>
             </ul>
             <p className="basket-item__price">

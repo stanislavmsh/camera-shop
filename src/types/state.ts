@@ -46,6 +46,7 @@ export type TModalProcess = {
 export type TBasketData = {
   items: TCamera[];
   currentItem: TCamera | undefined;
+  changedItems: TCamera[];
 }
 
 export type State = ReturnType<typeof store.getState>;

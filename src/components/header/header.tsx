@@ -4,7 +4,7 @@ import { AppRoute } from '../../utils/const';
 import SearchForm from '../search-form/search-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { resetCameras, setPriceMinMax } from '../../store/cameras-data/cameras-data.slice';
-import { getBasketItems } from '../../store/basket-data/basket-data.selectors';
+import { getChangedBasketItems } from '../../store/basket-data/basket-data.selectors';
 
 function Header() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ function Header() : JSX.Element {
     dispatch(resetCameras());
   };
 
-  const itemsInBasket = useAppSelector(getBasketItems).length;
+  const itemsInBasket = useAppSelector(getChangedBasketItems).length;
 
 
   return (

@@ -4,7 +4,7 @@ import { getCurrentBasketItem } from '../../store/basket-data/basket-data.select
 import { removeItem } from '../../store/basket-data/basket-data.slice';
 import { setActiveStatus, setRemovalModalStatus } from '../../store/modal-process/modal-process.slice';
 import { TCamera } from '../../types/camera';
-import { AppRoute } from '../../utils/const';
+import { AppRoute, FilterCategory } from '../../utils/const';
 
 
 export default function ModalRemoveItem () : JSX.Element {
@@ -12,11 +12,12 @@ export default function ModalRemoveItem () : JSX.Element {
 
   const currentItem = useAppSelector(getCurrentBasketItem);
 
-  const {vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, name , type, level} = currentItem as TCamera;
+  const {vendorCode, category, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, name , type, level} = currentItem as TCamera;
 
   const handleCloseModal = () => {
     dispatch(setActiveStatus(false));
     dispatch(setRemovalModalStatus(false));
+    document.body.style.overflow = 'unset';
   };
 
   const hanldeRemoveButton = () => {
@@ -52,7 +53,7 @@ export default function ModalRemoveItem () : JSX.Element {
                 <span className="basket-item__article">Артикул:</span>{' '}
                 <span className="basket-item__number">{vendorCode}</span>
               </li>
-              <li className="basket-item__list-item">{type} фотокамера</li>
+              <li className="basket-item__list-item">{type} {category === 'Фотоаппарат' ? FilterCategory.Photo.toLowerCase() : FilterCategory.Video.toLowerCase()}</li>
               <li className="basket-item__list-item">{level} уровень</li>
             </ul>
           </div>
