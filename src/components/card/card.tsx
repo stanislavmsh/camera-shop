@@ -2,9 +2,10 @@ import React from 'react';
 import { TCamera } from '../../types/camera';
 import { Link } from 'react-router-dom';
 import { AppRoute , STARS_RATING } from '../../utils/const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { formatNumberWithSpace } from '../../utils/utils';
 import { setActiveStatus, setModalInfo, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
+import { getBasketItems } from '../../store/basket-data/basket-data.selectors';
 
 type TCardProps = {
   cameraInfo : TCamera;
@@ -21,6 +22,9 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
     dispatch(setPurchaseModalStatus(true));
     document.body.style.overflow = 'hidden';
   };
+
+  const basketCameras = useAppSelector(getBasketItems);
+  const isInBasket = basketCameras.some((elem) => elem.id === cameraInfo.id);
 
 
   return (
@@ -62,13 +66,20 @@ function Card({cameraInfo , classCustom} : TCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button
-          className="btn btn--purple product-card__btn"
-          type="button"
-          onClick={handleBuyButton}
-        >
+        {!isInBasket ?
+          <button
+            className="btn btn--purple product-card__btn"
+            type="button"
+            onClick={handleBuyButton}
+          >
                       Купить
-        </button>
+          </button>
+          :
+          <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to={AppRoute.Basket}>
+            <svg width="16" height="16" aria-hidden="true">
+              <use xlinkHref="#icon-basket"></use>
+            </svg>В корзине
+          </Link>}
         <Link data-testid="button-more-test" className="btn btn--transparent" to={`${AppRoute.Root}${cameraInfo.id}`}>
                       Подробнее
         </Link>

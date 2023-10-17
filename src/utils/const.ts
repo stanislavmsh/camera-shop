@@ -17,6 +17,7 @@ export const enum NameSpace {
   Promo = 'PROMO',
   Current = 'CURRENT',
   Modal = 'MODAL',
+  Basket = 'BASKET'
 }
 
 export const enum RatingName {
@@ -63,6 +64,8 @@ export const enum SearchParam {
   Sorting = 'sort',
   Order = 'order',
 }
+
+export const STORAGE_NAME = 'basketCameras';
 
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 

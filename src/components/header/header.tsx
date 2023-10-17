@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../utils/const';
 import SearchForm from '../search-form/search-form';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { resetCameras, setPriceMinMax } from '../../store/cameras-data/cameras-data.slice';
+import { getBasketItems } from '../../store/basket-data/basket-data.selectors';
 
 function Header() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -11,6 +12,8 @@ function Header() : JSX.Element {
     dispatch(setPriceMinMax(['', '']));
     dispatch(resetCameras());
   };
+
+  const itemsInBasket = useAppSelector(getBasketItems).length;
 
 
   return (
@@ -54,11 +57,12 @@ function Header() : JSX.Element {
           </ul>
         </nav>
         <SearchForm />
-        <a className="header__basket-link" href="#">
+        <Link className="header__basket-link" to={AppRoute.Basket}>
           <svg width={16} height={16} aria-hidden="true">
             <use xlinkHref="#icon-basket" />
           </svg>
-        </a>
+          {itemsInBasket !== 0 && <span className="header__basket-count">{itemsInBasket}</span>}
+        </Link>
       </div>
     </header>
   );

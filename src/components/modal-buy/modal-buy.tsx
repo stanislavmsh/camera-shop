@@ -2,7 +2,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { formatNumberWithSpace } from '../../utils/utils';
 import { getModalInfo } from '../../store/modal-process/modal-process.selectors';
-import { setActiveStatus, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
+import { setActiveStatus, setBasketModalStatus, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
+import { addItemToBasket } from '../../store/basket-data/basket-data.slice';
 
 export default function ModalBuy() : JSX.Element {
   const dispatch = useAppDispatch();
@@ -26,10 +27,16 @@ export default function ModalBuy() : JSX.Element {
       document.removeEventListener('keydown', onEscClick);
     };
   });
+  const handleBuyButton = () => {
+    if(currentItem) {
+      dispatch(addItemToBasket(currentItem));
+    }
+    dispatch(setBasketModalStatus(true));
+  };
 
   return(
-    <div onClick={handleModalClose} className="modal__wrapper">
-      <div className="modal__overlay" />
+    <div className="modal__wrapper">
+      <div onClick={handleModalClose} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Добавить товар в корзину</p>
         <div className="basket-item basket-item--short">
@@ -69,6 +76,7 @@ export default function ModalBuy() : JSX.Element {
           <button
             data-testid='modal-buy-test'
             id='purchase__button'
+            onClick={handleBuyButton}
             className="btn btn--purple modal__btn modal__btn--fit-width"
             type="button"
           >

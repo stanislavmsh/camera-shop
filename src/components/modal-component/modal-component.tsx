@@ -6,8 +6,10 @@ import { getCurrentInfo } from '../../store/current-data/current-data.selectors'
 import { fetchCurrentAction, fetchReviewsAction } from '../../store/current-data/current-data.action';
 import ModalBuy from '../modal-buy/modal-buy';
 import FocusLock from 'react-focus-lock';
-import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus, getActiveStatus } from '../../store/modal-process/modal-process.selectors';
+import ModalBasketSuccess from '../modal-basket-success/modal-basket-success';
+import { getPurchaseModalStatus, getFormModalStatus, getSuccessModalStatus, getActiveStatus, getBasketModalStatus, getRemovalModalStatus } from '../../store/modal-process/modal-process.selectors';
 import { setActiveStatus } from '../../store/modal-process/modal-process.slice';
+import ModalRemoveItem from '../modal-remove-item/modal-remove-item';
 
 
 export default function ModalComponent (): JSX.Element {
@@ -19,6 +21,8 @@ export default function ModalComponent (): JSX.Element {
   const isPurchaseOpened = useAppSelector(getPurchaseModalStatus);
   const isFormModalOpened = useAppSelector(getFormModalStatus);
   const isSuccessModalOpened = useAppSelector(getSuccessModalStatus);
+  const isBasketModalOpened = useAppSelector(getBasketModalStatus);
+  const isRemovalModalOpened = useAppSelector(getRemovalModalStatus);
 
   const currentitem = useAppSelector(getCurrentInfo);
 
@@ -51,6 +55,12 @@ export default function ModalComponent (): JSX.Element {
       case isSuccessModalOpened:
         setCurrentElement (<CommentSuccess handleCommentSuccess={handleSuccessClick} />);
         break;
+      case isBasketModalOpened:
+        setCurrentElement(<ModalBasketSuccess />);
+        break;
+      case isRemovalModalOpened:
+        setCurrentElement(<ModalRemoveItem />);
+        break;
     }
 
 
@@ -69,12 +79,12 @@ export default function ModalComponent (): JSX.Element {
     return () => {
       document.removeEventListener('keydown', onEscClick);
     };
-  }, [isPurchaseOpened, isFormModalOpened, currentitem?.id, isSuccessModalOpened, dispatch, currentitem]);
+  }, [isPurchaseOpened, isFormModalOpened, currentitem?.id, isSuccessModalOpened, dispatch, currentitem, isBasketModalOpened, isRemovalModalOpened]);
 
 
   return(
     <FocusLock>
-      <div data-testid='modal-test' className={`modal ${isActive ? 'is-active' : ''} ${isSuccessModalOpened ? 'modal--narrow' : ''}`}>
+      <div data-testid='modal-test' className={`modal ${isActive ? 'is-active' : ''} ${isSuccessModalOpened || isBasketModalOpened ? 'modal--narrow' : ''}`}>
         {
           currentElement
         }

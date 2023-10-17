@@ -36,9 +36,16 @@ export type TCurrentData = {
 export type TModalProcess = {
   modalInfo: TCamera | undefined;
   purchaseModalStatus: boolean;
+  basketModalStatus: boolean;
   formModalStatus: boolean;
   successModalStatus: boolean;
+  removalModalStatus: boolean;
   isActive: boolean;
+}
+
+export type TBasketData = {
+  items: TCamera[];
+  currentItem: TCamera | undefined;
 }
 
 export type State = ReturnType<typeof store.getState>;

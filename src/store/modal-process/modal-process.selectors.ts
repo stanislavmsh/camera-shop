@@ -7,3 +7,6 @@ export const getPurchaseModalStatus = (state: State) : boolean => state[NameSpac
 export const getFormModalStatus = (state: State) : boolean => state[NameSpace.Modal].formModalStatus;
 export const getSuccessModalStatus = (state: State) : boolean => state[NameSpace.Modal].successModalStatus;
 export const getActiveStatus = (state: State) : boolean => state[NameSpace.Modal].isActive;
+
+export const getBasketModalStatus = (state: State) : boolean => state[NameSpace.Modal].basketModalStatus;
+export const getRemovalModalStatus = (state: State) : boolean => state[NameSpace.Modal].removalModalStatus;

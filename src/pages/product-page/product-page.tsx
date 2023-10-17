@@ -9,6 +9,7 @@ import { Link, useParams , useSearchParams} from 'react-router-dom';
 import { fetchCurrentAction, fetchReviewsAction, fetchSimilarAction } from '../../store/current-data/current-data.action';
 import { AppRoute, STARS_RATING, SearchParam } from '../../utils/const';
 import { setPriceMinMax, resetCameras } from '../../store/cameras-data/cameras-data.slice';
+import { setModalInfo, setActiveStatus, setPurchaseModalStatus } from '../../store/modal-process/modal-process.slice';
 
 
 export default function ProductPage() : JSX.Element {
@@ -56,6 +57,14 @@ export default function ProductPage() : JSX.Element {
     dispatch(resetCameras());
   };
 
+  const handleBuyButton = () => {
+    if(currentProduct) {
+      dispatch(setModalInfo(currentProduct));
+    }
+    dispatch(setActiveStatus(true));
+    dispatch(setPurchaseModalStatus(true));
+    document.body.style.overflow = 'hidden';
+  };
 
   return(
 
@@ -128,7 +137,7 @@ export default function ProductPage() : JSX.Element {
                   <p className="product__price">
                     <span className="visually-hidden">Цена:</span>{currentProduct?.price} ₽
                   </p>
-                  <button className="btn btn--purple" type="button">
+                  <button onClick={handleBuyButton} className="btn btn--purple" type="button">
                     <svg width={24} height={16} aria-hidden="true">
                       <use xlinkHref="#icon-add-basket" />
                     </svg>
