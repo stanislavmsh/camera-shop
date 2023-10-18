@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { TModalProcess } from '../types/state';
 
 export function formatNumberWithSpace(number : number) {
   const numberStr = number.toString();
@@ -26,3 +27,11 @@ export function debounce<F extends (evt: ChangeEvent<HTMLInputElement>) => void>
   };
 }
 
+export const resetModalStatus = (state: TModalProcess) => {
+  state.purchaseModalStatus = false;
+  state.formModalStatus = false;
+  state.successModalStatus = false;
+  state.basketModalStatus = false;
+  state.removalModalStatus = false;
+  state.orderSuccessModalStatus = false;
+};

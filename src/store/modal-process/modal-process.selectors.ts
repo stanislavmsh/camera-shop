@@ -10,3 +10,4 @@ export const getActiveStatus = (state: State) : boolean => state[NameSpace.Modal
 
 export const getBasketModalStatus = (state: State) : boolean => state[NameSpace.Modal].basketModalStatus;
 export const getRemovalModalStatus = (state: State) : boolean => state[NameSpace.Modal].removalModalStatus;
+export const getOrderModalStatus = (state: State) : boolean => state[NameSpace.Modal].orderSuccessModalStatus;

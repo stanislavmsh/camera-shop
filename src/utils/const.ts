@@ -9,7 +9,9 @@ export const enum APIRoute {
   Promo = '/promo',
   Cameras = '/cameras',
   Similar = '/similar',
-  Reviews = '/reviews'
+  Reviews = '/reviews',
+  Coupons = '/coupons',
+  Orders = '/orders'
 }
 
 export const enum NameSpace {
@@ -65,10 +67,15 @@ export const enum SearchParam {
   Order = 'order',
 }
 
-export const STORAGE_NAME = 'basketCameras';
+
+export const enum StorageName {
+  Camera = 'basketCameras',
+  CouponName = 'basketCoupon',
+  CouponValue = 'basketCouponValue'
+}
 
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];
 
 export const FOCUS_TIMEOUT = 500;
 
-export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy/';
+export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';

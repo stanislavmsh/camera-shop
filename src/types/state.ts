@@ -40,6 +40,7 @@ export type TModalProcess = {
   formModalStatus: boolean;
   successModalStatus: boolean;
   removalModalStatus: boolean;
+  orderSuccessModalStatus: boolean;
   isActive: boolean;
 }
 
@@ -47,6 +48,10 @@ export type TBasketData = {
   items: TCamera[];
   currentItem: TCamera | undefined;
   changedItems: TCamera[];
+  couponValue: number;
+  couponName: string | null;
+  isCouponValid: boolean;
+  isCouponInvalid: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

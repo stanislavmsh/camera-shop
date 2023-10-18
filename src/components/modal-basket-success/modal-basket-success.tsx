@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveStatus, setBasketModalStatus} from '../../store/modal-process/modal-process.slice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AppRoute, STORAGE_NAME } from '../../utils/const';
+import { AppRoute, StorageName } from '../../utils/const';
 import { getBasketItems } from '../../store/basket-data/basket-data.selectors';
 
 export default function ModalBasketSuccess() {
@@ -15,7 +15,7 @@ export default function ModalBasketSuccess() {
 
   const handleModalClose = () => {
     dispatch(setActiveStatus(false));
-    localStorage.setItem(STORAGE_NAME, JSON.stringify(basketItems));
+    localStorage.setItem(StorageName.Camera, JSON.stringify(basketItems));
     setTimeout(() => {
       dispatch(setBasketModalStatus(false));
     }, MODAL_CLOSE_TIME);
