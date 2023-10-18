@@ -24,7 +24,34 @@ describe('Page: Basket Page', () => {
         isDataByPriceLoading: false,
         priceMinMax: ['', '']
       },
-    });
+      BASKET: {
+        items: mockCameraData,
+        currentItem: undefined,
+        changedItems: mockCameraData,
+        couponName: null,
+        couponValue: 0,
+        isCouponInvalid: false,
+        isCouponValid: false,
+      },
+      MODAL: {
+        modalInfo: mockCameraData[0],
+        purchaseModalStatus: false,
+        basketModalStatus: false,
+        formModalStatus: false,
+        successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
+        isActive: false,
+      },
+      CURRENT: {
+        currentInfo : undefined,
+        hasError: false,
+        isDataLoading: false,
+        similarCameras: [],
+        reviews: [],
+      }
+    }
+    );
 
     const pagePrepared = withHistory(withStoreComponent);
 

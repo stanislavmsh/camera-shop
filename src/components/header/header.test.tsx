@@ -26,6 +26,15 @@ describe('Component: Card', () => {
         isDataByPriceLoading: false,
         priceMinMax: ['', '']
       },
+      BASKET: {
+        items: mockCamerasData,
+        currentItem: undefined,
+        changedItems: mockCamerasData,
+        couponName: null,
+        couponValue: 0,
+        isCouponInvalid: false,
+        isCouponValid: false,
+      },
     });
     const prepComponent = withHistory(withStoreComponent);
 

@@ -37,12 +37,24 @@ describe('Page: Catalog Page', () => {
         reviews: mockComments
       },
       MODAL: {
-        modalInfo: undefined,
+        modalInfo: mockCameraData[0],
         purchaseModalStatus: false,
+        basketModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
         isActive: false,
-      }
+      },
+      BASKET: {
+        items: mockCameraData,
+        currentItem: undefined,
+        changedItems: mockCameraData,
+        couponName: null,
+        couponValue: 0,
+        isCouponInvalid: false,
+        isCouponValid: false,
+      },
     }
     );
 

@@ -6,7 +6,6 @@ import { render, screen } from '@testing-library/react';
 
 const mockCamerasData = makeFakeCamerasData();
 const mockShownData = mockCamerasData.slice(0, 3);
-const mockModal = mockCamerasData[0];
 
 describe('Component: Modal Buy' , () => {
   it('should render ModalBuy when isActive is true', () => {
@@ -25,12 +24,15 @@ describe('Component: Modal Buy' , () => {
         priceMinMax: ['', '']
       },
       MODAL: {
-        modalInfo: mockModal,
+        modalInfo: mockCamerasData[0],
         purchaseModalStatus: false,
+        basketModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
         isActive: false,
-      }
+      },
     });
 
     render(withStoreComponent);

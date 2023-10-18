@@ -23,6 +23,15 @@ describe('Page: Basket Page', () => {
         isDataByPriceLoading: false,
         priceMinMax: ['', '']
       },
+      BASKET: {
+        items: mockCameraData,
+        currentItem: undefined,
+        changedItems: mockCameraData,
+        couponName: null,
+        couponValue: 0,
+        isCouponInvalid: false,
+        isCouponValid: false,
+      },
     });
     const pagePrepared = withHistory(withStoreComponent);
 

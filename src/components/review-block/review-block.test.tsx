@@ -34,10 +34,13 @@ describe('Component: Review Block', () => {
       MODAL: {
         modalInfo: undefined,
         purchaseModalStatus: false,
+        basketModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
         isActive: false,
-      }
+      },
     });
 
     render(withStoreComponent);

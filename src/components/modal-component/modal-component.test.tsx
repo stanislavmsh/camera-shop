@@ -31,12 +31,15 @@ describe('Component: Modal Component' , () => {
         priceMinMax: ['', '']
       },
       MODAL: {
-        modalInfo: undefined,
+        modalInfo: mockCurrentData,
         purchaseModalStatus: false,
+        basketModalStatus: false,
         formModalStatus: false,
-        successModalStatus: true,
+        successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
         isActive: true,
-      }
+      },
     });
 
     render(withStoreComponent);
@@ -72,10 +75,13 @@ describe('Component: Modal Component' , () => {
       MODAL: {
         modalInfo: undefined,
         purchaseModalStatus: false,
+        basketModalStatus: false,
         formModalStatus: false,
         successModalStatus: false,
+        removalModalStatus: false,
+        orderSuccessModalStatus: false,
         isActive: false,
-      }
+      },
     });
 
     render(withStoreComponent);

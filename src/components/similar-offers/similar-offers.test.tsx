@@ -17,7 +17,16 @@ describe('Component: Similar Offers', () => {
         isDataLoading: false,
         similarCameras: mockSimilarData,
         reviews: mockComments
-      }
+      },
+      BASKET: {
+        items: [],
+        currentItem: undefined,
+        changedItems: [],
+        couponName: null,
+        couponValue: 0,
+        isCouponInvalid: false,
+        isCouponValid: false,
+      },
     });
 
     const prepComponent = withHistory(withStoreComponent);
