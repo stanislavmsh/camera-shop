@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { getCouponName, getIsCouponInvalid, getIsCouponValid } from '../../store/basket-data/basket-data.selectors';
 import cn from 'classnames';
 import { fetchCouponAction } from '../../store/basket-data/basket-data.action';
@@ -24,7 +24,8 @@ export default function BasketForm({inputRef} : TBasketFormProps) : JSX.Element 
     setCurrentValue(newValue);
   };
 
-  const handleCouponCheck = () => {
+  const handleCouponCheck = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     if(currentValue.length !== 0) {
       dispatch(fetchCouponAction(currentValue));
     }
@@ -33,7 +34,7 @@ export default function BasketForm({inputRef} : TBasketFormProps) : JSX.Element 
 
   return (
     <div className="basket-form">
-      <form action="#">
+      <form onSubmit={handleCouponCheck} action="#">
         <div className={cn('custom-input',
           {
             'is-invalid' : isCouponInvalid ,
@@ -54,7 +55,7 @@ export default function BasketForm({inputRef} : TBasketFormProps) : JSX.Element 
           <p className="custom-input__error">Промокод неверный</p>
           <p className="custom-input__success">Промокод принят!</p>
         </div>
-        <button onClick={handleCouponCheck} className="btn" type="button">
+        <button className="btn" type="submit">
                     Применить
         </button>
       </form>

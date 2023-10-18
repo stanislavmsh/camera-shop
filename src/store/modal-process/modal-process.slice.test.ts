@@ -4,9 +4,12 @@ import { modalProcess, setModalInfo, setPurchaseModalStatus } from './modal-proc
 const initialState = {
   modalInfo: undefined,
   purchaseModalStatus: false,
+  basketModalStatus: false,
   formModalStatus: false,
   successModalStatus: false,
-  isActive: true,
+  removalModalStatus: false,
+  orderSuccessModalStatus: false,
+  isActive: false,
 };
 
 
