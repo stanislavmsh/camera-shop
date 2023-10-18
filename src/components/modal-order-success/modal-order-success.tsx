@@ -27,7 +27,7 @@ export default function ModalOrderSuccess() : JSX.Element {
 
 
   return(
-    <div className="modal__wrapper">
+    <div data-testid='modal-order-success-test' className="modal__wrapper">
       <div onClick={handleModalClose} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Спасибо за покупку</p>

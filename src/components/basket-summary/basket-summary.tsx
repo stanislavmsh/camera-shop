@@ -32,7 +32,7 @@ export default function BasketSummary() : JSX.Element {
 
 
   return (
-    <div className="basket__summary">
+    <div data-testid='basket-summary-test' className="basket__summary">
       <div className="basket__promo">
         <p className="title title--h4">
                 Если у вас есть промокод на скидку, примените его в этом поле

@@ -46,7 +46,7 @@ export default function ModalBasketSuccess() {
   };
 
   return (
-    <div className="modal__wrapper">
+    <div data-testid='modal-basket-success-test' className="modal__wrapper">
       <div onClick={handleModalClose} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Товар успешно добавлен в корзину</p>

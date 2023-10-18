@@ -33,7 +33,7 @@ export default function BasketForm({inputRef} : TBasketFormProps) : JSX.Element 
 
 
   return (
-    <div className="basket-form">
+    <div data-testid='basket-form-test' className="basket-form">
       <form onSubmit={handleCouponCheck} action="#">
         <div className={cn('custom-input',
           {
@@ -64,4 +64,3 @@ export default function BasketForm({inputRef} : TBasketFormProps) : JSX.Element 
 }
 
 
-// is-invalid | is-valid

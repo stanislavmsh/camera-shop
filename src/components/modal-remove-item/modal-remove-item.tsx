@@ -26,7 +26,7 @@ export default function ModalRemoveItem () : JSX.Element {
   };
 
   return (
-    <div className="modal__wrapper">
+    <div data-testid='modal-remove-item-test' className="modal__wrapper">
       <div onClick={handleCloseModal} className="modal__overlay" />
       <div className="modal__content">
         <p className="title title--h4">Удалить этот товар?</p>

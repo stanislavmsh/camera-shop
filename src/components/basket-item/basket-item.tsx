@@ -53,7 +53,7 @@ export default function BasketItem ({item} : TBasketItemProps) : JSX.Element {
   };
 
   return (
-    <li className="basket-item">
+    <li data-testid='basket-item-test' className="basket-item">
       <div className="basket-item__img">
         <picture>
           <source

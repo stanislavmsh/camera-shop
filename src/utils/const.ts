@@ -70,8 +70,6 @@ export const enum SearchParam {
 
 export const enum StorageName {
   Camera = 'basketCameras',
-  CouponName = 'basketCoupon',
-  CouponValue = 'basketCouponValue'
 }
 
 export const STARS_RATING = [1 , 2 , 3 , 4 , 5];

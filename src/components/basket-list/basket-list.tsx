@@ -16,7 +16,7 @@ export default function BasketList() : JSX.Element {
   }
 
   return (
-    <ul className="basket__list">
+    <ul data-testid='basket-list-test' className="basket__list">
       {uniqueItems.map((elem) =>
         <BasketItem key={elem.id} item={elem}/>
       )}
