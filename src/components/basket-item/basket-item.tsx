@@ -39,7 +39,7 @@ export default function BasketItem ({item} : TBasketItemProps) : JSX.Element {
   };
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    let newValue = Number(evt.target.value);
+    let newValue = Number(evt.target.value.replace(/[,.]/g, ''));
 
     if(isNaN(newValue) || newValue < 1) {
       newValue = 1;
@@ -47,6 +47,7 @@ export default function BasketItem ({item} : TBasketItemProps) : JSX.Element {
     if (newValue > 99) {
       newValue = 99;
     }
+
 
     setCurrentCount(newValue);
     dispatch(changeItems([id, newValue]));
@@ -101,7 +102,7 @@ export default function BasketItem ({item} : TBasketItemProps) : JSX.Element {
         </button>
         <label className="visually-hidden" htmlFor="counter1" />
         <input
-          type="number"
+          type="text"
           id="counter1"
           value={currentCount}
           onChange={handleInputChange}
